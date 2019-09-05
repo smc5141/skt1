@@ -1,8 +1,9 @@
 package skt1.dtos;
 
-import com.sun.org.apache.xml.internal.utils.SerializableLocatorImpl;
+import java.io.Serializable;
 
-public class LoginDto extends SerializableLocatorImpl {
+
+public class LoginDto implements Serializable  {
 
 	private static final long serialVersionUID = 1L;
 	
