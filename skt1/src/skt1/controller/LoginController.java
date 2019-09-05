@@ -57,9 +57,9 @@ public class LoginController extends HttpServlet {
 		}else if(command.equals("userlogin")) {
 			String id=request.getParameter("id");
 			String password=request.getParameter("password");
-			LoginDto dto=dao.Login(id, password);
+			LoginDto ldto=dao.Login(id, password);
 			
-			session.setAttribute("dto", dto);
+			session.setAttribute("ldto", ldto);
 			session.setMaxInactiveInterval(10*60);
 			dispatch("index.jsp", request, response);
 			

@@ -20,10 +20,7 @@
 	
 	
 </script>
-<%
 
-LoginDto dto=(LoginDto)session.getAttribute("dto");
-%>
 <style type="text/css">
  #wrap{
 		width:80%;

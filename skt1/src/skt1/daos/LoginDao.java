@@ -47,4 +47,19 @@ public class LoginDao extends SqlMapConfig {
 		}
 		return dto;
 	}
+	public LoginDto userinfo(String id) {
+		LoginDto dto=new LoginDto();
+		SqlSession sqlSession=null;
+		
+		
+		try {
+			sqlSession=getSqlSessionFactory().openSession(true);
+			dto=sqlSession.selectOne(nameSpace+"userinfo", id);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			sqlSession.close();
+		}
+		return dto;
+	}
 }

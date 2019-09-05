@@ -9,9 +9,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import javax.websocket.Session;
 
 import skt1.daos.AnsDao;
+import skt1.daos.LoginDao;
 import skt1.dtos.AnsDto;
+import skt1.dtos.LoginDto;
 import skt1.utils.Paging;
 
 
@@ -31,15 +35,17 @@ public class AnsController extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html; charset=utf-8");
 		
+		HttpSession session=request.getSession();
+		
 		String command=request.getParameter("command");
 		
 		AnsDao dao=new AnsDao();
-		
+		LoginDao ldao=new LoginDao();
 		if(command.equals("boardlistpage")) {
 			//요청 페이지 번호 받기
 			String pnum=request.getParameter("pnum");
 			//list 요청페이지에 해당하는 글목록 가져오기
-			
+			String id=request.getParameter("id");
 			//글목록을 요청할때 따로 pnum 파라미터를 전달하지 않아도 목륵을 볼 수 있게 전에 담긴pnum을 사용
 			if(pnum==null) {
 				pnum=(String)request.getSession().getAttribute("pnum");
@@ -50,10 +56,10 @@ public class AnsController extends HttpServlet {
 			List<AnsDto> list=dao.getAllListPage(pnum);
 			//페이지의 개수를 구하기
 			int pcount=dao.getPcount();
-			
+			LoginDto ldto=ldao.userinfo(id);
 			
 			Map<String, Integer> map=Paging.pagingValue(pcount, pnum, 5);
-			
+			request.setAttribute("ldto", ldto);
 			request.setAttribute("pmap", map);
 			request.setAttribute("list", list);
 			dispatch("boardlist.jsp", request, response);	
@@ -94,8 +100,8 @@ public class AnsController extends HttpServlet {
 				request.setAttribute("msg", "글여러개삭제실패");
 				dispatch("error.jsp", request, response);
 			}
-		}else if(command.equals("insertForm")) {
-			response.sendRedirect("insertboard.jsp");
+		}else if(command.equals("insertForm")) {		
+			 dispatch("insertboard.jsp", request, response);
 		}else if(command.equals("insertboard")) {
 			String id=request.getParameter("id");
 			String title=request.getParameter("title");

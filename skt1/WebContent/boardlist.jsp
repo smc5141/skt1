@@ -1,3 +1,4 @@
+<%@page import="skt1.dtos.LoginDto"%>
 <%@page import="java.util.Map"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.Date"%>
@@ -66,6 +67,7 @@
 	
 	Map<String,Integer>map=(Map<String,Integer>)request.getAttribute("pmap");
 	
+	LoginDto ldto=(LoginDto)request.getAttribute("ldto");
 %>
 <body>
 
@@ -142,7 +144,7 @@
 	<tr>
 		<td colspan="6">
 			<input type="button" value="글추가" 
-			       onclick="location.href='AnsController.do?command=insertForm'"/>
+			       onclick="location.href='AnsController.do?command=insertForm&id=<%=ldto.getId()%>'"/>
 			<input type="submit" value="글삭제"/>       
 		</td>
 	</tr>

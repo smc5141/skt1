@@ -1,3 +1,4 @@
+<%@page import="skt1.dtos.LoginDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <%request.setCharacterEncoding("utf-8"); %>
 <%response.setContentType("text/html; charset=UTF-8"); %>
@@ -41,16 +42,19 @@
 
 	})
 </script>
-
+<%
+	LoginDto ldto=(LoginDto)session.getAttribute("ldto");
+%>
 </head>
 <body>
 <h1>게시글 추가하기</h1>
 <form action="AnsController.do" method="post" >
 <input type="hidden" name="command" value="insertboard"/>
+<input type="hidden" name="id" value="<%=ldto.getId()%>">
 <table border="1">
 	<tr>
 		<th>아이디</th>
-		<td><input type="text" name="id" class="inputval"/></td>
+		<td><%=ldto.getId()%></td>
 	</tr>
 	<tr>
 		<th>제목</th>

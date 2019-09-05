@@ -9,9 +9,13 @@
 	
 	<select id="Login" parameterType="Map" resultType="loginDto">
 		SELECT ID,PASSWORD,NAME,ADDRESS,PHONE,EMAIL,ROLE
-		FROM WHERE ID=#{id} AND PASSWORD=#{password}
+		FROM M_USER WHERE ID=#{id} AND PASSWORD=#{password}
 	</select>
 	
+	<select id="userinfo" parameterType="String" resultType="loginDto">
+		SELECT ID,NAME,ADDRESS,PHONE,EMAIL,ROLE
+		FROM M_USER WHERE ID=#{id}
+	</select>
 </mapper>
 
 

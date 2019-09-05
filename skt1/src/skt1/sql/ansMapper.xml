@@ -5,9 +5,9 @@
 
 
 	<select id="boardlistpaging" resultType="ansDto" parameterType="String">
-		SELECT RN,SEQ,ID,TITLE,CONTENT,REGDATE,REFER,STEP,DEPTH,READCOUNT
+		SELECT RN,SEQ,ID,TITLE,CONTENT,REGDATE,REFER,STEP,DEPTH,READCOUNT,DELFLAG
      	 FROM(
-      	SELECT ROW_NUMBER() OVER (ORDER BY REFER,STEP) AS RN,SEQ,ID,TITLE,CONTENT,REGDATE,REFER,STEP,DEPTH,READCOUNT FROM M_BOARD
+      	SELECT ROW_NUMBER() OVER (ORDER BY REFER,STEP) AS RN,SEQ,ID,TITLE,CONTENT,REGDATE,REFER,STEP,DEPTH,READCOUNT,DELFLAG FROM M_BOARD
      	 ) 
       	WHERE CEIL(RN/5) = #{pnum}
 	</select>
@@ -18,7 +18,7 @@
 
 
 	<sql id="a">
-		SELECT SEQ,ID,TITLE,CONTENT,REGDATE,REFER,STEP,DEPTH,READCOUNT 
+		SELECT SEQ,ID,TITLE,CONTENT,REGDATE,REFER,STEP,DEPTH,READCOUNT,DELFLAG 
 		FROM M_BOARD 
 	</sql>
 
@@ -39,22 +39,18 @@
 	
 	<insert id="insertboard" parameterType="ansDto">
 		INSERT INTO M_BOARD (SEQ,ID,TITLE,CONTENT,REGDATE,REFER,
-		STEP,DEPTH,READCOUNT) 
+		STEP,DEPTH,READCOUNT,DELFLAG) 
 		VALUES(M_BOARD_SEQ.NEXTVAL,#{id},#{title},#{content},SYSDATE, 
-		(SELECT NVL(MAX(REFER)+1,0) FROM M_BOARD ),0,0,0)
+		(SELECT NVL(MAX(REFER)+1,0) FROM M_BOARD ),0,0,0,'N')
 	</insert>
 	
 	<update id="updateboard" parameterType="ansDto">
 		UPDATE M_BOARD SET TITLE=#{title},CONTENT=#{content},REGDATE=SYSDATE 
 		WHERE SEQ=#{seq} 
-	</update>
-	
-	<delete id="delboard" parameterType="int">
-		DELETE FROM HKBOARD WHERE SEQ=#{seq}
-	</delete>
+	</update>		
 	
 	<update id="muldel" parameterType="Map">
-		DELETE FROM M_BOARD WHERE SEQ IN 
+		UPDATE ANSWERBOARD SET DELFLAG='Y' WHERE SEQ IN 
 		<foreach collection="seqs" item="seq" open="(" close=")" separator=",">
 			#{seq}
 		</foreach>
@@ -70,8 +66,8 @@
 	<update id="replyupdate" parameterType="ansDto">
 		<![CDATA[
 			UPDATE M_BOARD SET STEP=STEP+1
-			WHERE REFER=(SELECT REFER FROM ANSWERBOARD WHERE SEQ=#{seq})
-			AND STEP > (SELECT STEP FROM ANSWERBOARD WHERE SEQ=#{seq})		
+			WHERE REFER=(SELECT REFER FROM M_BOARD WHERE SEQ=#{seq})
+			AND STEP > (SELECT STEP FROM M_BOARD WHERE SEQ=#{seq})		
 		]]>
 	</update>
 	<insert id="replyinsert" parameterType="ansDto">
@@ -79,7 +75,7 @@
 		VALUES(M_BOARD_SEQ.NEXTVAL,#{id},#{title},#{content},SYSDATE, 
 		(SELECT REFER FROM M_BOARD WHERE SEQ=#{seq}), 
 		(SELECT STEP FROM M_BOARD WHERE SEQ=#{seq})+1, 
-		(SELECT DEPTH FROM M_BOARD WHERE SEQ=#{seq})+1,0)
+		(SELECT DEPTH FROM M_BOARD WHERE SEQ=#{seq})+1,0,'N')
 	</insert>
 	
 	<select id="contentAjax" parameterType="int" resultType="ansDto">
