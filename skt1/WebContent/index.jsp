@@ -1,3 +1,4 @@
+<%@page import="skt1.dtos.LoginDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <%request.setCharacterEncoding("utf-8"); %>
 <%response.setContentType("text/html; charset=UTF-8"); %>
@@ -17,8 +18,12 @@
 			})
 	})
 	
-	LoginDto dto=(LoginDto)session.getAttribute("dto");
+	
 </script>
+<%
+
+LoginDto dto=(LoginDto)session.getAttribute("dto");
+%>
 <style type="text/css">
  #wrap{
 		width:80%;
