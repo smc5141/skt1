@@ -51,6 +51,11 @@
                     <input type="password" class="form-control" name="password" name="excludeHangul" data-rule-required="true" placeholder="패스워드" maxlength="30">
                 </div>
             </div>
+               <div class="form-group" >
+                <div class="col-lg-10">
+                    <input type="submit" value="로그인" class="form-control" >
+                </div>
+            </div>
             </form>
 	</section>
 	<div style="margin: 0 auto; text-align: right;">
