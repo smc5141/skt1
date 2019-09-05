@@ -52,6 +52,9 @@ public class LoginController extends HttpServlet {
 				dispatch("error.jsp", request, response);
 			}
 		}else if(command.equals("login")) {
+			response.sendRedirect("login.jsp");
+		
+		}else if(command.equals("userlogin")) {
 			String id=request.getParameter("id");
 			String password=request.getParameter("password");
 			LoginDto dto=dao.Login(id, password);

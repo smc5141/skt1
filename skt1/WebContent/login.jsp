@@ -36,7 +36,7 @@
 	<section class="sec2" >
 	<form action="LoginController.do" method="post" style="width:1000px; height:1500px; margin: 0 auto;">
 		<h2 style="text-align: center;">로그인 화면</h2>
-	<input type="hidden" name="command" value="login"/>
+	<input type="hidden" name="command" value="userlogin"/>
 			
 	<div class="form-group" id="divId">
 	
