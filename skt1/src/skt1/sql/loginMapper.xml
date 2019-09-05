@@ -7,6 +7,11 @@
 		#{phone},#{email},'USER')
 	</insert>
 	
+	<select id="Login" parameterType="Map" resultType="loginDto">
+		SELECT ID,PASSWORD,NAME,ADDRESS,PHONE,EMAIL,ROLE
+		FROM WHERE ID=#{id} AND PASSWORD=#{password}
+	</select>
+	
 </mapper>
 
 

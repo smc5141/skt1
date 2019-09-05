@@ -51,6 +51,14 @@ public class LoginController extends HttpServlet {
 				request.setAttribute("msg", "회원가입실패");
 				dispatch("error.jsp", request, response);
 			}
+		}else if(command.equals("login")) {
+			String id=request.getParameter("id");
+			String password=request.getParameter("password");
+			LoginDto dto=dao.Login(id, password);
+			
+			request.setAttribute("dto", dto);
+			dispatch("index.jsp", request, response);
+			
 		}
 	}
 	public void dispatch(String url,HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

@@ -1,5 +1,8 @@
 package skt1.daos;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.apache.ibatis.session.SqlSession;
 
 import skt1.config.SqlMapConfig;
@@ -24,5 +27,24 @@ public class LoginDao extends SqlMapConfig {
 		}
 		
 		return count>0?true:false;
+	}
+	//로그인
+	public LoginDto Login(String id,String password) {
+		LoginDto dto=new LoginDto();
+		SqlSession sqlSession=null;
+		Map<String,String> map=new HashMap<>();
+		map.put("id", id);
+		map.put("password", password);
+		
+		
+		try {
+			sqlSession=getSqlSessionFactory().openSession(true);
+			dto=sqlSession.selectOne(nameSpace+"Login", map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			sqlSession.close();
+		}
+		return dto;
 	}
 }
