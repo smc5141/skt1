@@ -16,6 +16,8 @@
 			  interval: 1500
 			})
 	})
+	
+	LoginDto dto=(LoginDto)session.getAttribute("dto");
 </script>
 <style type="text/css">
  #wrap{
