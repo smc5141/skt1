@@ -50,7 +50,7 @@
 	</update>		
 	
 	<update id="muldel" parameterType="Map">
-		UPDATE ANSWERBOARD SET DELFLAG='Y' WHERE SEQ IN 
+		UPDATE M_BOARD SET DELFLAG='Y' WHERE SEQ IN 
 		<foreach collection="seqs" item="seq" open="(" close=")" separator=",">
 			#{seq}
 		</foreach>
