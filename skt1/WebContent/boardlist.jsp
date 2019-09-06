@@ -23,6 +23,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+<link rel="stylesheet" href="css/skt1.css">
+<link rel="stylesheet" href="css/bootstrap.css">
 <title></title>
 <script type="text/javascript">
 
@@ -55,9 +57,10 @@
 
 </script>
 <style type="text/css">
-	img{width: 12px; height: 12px;}
-	
 
+	#util img{width: 12px; height: 12px;}
+	 
+	
 	
 </style>
 </head>
@@ -70,12 +73,35 @@
 	LoginDto ldto=(LoginDto)request.getAttribute("ldto");
 %>
 <body>
-
+<div id="wrap"  >
+		<header>
+			<h1><a href="index.jsp"><img src="img/skt1.jpeg" alt="skt1logo"></a></h1>
+			<ul class="gnb">
+				<li><a href="">일정</a></li>
+				<li><a href="AnsController.do?command=boardlistpage&pnum=1">자유게시판</a></li>
+				<li><a href="LoginController.do?command=insert">회원가입</a></li>
+				<li><a href="LoginController.do?command=login">로그인</a></li>
+				<li><a href="">마이페이지</a></li>
+			</ul>
+		</header>
+			<section class='sec1'>
+			<h2><img src='img/sk4.jpg' alt='MEMBER 회원안내'></h2>
+			<nav class='lnb' style="text-align: center;">
+				<ul >
+					<li><a href='#' onclick="location.href='LoginController.do?command=login'" style="color:#fff; font-size:40px;">게시판글목록</a></li>
+				</ul>
+			</nav>
+		
+		<div class='lnb_sns' style="text-align: center;" >
+			<div class='sns_title' style="color: #fff;" >SKT1 유트브</div>
+			<a href='https://www.youtube.com/user/SKTTeam1st' target="_blank" ><img src="img/youtube.png" alt="youtube"></a>
+		</div>
+	</section>
+	
 <jsp:useBean id="util" class="skt1.utils.Util"  />
-<h1>게시판글목록</h1>
 <form action="AnsController.do" method="post">
 <input type="hidden" name="command" value="muldel" />
-<table border="1">
+<table class="" border="1" >
 	<col width="50px" />
 	<col width="50px" />
 	<col width="100px" />
@@ -112,7 +138,7 @@
 							<td>-----삭제된 글입니다.-----</td>
 						</c:when>
 						<c:otherwise>
-							<td>
+							<td id="util">
 								<jsp:setProperty property="arrowNbsp" name="util" value="${dto.depth}"/>
 								<jsp:getProperty property="arrowNbsp" name="util"/>
 							   <a href="AnsController.do?command=boarddetail&seq=${dto.seq}">${dto.title}</a>
@@ -152,7 +178,7 @@
 	     
 </table>
 </form>
-
+</div>
 </body>
 </html>
 

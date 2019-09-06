@@ -23,7 +23,7 @@ public class Util {
 			nbsp+="&nbsp;&nbsp;&nbsp;&nbsp;";
 		}
 		//                답글이면 nbsp+<img> 출력: 부모글이면 ""
-		this.arrowNbsp = (depthInt>0?nbsp+"<img src='img/aaa.png' alt='답글'/>":"");
+		this.arrowNbsp = (depthInt>0?nbsp+"<img src='img/aaa.png' alt='답글' />":"");
 	}
 	//<getPropery> : getMethod를 실행하면서 html에 값을 출력
 	public String getArrowNbsp() {
