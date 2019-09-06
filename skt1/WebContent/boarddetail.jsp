@@ -1,3 +1,4 @@
+<%@page import="skt1.dtos.LoginDto"%>
 <%@page import="skt1.dtos.AnsDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <%request.setCharacterEncoding("utf-8"); %>
@@ -29,6 +30,8 @@
 <body>
 <%
 // 	AnsDto dto1=(AnsDto)request.getAttribute("dto");
+
+	LoginDto ldto=(LoginDto)session.getAttribute("ldto");
 %>
 
 <div id="container">
@@ -64,10 +67,11 @@
 <form action="AnsController.do" method="post" >
 <input type="hidden" name="command" value="replyboard"/>
 <input type="hidden" name="seq" value="${dto.seq}"/>
+<input type="hidden" name="id" value="<%=ldto.getId()%>">
 <table border="1">
 	<tr>
 		<th>아이디</th>
-		<td><input type="text" name="id" class="inputval"/></td>
+		<td><%=ldto.getId()%></td>
 	</tr>
 	<tr>
 		<th>제목</th>
