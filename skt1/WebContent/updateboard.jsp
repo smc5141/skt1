@@ -1,3 +1,4 @@
+<%@page import="skt1.dtos.LoginDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <%request.setCharacterEncoding("utf-8"); %>
 <%response.setContentType("text/html; charset=UTF-8"); %>
@@ -25,6 +26,9 @@ $(function(){
 			});
 		})
 </script>
+<%
+	LoginDto ldto=(LoginDto)session.getAttribute("ldto");
+%>
 </head>
 <body>
 <h1>게시글수정하기</h1>
@@ -51,7 +55,7 @@ $(function(){
 	<tr>
 		<td colspan="2">
 			<input type="submit" value="수정완료"/>
-			<button type="button" onclick="location.href='AnsController.do?command=boardlist'">글목록</button>
+			<button type="button" onclick="location.href='AnsController.do?command=boardlistpage&pnum=1'">글목록</button>
 		</td>
 	</tr>
 </table>
