@@ -8,6 +8,7 @@
 	<typeAliases>
 		<typeAlias type="skt1.dtos.LoginDto" alias="loginDto"/>
 		<typeAlias type="skt1.dtos.AnsDto" alias="ansDto"/>
+		<typeAlias type="skt1.dtos.CalDto" alias="calDto"/>
 	</typeAliases>
 	
 <!-- 	DB접속 정보 셋팅 -->
@@ -26,6 +27,7 @@
 	<mappers>
 		<mapper resource="skt1/sql/loginMapper.xml"/>
 		<mapper resource="skt1/sql/ansMapper.xml"/>
+			<mapper resource="skt1/sql/calMapper.xml"/>
 		<!-- <mapper resource="com/hk/sql/boardMapper.xml"/> -->
 <!-- 		<mapper resource="com/hk/sql/hkMapper1.xml"/> -->
 <!-- 		<mapper resource="com/hk/sql/DataMapper2.xml"/> -->

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="skt1.calboard">
+	
+	<resultMap type="skt1.dtos.CalDto" id="calDtoMap">
+		<result property="seq" column="SEQ" />
+		<result property="id" column="ID" />
+		<result property="title" column="TITLE" />
+		<result property="content" column="CONTENT" />
+		<result property="mdate" column="MDATE" />
+		<result property="regDate" column="REGDATE" />
+	</resultMap>
+	
+	
+	<select id="getCalList" parameterType="Map" resultMap="calDtoMap">
+		SELECT SEQ,ID,TITLE,CONTENT,MDATE,REGDATE
+		FROM M_CALBOARD WHERE ID=#{id} AND SUBSTR(MDATE,1,8)=#{yyyyMMdd}
+	</select>
+	
+	<insert id="insertCal" parameterType="calDto">
+		INSERT INTO M_CALBOARD VALUES(M_CALBOARD_SEQ.NEXTVAL,#{id},#{title},#{content},
+		#{mdate},SYSDATE)
+	</insert>
+	
+	<delete id="muldel" parameterType="Map">
+		DELETE FROM M_CALBOARD WHERE SEQ IN
+		<foreach collection="seqs" item="seq" open="(" close=")" separator=",">
+			#{seq}
+		</foreach>
+	</delete>
+	
+	<select id="caldetail" parameterType="int" resultMap="calDtoMap">
+		SELECT SEQ,ID,TITLE,CONTENT,MDATE,REGDATE
+		FROM M_CALBOARD WHERE SEQ=#{seq}
+	</select>
+	
+	<update id="calupdate" parameterType="calDto">
+		UPDATE M_CALBOARD SET TITLE=#{title}, CONTENT=#{content},MDATE=#{mdate},
+		REGDATE=SYSDATE WHERE SEQ=#{seq}
+	</update>
+	
+	<select id="calviewlist" resultMap="calDtoMap">
+	SELECT SEQ, ID, TITLE, CONTENT, MDATE, REGDATE
+	FROM(
+		SELECT(ROW_NUMBER() OVER(PARTITION BY SUBSTR(MDATE,1,8) ORDER BY MDATE)) AS RN,
+				SEQ,ID,TITLE,CONTENT,MDATE,REGDATE
+	FROM M_CALBOARD WHERE ID=#{id} AND SUBSTR(MDATE,1,6)=#{yyyyMM}
+	)
+	WHERE RN BETWEEN 1 AND 3
+	</select>
+	
+	<select id="calcount" resultType="int" parameterType="Map">
+		SELECT COUNT(*) FROM M_CALBOARD
+		WHERE ID=#{id} AND SUBSTR(MDATE,1,8)=#{yyyyMMdd}	
+	</select>
+	
+</mapper>
