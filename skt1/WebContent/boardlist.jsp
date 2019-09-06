@@ -24,6 +24,7 @@
 
 <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
 <link rel="stylesheet" href="css/skt1.css">
+<link rel="stylesheet" href="css/bootstrap.css">
 <title></title>
 <script type="text/javascript">
 
@@ -56,17 +57,10 @@
 
 </script>
 <style type="text/css">
-	 img{width: 12px; height: 12px;}
-	 h1 img{width: 250px;
-			height: 150px;
-			margin-left: 30px;}
-			
-	h2 img{
-     width: 250px;
-		height: 150px;
-		margin-left: 30px;
-   }
 
+	#util img{width: 12px; height: 12px;}
+	 
+	
 	
 </style>
 </head>
@@ -107,7 +101,7 @@
 <jsp:useBean id="util" class="skt1.utils.Util"  />
 <form action="AnsController.do" method="post">
 <input type="hidden" name="command" value="muldel" />
-<table border="1">
+<table class="" border="1" >
 	<col width="50px" />
 	<col width="50px" />
 	<col width="100px" />
@@ -144,7 +138,7 @@
 							<td>-----삭제된 글입니다.-----</td>
 						</c:when>
 						<c:otherwise>
-							<td>
+							<td id="util">
 								<jsp:setProperty property="arrowNbsp" name="util" value="${dto.depth}"/>
 								<jsp:getProperty property="arrowNbsp" name="util"/>
 							   <a href="AnsController.do?command=boarddetail&seq=${dto.seq}">${dto.title}</a>

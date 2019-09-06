@@ -7,6 +7,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="css/skt1.css">
 <title></title>
 <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
 <style type="text/css">
@@ -33,9 +34,32 @@
 
 	LoginDto ldto=(LoginDto)session.getAttribute("ldto");
 %>
-
+<div id="wrap"  >
+		<header>
+			<h1><a href="index.jsp"><img src="img/skt1.jpeg" alt="skt1logo"></a></h1>
+			<ul class="gnb">
+				<li><a href="">일정</a></li>
+				<li><a href="AnsController.do?command=boardlistpage&pnum=1">자유게시판</a></li>
+				<li><a href="LoginController.do?command=insert">회원가입</a></li>
+				<li><a href="LoginController.do?command=login">로그인</a></li>
+				<li><a href="">마이페이지</a></li>
+			</ul>
+		</header>
+			<section class='sec1'>
+			<h2><img src='img/sk4.jpg' alt='MEMBER 회원안내'></h2>
+			<nav class='lnb' style="text-align: center;">
+				<ul >
+					<li><a href='#' onclick="location.href='LoginController.do?command=login'" style="color:#fff; font-size:30px;">게시글 추가하기</a></li>
+				</ul>
+			</nav>
+		
+		<div class='lnb_sns' style="text-align: center;" >
+			<div class='sns_title' style="color: #fff;" >SKT1 유트브</div>
+			<a href='https://www.youtube.com/user/SKTTeam1st' target="_blank" ><img src="img/youtube.png" alt="youtube"></a>
+		</div>
+	</section>
 <div id="container">
-<h1>게시글상세보기</h1>
+
 <table border="1">
 	<tr>
 		<th>번호</th>
@@ -90,6 +114,7 @@
 	</tr>
 </table>
 </form>
+</div>
 </div>
 </div>
 <script type="text/javascript">
