@@ -17,7 +17,7 @@ import skt1.utils.Util;
 
 
 
-
+//test
 @WebServlet("/CalController.do")
 public class CalController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
