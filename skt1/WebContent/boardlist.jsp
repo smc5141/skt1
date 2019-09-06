@@ -148,6 +148,8 @@
 			<input type="submit" value="글삭제"/>       
 		</td>
 	</tr>
+	
+	 
 </table>
 </form>
 
