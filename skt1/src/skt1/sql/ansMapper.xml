@@ -9,11 +9,11 @@
      	 FROM(
       	SELECT ROW_NUMBER() OVER (ORDER BY REFER,STEP) AS RN,SEQ,ID,TITLE,CONTENT,REGDATE,REFER,STEP,DEPTH,READCOUNT,DELFLAG FROM M_BOARD
      	 ) 
-      	WHERE CEIL(RN/5) = #{pnum}
+      	WHERE CEIL(RN/10) = #{pnum}
 	</select>
 
 	<select id="pcount" resultType="int">
-		SELECT CEIL(COUNT(*)/5) FROM M_BOARD
+		SELECT CEIL(COUNT(*)/10) FROM M_BOARD
 	</select>
 
 
