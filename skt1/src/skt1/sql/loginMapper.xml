@@ -16,6 +16,20 @@
 		SELECT ID,NAME,ADDRESS,PHONE,EMAIL,ROLE
 		FROM M_USER WHERE ID=#{id}
 	</select>
+	
+	<update id="updateinfo" parameterType="Map">
+		UPDATE M_USER SET ADDRESS=#{address},PHONE=#{phone},EMAIL=#{email}
+		WHERE ID=#{id} 
+	</update>
+	
+	<select id="alluserlist" resultType="loginDto">
+		SELECT ID,NAME,ADDRESS,PHONE,EMAIL,ROLE
+		FROM M_USER
+	</select>
+	
+	<select id="idChk" parameterType="String" resultType="loginDto">
+		SELECT ID FROM M_USER WHERE ID=#{id}
+	</select>
 </mapper>
 
 

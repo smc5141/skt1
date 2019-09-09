@@ -63,7 +63,7 @@
 	}
 	.gnb li{
 		float: left;
-		width: 20%;
+		width: 16.667%;
 		text-align: center;
 		line-height: 100px;
 	}
@@ -114,13 +114,14 @@
 <body>
 	<div id="wrap" >
 		<header>
-			<h1><img src="img/skt1.jpeg" alt="skt1logo"><!--로고이미지 넣는곳--></h1>
+			<h1><img src="img/skt1.jpeg" alt="skt1logo"></h1>
 			<ul class="gnb">
 				<li><a href="CalController.do?command=calendar">경기일정</a></li>
 				<li><a href="AnsController.do?command=boardlistpage&pnum=1">자유게시판</a></li>
 				<li><a href="LoginController.do?command=insert">회원가입</a></li>
 				<li><a href="LoginController.do?command=login">로그인</a></li>
-				<li><a href="">마이페이지</a></li>
+				<li><a href="LoginController.do?command=info">마이페이지</a></li>
+				<li><a href="LoginController.do?command=logout">로그아웃</a></li>
 			</ul>
 		</header>
 <div id="myCarousel" class="carousel slide" data-ride="carousel">

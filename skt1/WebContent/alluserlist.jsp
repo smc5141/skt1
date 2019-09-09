@@ -1,3 +1,5 @@
+<%@page import="java.util.List"%>
+<%@page import="skt1.dtos.LoginDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <%request.setCharacterEncoding("utf-8"); %>
 <%response.setContentType("text/html; charset=UTF-8"); %>
@@ -7,6 +9,9 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="css/skt1.css">
 <title></title>
+<%
+	List<LoginDto>list=(List<LoginDto>)request.getAttribute("list");
+%>
 </head>
 <body>
 <div id="wrap"  >
@@ -35,29 +40,33 @@
 		</div>
 	</section>
 	<section class="sec2" >
-	<form action="LoginController.do" method="post" style="width:1000px; height:1500px; margin: 0 auto;">
-		<h2 style="text-align: center;">로그인 화면</h2>
-	<input type="hidden" name="command" value="userlogin"/>
-			
-	<div class="form-group" id="divId">
-	
-                <label for="inputId" class="control-label">아이디</label>
-                <div class="col-lg-10">
-                    <input type="text" class="form-control" name="id" data-rule-required="true" placeholder="10자이내의 알파벳, 언더스코어(_), 숫자만 입력 가능합니다." maxlength="30">
-                </div>
-            </div>
-            <div class="form-group" >
-                <label for="inputPassword" class="control-label">비밀번호</label>
-                <div class="col-lg-10">
-                    <input type="password" class="form-control" name="password" name="excludeHangul" data-rule-required="true" placeholder="패스워드" maxlength="30">
-                </div>
-            </div>
-               <div class="form-group" >
-                <div class="col-lg-10">
-                    <input type="submit" value="로그인" class="form-control" >
-                </div>
-            </div>
-            </form>
+<table border="1">
+	<tr>
+		<th>아이디</th>
+		<th>이름</th>
+		<th>주소</th>
+		<th>전화번호</th>
+		<th>이메일</th>
+		<th>회원등급</th>
+	</tr>
+	<%
+		for(LoginDto dto:list){
+			%>
+			<tr>
+				<td><%=dto.getId()%></td>
+				<td><%=dto.getName()%></td>
+				<td><%=dto.getAddress()%></td>
+				<td><%=dto.getPhone()%></td>
+				<td><%=dto.getEmail()%></td>
+				<td>
+					<%=dto.getRole()%>
+					<button onclick="auth(<%=dto.getId()%>)">변경</button>
+				</td>
+			</tr>
+			<%
+		}
+	%>
+</table>
 	</section>
 	<div style="margin: 0 auto; text-align: right;">
 	<br/>

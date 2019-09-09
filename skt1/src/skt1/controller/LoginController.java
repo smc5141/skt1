@@ -2,6 +2,7 @@ package skt1.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -52,8 +53,12 @@ public class LoginController extends HttpServlet {
 				dispatch("error.jsp", request, response);
 			}
 		}else if(command.equals("login")) {
-			response.sendRedirect("login.jsp");
-		
+			LoginDto ldto=(LoginDto)session.getAttribute("ldto");
+			if(ldto!=null) {
+				jsFoward("현재 로그인 상태입니다.", "index.jsp", response);
+			}else {
+				response.sendRedirect("login.jsp");
+			}
 		}else if(command.equals("userlogin")) {
 			String id=request.getParameter("id");
 			String password=request.getParameter("password");
@@ -63,6 +68,57 @@ public class LoginController extends HttpServlet {
 			session.setMaxInactiveInterval(10*60);
 			dispatch("index.jsp", request, response);
 			
+		}else if(command.equals("info")) {
+			LoginDto ldto=(LoginDto)session.getAttribute("ldto");
+			if(ldto==null) {
+				jsFoward("로그인후 사용가능합니다", "login.jsp", response);
+			}else {
+				String id=ldto.getId();
+				ldto=dao.userinfo(id);
+				if(ldto.getRole().equals("USER")) {
+				request.setAttribute("ldto",ldto);
+				dispatch("userinfo.jsp", request, response);
+				}else {
+					request.setAttribute("ldto",ldto);
+					dispatch("admininfo.jsp", request, response);
+				}
+			}
+			
+		}else if(command.equals("logout")) {
+			LoginDto ldto=(LoginDto)session.getAttribute("ldto");
+			if(ldto!=null) {
+				session.invalidate();
+				jsFoward("로그아웃 하였습니다", "index.jsp", response);
+			}else {
+				jsFoward("로그인 상태가 아닙니다", "index.jsp", response);
+			}
+		}else if(command.equals("updateinfo")) {
+			String id=request.getParameter("id");
+			LoginDto ldto=dao.userinfo(id);
+			request.setAttribute("ldto", ldto);
+			dispatch("updateinfo.jsp", request, response);
+			
+		}else if(command.equals("update")) {
+			String id=request.getParameter("id");
+			String address=request.getParameter("address");
+			String phone=request.getParameter("phone");
+			String email=request.getParameter("email");
+			
+			boolean isS=dao.updateinfo(id,address,phone,email);
+			if(isS) {
+				jsFoward("정보수정  성공", "LoginController.do?command=info", response);
+			}else {
+				jsFoward("정보수정 실패", "LoginController.do?command=update", response);
+			}
+		}else if(command.equals("alluser")) {
+			List<LoginDto> list=dao.alluserlist();
+			request.setAttribute("list", list);
+			dispatch("alluserlist.jsp", request, response);
+		}else if(command.equals("idChk")) {
+			String id=request.getParameter("id");
+			LoginDto ldto=dao.idChk(id);
+			request.setAttribute("ldto", ldto);
+			dispatch("idChkform.jsp", request, response);
 		}
 	}
 	public void dispatch(String url,HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
