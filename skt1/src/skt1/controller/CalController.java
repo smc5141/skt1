@@ -10,9 +10,14 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import org.apache.ibatis.session.SqlSession;
 
 import skt1.daos.CalDao;
+import skt1.daos.LoginDao;
 import skt1.dtos.CalDto;
+import skt1.dtos.LoginDto;
 import skt1.utils.Util;
 
 
@@ -34,6 +39,8 @@ public class CalController extends HttpServlet {
 		
 		String command=request.getParameter("command");
 		CalDao dao=new CalDao();
+		LoginDao ldao=new LoginDao();
+		HttpSession session=request.getSession();
 		
 		if(command.equals("calendar")) {
 			String year=request.getParameter("year");
@@ -49,15 +56,14 @@ public class CalController extends HttpServlet {
 			}
 			
 			//한달에 대한 일정목록 가져오기(separaiton 패턴)
-			String id="hk";//나중에 로그인기능있을때 session에서 구하기
+			
 			String yyyyMM=year+Util.isTwo(month+"");//"201908"
-			List<CalDto>list=dao.getCalViewList(id, yyyyMM);
+			System.out.println(yyyyMM);
+			List<CalDto>list=dao.getCalViewList(yyyyMM);
 			request.setAttribute("list", list);
-			
-			
 			dispatch("calendar.jsp", request, response);
-//			response.sendRedirect("calendar.jsp");
-		
+			
+
 		
 		}else if(command.equals("callist")) {
 			String year=request.getParameter("year");
@@ -71,6 +77,8 @@ public class CalController extends HttpServlet {
 			dispatch("calboardlist.jsp", request, response);
 			
 		}else if(command.equals("insertcal")) {
+			LoginDto ldto=(LoginDto)session.getAttribute("ldto");
+			if(ldto.getRole().equals("ADMIN")) {
 			String year=request.getParameter("year");
 			String month=request.getParameter("month");
 			String date=request.getParameter("date");
@@ -88,6 +96,9 @@ public class CalController extends HttpServlet {
 			}else {
 				request.setAttribute("msg", "일정추가실패");
 				dispatch("error.jsp", request, response);
+			}
+			}else {
+				jsFoward("관리자만 일정추가 가능합니다.", "calendar.jsp", response);
 			}
 		}else if(command.equals("insertcalform")) {
 			dispatch("calwrite.jsp", request, response);
@@ -134,8 +145,7 @@ public class CalController extends HttpServlet {
 			}
 		}else if(command.equals("calcount")) {
 			String yyyyMMdd=request.getParameter("yyyyMMdd");
-			String id="hk";
-			int count=dao.getCalViewCount(id, yyyyMMdd);
+			int count=dao.getCalViewCount(yyyyMMdd);
 			PrintWriter pw=response.getWriter();
 			pw.print(count);
 		}
@@ -146,6 +156,14 @@ public class CalController extends HttpServlet {
 			throws ServletException, IOException {
 		request.getRequestDispatcher(url).forward(request, response);
 	}
-	
+	public void jsFoward(String msg, String url, HttpServletResponse response) throws IOException {
+		String str="<script type='text/javascript'>"
+		+"alert('"+msg+"');"
+		+"location.href='"+url+"';"
+		+"</script>";
+		PrintWriter pw=response.getWriter();
+		pw.print(str);
+		
+	}
 	
 }

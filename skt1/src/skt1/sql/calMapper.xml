@@ -13,9 +13,11 @@
 	</resultMap>
 	
 	
+	
+	
 	<select id="getCalList" parameterType="Map" resultMap="calDtoMap">
 		SELECT SEQ,ID,TITLE,CONTENT,MDATE,REGDATE
-		FROM M_CALBOARD WHERE ID=#{id} AND SUBSTR(MDATE,1,8)=#{yyyyMMdd}
+		FROM M_CALBOARD WHERE SUBSTR(MDATE,1,8)=#{yyyyMMdd}
 	</select>
 	
 	<insert id="insertCal" parameterType="calDto">
@@ -40,19 +42,14 @@
 		REGDATE=SYSDATE WHERE SEQ=#{seq}
 	</update>
 	
-	<select id="calviewlist" resultMap="calDtoMap">
+	<select id="calviewlist" parameterType="String" resultMap="calDtoMap">
 	SELECT SEQ, ID, TITLE, CONTENT, MDATE, REGDATE
-	FROM(
-		SELECT(ROW_NUMBER() OVER(PARTITION BY SUBSTR(MDATE,1,8) ORDER BY MDATE)) AS RN,
-				SEQ,ID,TITLE,CONTENT,MDATE,REGDATE
-	FROM M_CALBOARD WHERE ID=#{id} AND SUBSTR(MDATE,1,6)=#{yyyyMM}
-	)
-	WHERE RN BETWEEN 1 AND 3
+	FROM M_CALBOARD WHERE SUBSTR(MDATE,1,6)=#{yyyyMM}
 	</select>
 	
 	<select id="calcount" resultType="int" parameterType="Map">
 		SELECT COUNT(*) FROM M_CALBOARD
-		WHERE ID=#{id} AND SUBSTR(MDATE,1,8)=#{yyyyMMdd}	
+		WHERE SUBSTR(MDATE,1,8)=#{yyyyMMdd}	
 	</select>
 	
 </mapper>
