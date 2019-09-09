@@ -1,3 +1,4 @@
+<%@page import="skt1.dtos.LoginDto"%>
 <%@page import="java.util.Calendar"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <%request.setCharacterEncoding("utf-8"); %>
@@ -12,8 +13,7 @@
 <title></title>
 </head>
 <%
-	//EL
-
+	LoginDto ldto=(LoginDto)session.getAttribute("ldto");
 
 	//추가할 일정의 날짜를 받는다.
 	int year=Integer.parseInt(request.getParameter("year"));
@@ -36,8 +36,8 @@
 	<input type="hidden" name="seq" value="${dto.seq}" />
 	<table border="1">
 		<tr>
-			<th></th>
-			<td><input type="text" name="id" value="hk" readonly="readonly"></td>
+			<th>아이디</th>
+			<td><input type="text" name="id" value="<%=ldto.getId()%>" readonly="readonly"></td>
 		</tr>
 		<tr>
 			<th>일정</th>
