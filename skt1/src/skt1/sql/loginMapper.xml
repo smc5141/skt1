@@ -16,6 +16,9 @@
 		SELECT ID,NAME,ADDRESS,PHONE,EMAIL,ROLE
 		FROM M_USER WHERE ID=#{id}
 	</select>
+	
+	
+	
 </mapper>
 
 
