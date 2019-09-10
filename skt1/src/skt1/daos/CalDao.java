@@ -16,15 +16,12 @@ public class CalDao extends SqlMapConfig{
 
 	//일정 목록조회 : 반환List,파라미터(id, 년월일8자리)
 	
-	public List<CalDto> getCalList(String id,String yyyyMMdd){
+	public List<CalDto> getCalList(String yyyyMMdd){
 		List<CalDto> list=null;
-		Map<String, String>map=new HashMap<String, String>();
-		map.put("id", id);
-		map.put("yyyyMMdd", yyyyMMdd);
 		SqlSession sqlSession=null;
 		try {
 			sqlSession=getSqlSessionFactory().openSession(true);
-			list=sqlSession.selectList(nameSpace+"getCalList", map);
+			list=sqlSession.selectList(nameSpace+"getCalList", yyyyMMdd);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally {
