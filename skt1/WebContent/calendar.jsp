@@ -131,7 +131,7 @@
 		<header>
 			<h1><a href="index.jsp"><img src="img/skt1.jpeg" alt="skt1logo"></a></h1>
 			<ul class="gnb">
-				<li><a href="CalController.do?command=calendar">경기일정</a></li>
+				<li><a href="CalController.do?command=calendar">일정</a></li>
 				<li><a href="AnsController.do?command=boardlistpage&pnum=1">자유게시판</a></li>
 				<li><a href="LoginController.do?command=insert">회원가입</a></li>
 				<li><a href="LoginController.do?command=login">로그인</a></li>
@@ -193,8 +193,8 @@
 				<td>
 					<a class="countview" href="CalController.do?command=callist&year=<%=year%>&month=<%=month%>&date=<%=i%>" style="color:<%=Util.fontColor(dayOfWeek,i)%>;"><%=i%></a>
 					<a href="CalController.do?command=insertcalform
-					&year=<%=year%>&month=<%=month%>&date=<%=i%>&lastday=<%=lastDay%>">
-						<img src="img/pen.png" alt="일정추가" />
+					&year=<%=year%>&month=<%=month%>&date=<%=i%>&lastday=<%=lastDay%>" >
+						<img src="img/pen.png" alt="일정추가"  />
 					</a>
 					<%=Util.getCalView(list, i) %>
 					
