@@ -1,3 +1,4 @@
+<%@page import="skt1.dtos.LoginDto"%>
 <%@page import="skt1.dtos.CalDto"%>
 <%@page import="skt1.utils.Util"%>
 <%@page import="skt1.daos.CalDao"%>
@@ -82,6 +83,7 @@
 </script>
 </head>
 <%
+	LoginDto ldto=(LoginDto)session.getAttribute("ldto");
 	//달력의 날짜를 바꾸기 위해서 전달된 year와 month 값을 받는다.
 	String pYear=request.getParameter("year");
 	String pMonth=request.getParameter("month");
@@ -118,9 +120,8 @@
 	
 	//한달에 대한 일정목록 가져오기(separation 패턴)
 	CalDao dao=new CalDao();
-	String id="hk1";
 	String yyyyMM=year+Util.isTwo(month+"");
-	List<CalDto>list=dao.getCalViewList(id, yyyyMM);
+	List<CalDto>list=dao.getCalViewList(yyyyMM);
 //	List<CalDto>list=(List<CalDto>)request.getAttribute("list");
 	
 	
@@ -141,7 +142,7 @@
 			<h2><img src='img/sk4.jpg' alt='MEMBER 회원안내'></h2>
 			<nav class='lnb' style="text-align: center;">
 				<ul >
-					<li><a href='#' onclick="location.href='LoginController.do?command=login'" style="color:#fff; font-size:40px;">일정보기</a></li>
+					<li><a href='#' onclick="location.href='LoginController.do?command=login'" style="color:#fff; font-size:40px;">로그인</a></li>
 				</ul>
 			</nav>
 		
@@ -153,8 +154,9 @@
 <%
 //	out.print("1일의 요일값"+dayOfWeek); 
 %>
+<section class="sec2" >
 <div id="container">
-<h3></h3>
+<h2 style="text-align: center;">일정보기</h2>
 <table border="1">
 	<caption>
 		<a href="calendar.jsp?year=<%=year-1%>&month=<%=month%>">◁</a>
@@ -214,7 +216,15 @@
 
 	</tr>
 </table>
+
 </div>
+</section>
+<div style="margin: 0 auto; text-align: right;">
+	<br/>
+	<address >서울특별시 영등포구 양평동3가 15-1 월드메르디앙비즈센터 4층 401 402호 연락처 : 02-6340-2233<br/>COPYRIGHT &copy;
+	iCox. All Rights Reserved </address>
+	</div>
 </div>
+
 </body>
 </html>
