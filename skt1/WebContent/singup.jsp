@@ -55,7 +55,6 @@ function idChk(){
 				<li><a href="LoginController.do?command=login">로그인</a></li>
 				<li><a href="LoginController.do?command=info">마이페이지</a></li>	
 				<li><a href="LoginController.do?command=logout">로그아웃</a></li>
-				<li><a href="">마이페이지</a></li>
 		</ul>
 		</header>
 	<section class='sec1'>
