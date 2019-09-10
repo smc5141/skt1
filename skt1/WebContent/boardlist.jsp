@@ -168,17 +168,17 @@
 	</c:choose>
 	<tr>
 		<td colspan="6" style="text-align: center;">
-			<a href="AnsController.do?command=boardlistpage&pnum=<%=map.get("prePageNum")%>">◀</a>
+			<a href="AnsController.do?command=boardlistpage&pnum=<%=map.get("prePageNum")%>${statusPage==null?'':statusPage}">◀</a>
 			<%
 // 				int pcount=(Integer)request.getAttribute("pcount");
 				for(int i=map.get("startPage");i<=map.get("endPage");i++){
 					%>
-					<a href="AnsController.do?command=boardlistpage&pnum=<%=i%>" style="text-decoration: none;"><%=i%></a>				
+					<a href="AnsController.do?command=boardlistpage&pnum=<%=i%>${statusPage==null?'':statusPage}" style="text-decoration: none;"><%=i%></a>				
 					<%
 				}	
 				
 			%>
-			<a href="AnsController.do?command=boardlistpage&pnum=<%=map.get("nextPageNum")%>">▶</a>
+			<a href="AnsController.do?command=boardlistpage&pnum=<%=map.get("nextPageNum")%>${statusPage==null?'':statusPage}">▶</a>
 		</td>
 	</tr>
 	<tr>
