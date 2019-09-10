@@ -26,13 +26,17 @@ public class AnsDao extends SqlMapConfig{
 	
 	
 	//글목록의 페이지 개수 구하기
-		public int getPcount() {
+		public int getPcount(String id,String title,String content) {			
+			Map<String, String> map=new HashMap<>();
+			map.put("id", id);
+			map.put("title", title);
+			map.put("content", content);
 			SqlSession sqlSession=null;
 			int pcount=0;
 			
 			try {
 				sqlSession=getSqlSessionFactory().openSession(true);
-				pcount=sqlSession.selectOne(nameSpace+"pcount");
+				pcount=sqlSession.selectOne(nameSpace+"pcount",map);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -44,14 +48,19 @@ public class AnsDao extends SqlMapConfig{
 		
 		
 		//글목록 조회(페이징처리): 파라미터가 필요(페이지번호)
-		public List<AnsDto> getAllListPage(String pnum){
+		public List<AnsDto> getAllListPage(String pnum,String id,String title,String content){
 			List<AnsDto> list=new ArrayList<>();
+			Map<String, String> map=new HashMap<>();
+			map.put("pnum", pnum);
+			map.put("id", id);
+			map.put("title", title);
+			map.put("content", content);
 			SqlSession sqlSession=null;
 			
 			try {
 				SqlSessionFactory sqlSessionFactory=getSqlSessionFactory();
 				sqlSession=sqlSessionFactory.openSession(true);//autocommit->true
-				list=sqlSession.selectList(nameSpace+"boardlistpaging",pnum);//list[hkdto,hkdto...]
+				list=sqlSession.selectList(nameSpace+"boardlistpaging",map);//list[hkdto,hkdto...]
 			} catch (Exception e) {
 				e.printStackTrace();
 			}finally {
