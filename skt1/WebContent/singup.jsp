@@ -53,13 +53,10 @@ function idChk(){
 				<li><a href="AnsController.do?command=boardlistpage&pnum=1">자유게시판</a></li>
 				<li><a href="LoginController.do?command=insert">회원가입</a></li>
 				<li><a href="LoginController.do?command=login">로그인</a></li>
-<<<<<<< HEAD
 				<li><a href="LoginController.do?command=info">마이페이지</a></li>	
 				<li><a href="LoginController.do?command=logout">로그아웃</a></li>
-=======
 				<li><a href="">마이페이지</a></li>
->>>>>>> branch 'master' of https://github.com/smc5141/skt1.git
-			</ul>
+		</ul>
 		</header>
 	<section class='sec1'>
 			<h2><img src='img/sk4.jpg' alt='MEMBER 회원안내'></h2>

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-
 <mapper namespace="skt1.loginboard">
 	<insert id="insertuser" parameterType="loginDto">
 		INSERT INTO M_USER VALUES(#{id},#{password},#{name},#{address},
@@ -17,7 +16,7 @@
 		FROM M_USER WHERE ID=#{id}
 	</select>
 	
-<<<<<<< HEAD
+
 	<update id="updateinfo" parameterType="Map">
 		UPDATE M_USER SET ADDRESS=#{address},PHONE=#{phone},EMAIL=#{email}
 		WHERE ID=#{id} 
@@ -35,10 +34,9 @@
 	<select id="loginChk" parameterType="Map" resultType="loginDto">
 		SELECT ID,PASSWORD FROM M_USER WHERE ID=#{id} AND PASSWORD=#{password}
 	</select>
-=======
+
 	
 	
->>>>>>> branch 'master' of https://github.com/smc5141/skt1.git
 </mapper>
 
 
