@@ -10,6 +10,7 @@
 <html>
 <head>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="css/skt1.css">
 <title></title>
 </head>
 <%
@@ -30,10 +31,36 @@
 	pageContext.setAttribute("min", min);
 	%>
 <body>
-<h1>일정추가하기</h1>
-<form action="CalController.do" method="post">
+<div id="wrap"  >
+		<header>
+			<h1><a href="index.jsp"><img src="img/skt1.jpeg" alt="skt1logo"></a></h1>
+			<ul class="gnb">
+				<li><a href="CalController.do?command=calendar">경기일정</a></li>
+				<li><a href="AnsController.do?command=boardlistpage&pnum=1">자유게시판</a></li>
+				<li><a href="LoginController.do?command=insert">회원가입</a></li>
+				<li><a href="LoginController.do?command=login">로그인</a></li>
+				<li><a href="">마이페이지</a></li>
+			</ul>
+		</header>
+	<section class='sec1'>
+			<h2><img src='img/sk4.jpg' alt='MEMBER 회원안내'></h2>
+			<nav class='lnb' style="text-align: center;">
+				<ul >
+					<li><a href='#' onclick="location.href='LoginController.do?command=login'" style="color:#fff; font-size:40px;">일정보기</a></li>
+				</ul>
+			</nav>
+		
+		<div class='lnb_sns' style="text-align: center;" >
+			<div class='sns_title' style="color: #fff;" >SKT1 유트브</div>
+			<a href='https://www.youtube.com/user/SKTTeam1st' target="_blank" ><img src="img/youtube.png" alt="youtube"></a>
+		</div>
+	</section>
+	<section class="sec2" >
+<form action="CalController.do" method="post" style="width:1000px; height:1500px; margin: 0 auto;">
+<h2 style="text-align: center;">일정추가</h2>
 	<input type="hidden" name="command" value="insertcal" />
 	<input type="hidden" name="seq" value="${dto.seq}" />
+	<input type="hidden" name="id" value="<%=ldto.getId()%>">
 	<table border="1">
 		<tr>
 			<th>아이디</th>
@@ -86,7 +113,13 @@
 					onclick="location.href='CalController.do?command=calendar'"/>
 		</tr>
 	</table>
-	
 </form>
+</section>
+<div style="margin: 0 auto; text-align: right;">
+	<br/>
+	<address >서울특별시 영등포구 양평동3가 15-1 월드메르디앙비즈센터 4층 401 402호 연락처 : 02-6340-2233<br/>COPYRIGHT &copy;
+	iCox. All Rights Reserved </address>
+	</div>
+</div>
 </body>
 </html>

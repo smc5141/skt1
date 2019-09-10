@@ -15,15 +15,13 @@ public class CalDao extends SqlMapConfig{
 	private String nameSpace="skt1.calboard.";
 
 	//일정 목록조회 : 반환List,파라미터(id, 년월일8자리)
-	public List<CalDto> getCalList(String id,String yyyyMMdd){
+	
+	public List<CalDto> getCalList(String yyyyMMdd){
 		List<CalDto> list=null;
-		Map<String, String>map=new HashMap<String, String>();
-		map.put("id", id);
-		map.put("yyyyMMdd", yyyyMMdd);
 		SqlSession sqlSession=null;
 		try {
 			sqlSession=getSqlSessionFactory().openSession(true);
-			list=sqlSession.selectList(nameSpace+"getCalList", map);
+			list=sqlSession.selectList(nameSpace+"getCalList", yyyyMMdd);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally {
@@ -33,6 +31,7 @@ public class CalDao extends SqlMapConfig{
 	}
 
 	//일정추가
+	
 	public boolean insertCal(CalDto dto) {
 		int count=0;
 		SqlSession sqlSession=null;
@@ -48,6 +47,7 @@ public class CalDao extends SqlMapConfig{
 	}
 
 	//일정상세보기
+	
 	public CalDto getCalBoard(int seq) {
 		CalDto dto=new CalDto();
 		SqlSession sqlSession=null;
@@ -63,8 +63,9 @@ public class CalDao extends SqlMapConfig{
 
 		return dto;
 	}
-
+	
 	//일정수정하기
+	
 	public boolean updateCal(CalDto dto) {
 		int count=0;
 		SqlSession sqlSession=null;
@@ -80,6 +81,7 @@ public class CalDao extends SqlMapConfig{
 	}
 
 	//일정삭제하기
+	
 	public boolean muldelCal(String[] seqs) {
 		int count=0;
 		SqlSession sqlSession=null;
@@ -97,34 +99,32 @@ public class CalDao extends SqlMapConfig{
 		return count>0?true:false;
 	}
 
-	//달력에 일정 3개씩 보여주는 기능
-	public List<CalDto> getCalViewList(String id,String yyyyMM){
+	//일정보여주기
+	
+	public List<CalDto> getCalViewList(String yyyyMM){
 		List<CalDto> list=null;
-		Map<String, String>map=new HashMap<String, String>();
-		map.put("id", id);
-		map.put("yyyyMM", yyyyMM);
 		SqlSession sqlSession=null;
 		try {
 			sqlSession=getSqlSessionFactory().openSession(true);
-			list=sqlSession.selectList(nameSpace+"calviewlist", map);
+			list=sqlSession.selectList(nameSpace+"calviewlist", yyyyMM);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally {
 			sqlSession.close();
 		}
 		return list;
-	}		
+	}
+	
+	
+	
 
 	//하루에 대한 일정 개수 구하기
-	public int getCalViewCount(String id,String yyyyMMdd){
+	public int getCalViewCount(String yyyyMMdd){
 		int count=0;
-		Map<String, String>map=new HashMap<String, String>();
-		map.put("id", id);
-		map.put("yyyyMMdd", yyyyMMdd);
 		SqlSession sqlSession=null;
 		try {
 			sqlSession=getSqlSessionFactory().openSession(true);
-			count=sqlSession.selectOne(nameSpace+"calcount", map);
+			count=sqlSession.selectOne(nameSpace+"calcount", yyyyMMdd);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally {

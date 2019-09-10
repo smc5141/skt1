@@ -116,7 +116,7 @@
 		<header>
 			<h1><img src="img/skt1.jpeg" alt="skt1logo"></h1>
 			<ul class="gnb">
-				<li><a href="CalController.do?command=calendar">경기일정</a></li>
+				<li><a href="CalController.do?command=calendar">일정</a></li>
 				<li><a href="AnsController.do?command=boardlistpage&pnum=1">자유게시판</a></li>
 				<li><a href="LoginController.do?command=insert">회원가입</a></li>
 				<li><a href="LoginController.do?command=login">로그인</a></li>
