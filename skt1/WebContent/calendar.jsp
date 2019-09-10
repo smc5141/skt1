@@ -120,6 +120,7 @@
 	
 	//한달에 대한 일정목록 가져오기(separation 패턴)
 	CalDao dao=new CalDao();
+	CalDto dto=new CalDto();
 	String yyyyMM=year+Util.isTwo(month+"");
 	List<CalDto>list=dao.getCalViewList(yyyyMM);
 //	List<CalDto>list=(List<CalDto>)request.getAttribute("list");
@@ -196,6 +197,8 @@
 					&year=<%=year%>&month=<%=month%>&date=<%=i%>&lastday=<%=lastDay%>" >
 						<img src="img/pen.png" alt="일정추가"  />
 					</a>
+
+					
 					<%=Util.getCalView(list, i) %>
 					
 				</td>

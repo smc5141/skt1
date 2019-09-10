@@ -85,7 +85,8 @@ public class CalController extends HttpServlet {
 			String id=request.getParameter("id");
 			String title=request.getParameter("title");
 			String content=request.getParameter("content");
-			boolean isS=dao.insertCal(new CalDto(0,id,title,content,mdate,null));
+			String teamname=request.getParameter("teamname");
+			boolean isS=dao.insertCal(new CalDto(0,id,title,content,mdate,null,teamname));
 			if(isS) {
 				response.sendRedirect("CalController.do?command=calendar");
 			}else{
@@ -153,7 +154,7 @@ public class CalController extends HttpServlet {
 			String title=request.getParameter("title");
 			String content=request.getParameter("content");
 			
-			boolean isS=dao.updateCal(new CalDto(seq,null,title,content,mdate,null));
+			boolean isS=dao.updateCal(new CalDto(seq,null,title,content,mdate,null,null));
 			if(isS) {
 				response.sendRedirect("CalController.do?command=caldetail&seq="+seq);
 			}else {

@@ -72,7 +72,7 @@
 		<th><input type="checkbox" name="all" onclick="allChk(this.checked)"/></th>
 		<th>번호</th>
 		<th>일정</th>
-		<th>제목</th>
+		<th>KDA</th>
 		<th>작성일</th>
 	</tr>
 	<c:choose>
@@ -97,7 +97,7 @@
 	<tr>
 		<td colspan="5">
 			<input type="submit" value="삭제"/>
-			<input type="button" value="달력보기" onclick="location.href='CalController.do?command=calendar'"/>
+			<input type="button" value="일정보기" onclick="location.href='CalController.do?command=calendar'"/>
 		</td>
 	</tr>
 </table>

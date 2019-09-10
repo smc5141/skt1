@@ -1,8 +1,11 @@
 package skt1.utils;
 
+import java.io.PrintWriter;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.List;
+
+import com.sun.prism.Image;
 
 import skt1.dtos.CalDto;
 
@@ -84,7 +87,9 @@ public class Util {
 								//<p>title</p>
 			for (CalDto calDto : list) {
 				if(calDto.getMdate().substring(6, 8).equals(d)) {
-					titleList+="<p title='"+calDto.getTitle()+"'  class='clist'>" // title은 리스트에서 마우스로 보면 풀네임 다 나옴
+					titleList+=
+								calDto.getTeamname()+".jpg" +
+							"<p title='"+calDto.getTitle()+"'  class='clist'>" // title은 리스트에서 마우스로 보면 풀네임 다 나옴
 								+(calDto.getTitle().length()>6?calDto.getTitle().substring(0,6)+"..":calDto.getTitle())
 								+"</p>";					
 				}

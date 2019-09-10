@@ -10,13 +10,14 @@ public class CalDto {
 	private String content;
 	private String mdate;
 	private Date regDate;
+	private String teamname;
 	
 	public CalDto() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public CalDto(int seq, String id, String title, String content, String mdate, Date regDate) {
+	public CalDto(int seq, String id, String title, String content, String mdate, Date regDate, String teamname) {
 		super();
 		this.seq = seq;
 		this.id = id;
@@ -24,6 +25,7 @@ public class CalDto {
 		this.content = content;
 		this.mdate = mdate;
 		this.regDate = regDate;
+		this.teamname = teamname;
 	}
 
 	public int getSeq() {
@@ -74,13 +76,22 @@ public class CalDto {
 		this.regDate = regDate;
 	}
 
+	public String getTeamname() {
+		return teamname;
+	}
+
+	public void setTeamname(String teamname) {
+		this.teamname = teamname;
+	}
+
 	@Override
 	public String toString() {
 		return "CalDto [seq=" + seq + ", id=" + id + ", title=" + title + ", content=" + content + ", mdate=" + mdate
-				+ ", regDate=" + regDate + "]";
+				+ ", regDate=" + regDate + ", teamname=" + teamname + "]";
 	}
 	
 	
-		
+	
+	
 	
 }

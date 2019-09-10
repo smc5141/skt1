@@ -61,7 +61,7 @@
 	<input type="hidden" name="command" value="insertcal" />
 	<input type="hidden" name="seq" value="${dto.seq}" />
 	<input type="hidden" name="id" value="<%=ldto.getId()%>">
-	<table border="1">
+	<table border="1" style="height:250px; ">
 		<tr>
 			<th>아이디</th>
 			<td><input type="text" name="id" value="<%=ldto.getId()%>" readonly="readonly"></td>
@@ -99,8 +99,39 @@
 			</td>
 		</tr>
 		<tr>
+			<th>상대팀</th>
+			<td>
+			<select name="teamname">
+				<option value="kt">케이티</option>
+				<option value="afreeca">아프리카</option>
+				<option value="jinair">진에어</option>
+				<option value="damwon">담원</option>
+				<option value="kingzone">킹존</option>
+			</select>
+			</td>
+		</tr>
+				<tr>
+			<th>경기결과</th>
+			<td>
+			<select>
+				<option >0</option>
+				<option >1</option>
+				<option >2</option>
+			</select>
+			<select>
+				<option >0</option>
+				<option >1</option>
+				<option>2</option>
+			</select>
+			<select>
+				<option >승</option>
+				<option >패</option>
+			</select>
+			</td>
+		</tr>
+		<tr>
 			<th>제목</th>
-			<td><input type="text" name="title" /></td>
+			<td><input type="text" name="title" value="KDA확인하기" readonly="readonly"/>
 		</tr>
 		<tr>
 			<th>내용</th>
@@ -109,7 +140,7 @@
 		<tr>
 			<td colspan="2">
 				<input type="submit" value="일정추가" />
-				<input type="button" value="달력"
+				<input type="button" value="일정보기"
 					onclick="location.href='CalController.do?command=calendar'"/>
 		</tr>
 	</table>
