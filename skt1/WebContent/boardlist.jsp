@@ -99,6 +99,7 @@
 	</section>
 	
 <jsp:useBean id="util" class="skt1.utils.Util"  />
+<section class="sec2" >
 	<div>
 			<form action="AnsController.do" method="post">
 			<input type="hidden" name="command" value="boardlistpage" />
@@ -191,8 +192,17 @@
 	  
 	     
 </table>
+
 </form>
+</section>
 </div>
+
+<div style="margin: 0 auto; text-align: right;">
+	<br/>
+	<address >서울특별시 영등포구 양평동3가 15-1 월드메르디앙비즈센터 4층 401 402호 연락처 : 02-6340-2233<br/>COPYRIGHT &copy;
+	iCox. All Rights Reserved </address>
+</div>
+
 </body>
 </html>
 

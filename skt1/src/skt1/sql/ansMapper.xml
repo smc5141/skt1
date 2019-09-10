@@ -20,11 +20,11 @@
       	</if>
       	</where>
      	 ) 
-      	WHERE CEIL(RN/5) = #{pnum}
+      	WHERE CEIL(RN/10) = #{pnum}
 	</select>
 
 	<select id="pcount" resultType="int" parameterType="Map">
-		SELECT CEIL(COUNT(*)/5) FROM M_BOARD
+		SELECT CEIL(COUNT(*)/10) FROM M_BOARD
 		<where>
       	<if test="id!=null">
 	      	ID LIKE '%'||#{id}||'%'
