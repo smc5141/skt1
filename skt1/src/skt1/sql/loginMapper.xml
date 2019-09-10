@@ -30,6 +30,10 @@
 	<select id="idChk" parameterType="String" resultType="loginDto">
 		SELECT ID FROM M_USER WHERE ID=#{id}
 	</select>
+	
+	<select id="loginChk" parameterType="Map" resultType="loginDto">
+		SELECT ID,PASSWORD FROM M_USER WHERE ID=#{id} AND PASSWORD=#{password}
+	</select>
 </mapper>
 
 

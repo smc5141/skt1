@@ -19,7 +19,7 @@
 		var val=document.getElementsByName("id")[0].value;
 		if(bool){
 			opener.document.getElementsByName("password")[0].focus();
-			parentPage.setAttribute("class","y");
+// 			parentPage.setAttribute("class","y");
 		}else{
 			parentPage.value="";
 			parentPage.focus();

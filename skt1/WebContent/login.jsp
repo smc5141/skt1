@@ -5,8 +5,40 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
 <link rel="stylesheet" href="css/skt1.css">
 <title></title>
+<script type="text/javascript">
+window.onload=function(){
+	var form=document.getElementsByTagName("form")[0];//[form]
+	//form태그에서 submit이벤트가 발생하면 함수를 실행해라
+	form.onsubmit=function(){//패스워드가 정확해게 입력됐는지와 모든 입력값을 넣었는지 확인
+		var inputs=document.querySelectorAll("section input");//[input,input....]
+			for (var i = 0; i < inputs.length; i++) {
+				if(inputs[i].value==""){
+					var tagEleTxt=inputs[i].parentNode.previousElementSibling.textContent;
+					//                     .부모태그구함.  앞에오는 형제엘리먼트구함.      내부에 text구함
+					alert(tagEleTxt+"를 입력하세요!!");
+					inputs[i].focus();
+					return false;
+				}
+			}
+		}
+	}
+	$(function(){
+		$("form").submit(function(){
+			var id=document.getElementsByName("id")[0].value;
+			var password=document.getElementsByName("password")[0].value;
+			//open("url","title","창의 속성설정")
+			if(id.length>0&&password.length>0){
+				location.href="LoginController.do?command=loginChk&id="+id+"&password="+password;
+		}else{
+			return false;
+		}
+		});
+	});
+
+</script>
 </head>
 <body>
 <div id="wrap"  >
