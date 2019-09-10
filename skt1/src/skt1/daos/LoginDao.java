@@ -112,8 +112,8 @@ public class LoginDao extends SqlMapConfig {
 		
 		return dto;
 	}
-	public boolean loginChk(String id,String password) {
-		int count=0;
+	public LoginDto loginChk(String id,String password) {
+		LoginDto dto=new LoginDto();
 		Map<String,String> map=new HashMap<>();
 		map.put("id", id);
 		map.put("password", password);
@@ -121,12 +121,12 @@ public class LoginDao extends SqlMapConfig {
 		
 		try {
 			sqlSession=getSqlSessionFactory().openSession(true);
-			count=sqlSession.selectOne(nameSpace+"loginChk", map);
+			dto=sqlSession.selectOne(nameSpace+"loginChk", map);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally {
 			sqlSession.close();
 		}
-		return count>0?true:false;
+		return dto;
 	}
 }

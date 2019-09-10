@@ -25,18 +25,7 @@ window.onload=function(){
 			}
 		}
 	}
-	$(function(){
-		$("form").submit(function(){
-			var id=document.getElementsByName("id")[0].value;
-			var password=document.getElementsByName("password")[0].value;
-			//open("url","title","창의 속성설정")
-			if(id.length>0&&password.length>0){
-				location.href="LoginController.do?command=loginChk&id="+id+"&password="+password;
-		}else{
-			return false;
-		}
-		});
-	});
+
 
 </script>
 </head>

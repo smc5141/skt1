@@ -1,6 +1,6 @@
 package skt1.controller;
 
-import java.io.IOException;
+import java.io.IOException; 
 import java.io.PrintWriter;
 import java.util.List;
 
@@ -63,11 +63,13 @@ public class LoginController extends HttpServlet {
 			String id=request.getParameter("id");
 			String password=request.getParameter("password");
 			LoginDto ldto=dao.Login(id, password);
-			
-			session.setAttribute("ldto", ldto);
-			session.setMaxInactiveInterval(10*60);
-			dispatch("index.jsp", request, response);
-			
+			if(ldto==null) {
+				jsFoward("아이디와 비밀번호가 틀리거나 없는 아이디입니다.", "login.jsp", response);
+			}else {
+				session.setAttribute("ldto", ldto);
+				session.setMaxInactiveInterval(10*60);
+				dispatch("index.jsp", request, response);
+			}
 		}else if(command.equals("info")) {
 			LoginDto ldto=(LoginDto)session.getAttribute("ldto");
 			if(ldto==null) {
@@ -119,19 +121,6 @@ public class LoginController extends HttpServlet {
 			LoginDto ldto=dao.idChk(id);
 			request.setAttribute("ldto", ldto);
 			dispatch("idChkform.jsp", request, response);
-		}else if(command.equals("loginChk")) {
-			String id=request.getParameter("id");
-			String password=request.getParameter("password");
-			boolean isS=dao.loginChk(id, password);
-			if(isS) {
-				jsFoward("아이디 비밀번호를 확인하세요", "login.jsp", response);
-			}else {
-				request.setAttribute("id", id);
-				request.setAttribute("password", password);
-				dispatch("LoginController.do?command=userlogin", request, response);
-			}
-			
-			
 		}
 	}
 	public void dispatch(String url,HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
