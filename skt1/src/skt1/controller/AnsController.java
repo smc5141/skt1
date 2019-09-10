@@ -44,8 +44,24 @@ public class AnsController extends HttpServlet {
 		if(command.equals("boardlistpage")) {
 			//요청 페이지 번호 받기
 			String pnum=request.getParameter("pnum");
+			String opt=request.getParameter("opt");
+			String condition=request.getParameter("condition");
+			String id=null;
+			String title=null;
+			String content=null;
+			if(opt!=null) {
+				if(opt.equals("id")) {
+					id=condition;
+				}
+				if(opt.equals("title")) {
+					title=condition;
+				}
+				if(opt.equals("content")) {
+					content=condition;
+				}
+			}
 			//list 요청페이지에 해당하는 글목록 가져오기
-			String id=request.getParameter("id");
+			//String id=request.getParameter("id");
 			//글목록을 요청할때 따로 pnum 파라미터를 전달하지 않아도 목륵을 볼 수 있게 전에 담긴pnum을 사용
 			if(pnum==null) {
 				pnum=(String)request.getSession().getAttribute("pnum");
@@ -53,9 +69,9 @@ public class AnsController extends HttpServlet {
 				request.getSession().setAttribute("pnum", pnum);
 			}
 			
-			List<AnsDto> list=dao.getAllListPage(pnum);
+			List<AnsDto> list=dao.getAllListPage(pnum, id, title, content);
 			//페이지의 개수를 구하기
-			int pcount=dao.getPcount();
+			int pcount=dao.getPcount(id, title, content);
 			LoginDto ldto=ldao.userinfo(id);
 			
 			Map<String, Integer> map=Paging.pagingValue(pcount, pnum, 5);

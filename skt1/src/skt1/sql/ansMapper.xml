@@ -4,17 +4,38 @@
 <mapper namespace="skt1.ansboard">
 
 
-	<select id="boardlistpaging" resultType="ansDto" parameterType="String">
+	<select id="boardlistpaging" resultType="ansDto" parameterType="Map">
 		SELECT RN,SEQ,ID,TITLE,CONTENT,REGDATE,REFER,STEP,DEPTH,READCOUNT,DELFLAG
      	 FROM(
-      	SELECT ROW_NUMBER() OVER (ORDER BY REFER,STEP) AS RN,SEQ,ID,TITLE,CONTENT,REGDATE,REFER,STEP,DEPTH,READCOUNT,DELFLAG FROM M_BOARD      	 
-     
-	     	 )       	
+      	SELECT ROW_NUMBER() OVER (ORDER BY REFER DESC,STEP) AS RN,SEQ,ID,TITLE,CONTENT,REGDATE,REFER,STEP,DEPTH,READCOUNT,DELFLAG FROM M_BOARD
+      	<where>
+      	<if test="id!=null">
+	      	ID LIKE '%'||#{id}||'%'
+      	</if>
+      	<if test="title!=null">
+	      	TITLE LIKE '%'||#{title}||'%'
+      	</if>
+      	<if test="content!=null">
+	      	CONTENT LIKE '%'||#{content}||'%'
+      	</if>
+      	</where>
+     	 ) 
       	WHERE CEIL(RN/10) = #{pnum}
 	</select>
 
-	<select id="pcount" resultType="int">
+	<select id="pcount" resultType="int" parameterType="Map">
 		SELECT CEIL(COUNT(*)/10) FROM M_BOARD
+		<where>
+      	<if test="id!=null">
+	      	ID LIKE '%'||#{id}||'%'
+      	</if>
+      	<if test="title!=null">
+	      	TITLE LIKE '%'||#{title}||'%'
+      	</if>
+      	<if test="content!=null">
+	      	CONTENT LIKE '%'||#{content}||'%'
+      	</if>
+      	</where>
 	</select>
 
 

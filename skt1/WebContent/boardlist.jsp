@@ -99,20 +99,22 @@
 	</section>
 	
 <jsp:useBean id="util" class="skt1.utils.Util"  />
-<form action="AnsController.do" method="post">
-<input type="hidden" name="command" value="muldel" />
-<br><br>
-<div id="searchForm">
-		
+	<div>
+			<form action="AnsController.do" method="post">
+			<input type="hidden" name="command" value="boardlistpage" />
 			<select name="opt">
-				<option value="0">작성자</option>
-				<option value="1">제목</option>				
-				<option value="2">내용</option>
+				<option value="id">작성자</option>
+				<option value="title">제목</option>				
+				<option value="content">내용</option>
 			</select>
 			<input type="text" size="20" name="condition"/>&nbsp;
 			<input type="submit" value="검색"/>
-			
+			</form>
 	</div>
+<form action="AnsController.do" method="post">
+<input type="hidden" name="command" value="muldel" />
+
+
 <table class="" border="1" >
 	<col width="50px" />
 	<col width="50px" />
