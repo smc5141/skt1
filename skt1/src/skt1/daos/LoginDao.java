@@ -29,6 +29,21 @@ public class LoginDao extends SqlMapConfig {
 		
 		return count>0?true:false;
 	}
+	public boolean insertadmin(LoginDto dto) {
+		int count=0;
+		SqlSession sqlSession=null;
+		
+		try {
+			sqlSession=getSqlSessionFactory().openSession(true);
+			count=sqlSession.insert(nameSpace+"insertadmin", dto);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			sqlSession.close();
+		}
+		
+		return count>0?true:false;
+	}
 	//로그인
 	public LoginDto Login(String id,String password) {
 		LoginDto dto=new LoginDto();

@@ -49,6 +49,7 @@ public class AnsController extends HttpServlet {
 			String id=null;
 			String title=null;
 			String content=null;
+			String statusPage=null;
 			if(opt!=null) {
 				if(opt.equals("id")) {
 					id=condition;
@@ -59,6 +60,7 @@ public class AnsController extends HttpServlet {
 				if(opt.equals("content")) {
 					content=condition;
 				}
+				statusPage="&opt="+opt+"&condition="+condition;
 			}
 			//list 요청페이지에 해당하는 글목록 가져오기
 			//String id=request.getParameter("id");
@@ -74,10 +76,11 @@ public class AnsController extends HttpServlet {
 			int pcount=dao.getPcount(id, title, content);
 			LoginDto ldto=ldao.userinfo(id);
 			
-			Map<String, Integer> map=Paging.pagingValue(pcount, pnum, 5);
+			Map<String, Integer> map=Paging.pagingValue(pcount, pnum, 10);
 			request.setAttribute("ldto", ldto);
 			request.setAttribute("pmap", map);
 			request.setAttribute("list", list);
+			request.setAttribute("statusPage", statusPage);
 			dispatch("boardlist.jsp", request, response);	
 		
 		}else if(command.equals("boardlist")) {

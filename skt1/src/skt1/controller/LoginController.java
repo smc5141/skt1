@@ -37,6 +37,8 @@ public class LoginController extends HttpServlet {
 		
 		if(command.equals("insert")){
 			response.sendRedirect("singup.jsp");
+		}else if(command.equals("admin")){
+			response.sendRedirect("adminsignup.jsp");
 		}else if(command.equals("insertuser")) {
 			String id=request.getParameter("id");
 			String password=request.getParameter("password");
@@ -46,6 +48,21 @@ public class LoginController extends HttpServlet {
 			String email=request.getParameter("email");
 			
 			boolean isS=dao.insertuser(new LoginDto(id,password,name,address,phone,email,null));
+			if(isS) {
+				jsFoward("회원가입 성공", "index.jsp", response);
+			}else {
+				request.setAttribute("msg", "회원가입실패");
+				dispatch("error.jsp", request, response);
+			}
+		}else if(command.equals("insertadmin")){
+			String id=request.getParameter("id");
+			String password=request.getParameter("password");
+			String name=request.getParameter("name");
+			String address=request.getParameter("address");
+			String phone=request.getParameter("phone");
+			String email=request.getParameter("email");
+			
+			boolean isS=dao.insertadmin(new LoginDto(id,password,name,address,phone,email,null));
 			if(isS) {
 				jsFoward("회원가입 성공", "index.jsp", response);
 			}else {

@@ -50,7 +50,7 @@
 			}
 			return bool;
 		});
-		
+	})	
 
 		
 		
@@ -58,19 +58,72 @@
 </script>
 <style type="text/css">
 
+
+
 	#util img{width: 12px; height: 12px;}
-	 
-	
-	
+	 a:hover{
+   color:blue;
+	}
+
+	* {
+   	margin: 0 auto;
+  	 padding: 0;
+  	 font-family: 'Malgun gothic','Sans-Serif','Arial';
+	}
+	a {
+   text-decoration: none;
+   color:#333;
+	}
+	ul li {
+   list-style:none;
+	}
+
+	.fl {
+   float:left;
+}
+.tc {
+   text-align:center;
+}	
+
+	#board_area {
+   width: 900px;
+   position: relative;
+}
+.list-table {
+   margin-top: 40px;
+}
+.list-table thead th{
+   height:40px;
+   border-top:2px solid #09C;
+   border-bottom:1px solid #CCC;
+   font-weight: bold;
+   font-size: 17px;
+}
+.list-table tbody td{
+   text-align:center;
+   padding:10px 0;
+   border-bottom:1px solid #CCC; height:20px;
+   font-size: 14px 
+}
+#nd{
+text-align:center;
+ position: relative;
+}	
 </style>
 </head>
 <%
 // 	Object obj=request.getAttribute("list");
+
+	AnsDto dto1=(AnsDto)request.getAttribute("dto");	
+
 	List<AnsDto> list =(List<AnsDto>)request.getAttribute("list"); 
 	
 	Map<String,Integer>map=(Map<String,Integer>)request.getAttribute("pmap");
 	
-	LoginDto ldto=(LoginDto)request.getAttribute("ldto");
+	LoginDto ldto=(LoginDto)session.getAttribute("ldto");
+	if(ldto==null){
+		pageContext.forward("login.jsp");
+	}
 %>
 <body>
 <div id="wrap"  >
@@ -99,7 +152,9 @@
 	</section>
 	
 <jsp:useBean id="util" class="skt1.utils.Util"  />
-	<div>
+<section class="" >
+	<br/><br/><br/>
+	<div id="nd">
 			<form action="AnsController.do" method="post">
 			<input type="hidden" name="command" value="boardlistpage" />
 			<select name="opt">
@@ -115,19 +170,22 @@
 <input type="hidden" name="command" value="muldel" />
 
 
-<table class="" border="1" >
+<table class="list-table" >
 	<col width="50px" />
-	<col width="50px" />
-	<col width="100px" />
+	<col width="70px" />
 	<col width="300px" />
-	<col width="100px" />
-	<col width="50px" />
-	<col width="50px" />
-	<col width="50px" />
-	<col width="50px" />
-	<col width="50px" />
+	<col width="300px" />
+	<col width="150px" />
+	<col width="100px" />	
+	<thead>
 	<tr>
+		<% 
+		if(ldto.getRole().equals("ADMIN")){
+		%>
 		<th><input type="checkbox" name="all" onclick="allSel(this)"/></th>
+		<%
+		}
+		%>
 		<th>번호</th>
 		<th>작성자</th>
 		<th>제 목</th>
@@ -135,6 +193,7 @@
 		<th>조회수</th>
 		
 	</tr>
+	</thead>
 	<c:choose>
 		<c:when test="${empty list}">
 			<tr>
@@ -144,12 +203,18 @@
 		<c:otherwise>
 			<c:forEach items="${list}" var="dto">
 				<tr>
+					<% 
+					if(ldto.getRole().equals("ADMIN")){
+					%>
 					<td><input type="checkbox" name="chk" value="${dto.seq}"/></td>
+					<%
+					}
+					%>
 					<td>${dto.seq}</td>
 					<td>${dto.id}</td>
 					<c:choose>
 						<c:when test="${dto.delflag=='Y'}">
-							<td>-----삭제된 글입니다.-----</td>
+							<td>------삭제된 글입니다.------</td>
 						</c:when>
 						<c:otherwise>
 							<td id="util">
@@ -168,31 +233,46 @@
 	</c:choose>
 	<tr>
 		<td colspan="6" style="text-align: center;">
-			<a href="AnsController.do?command=boardlistpage&pnum=<%=map.get("prePageNum")%>">◀</a>
+			<a href="AnsController.do?command=boardlistpage&pnum=<%=map.get("prePageNum")%>${statusPage==null?'':statusPage}">◀</a>
 			<%
 // 				int pcount=(Integer)request.getAttribute("pcount");
 				for(int i=map.get("startPage");i<=map.get("endPage");i++){
 					%>
-					<a href="AnsController.do?command=boardlistpage&pnum=<%=i%>" style="text-decoration: none;"><%=i%></a>				
+					<a href="AnsController.do?command=boardlistpage&pnum=<%=i%>${statusPage==null?'':statusPage}" style="text-decoration: none;"><%=i%></a>				
 					<%
 				}	
 				
 			%>
-			<a href="AnsController.do?command=boardlistpage&pnum=<%=map.get("nextPageNum")%>">▶</a>
+			<a href="AnsController.do?command=boardlistpage&pnum=<%=map.get("nextPageNum")%>${statusPage==null?'':statusPage}">▶</a>
 		</td>
 	</tr>
+	
 	<tr>
-		<td colspan="6">
+		<td colspan="6" >
 			<input type="button" value="글추가" 
 			       onclick="location.href='AnsController.do?command=insertForm&id=<%=ldto.getId()%>'"/>
-			<input type="submit" value="글삭제"/>       
+			<% 
+// 			if(ldto.getRole()!=null){
+				if(ldto.getRole().equals("ADMIN")){
+				%>     
+					<input type="submit" value="글삭제"/> 
+				<%
+					}
+// 				 } 
+			%>
+			     
 		</td>
 	</tr>
 	  
 	     
 </table>
+
 </form>
+</section>
 </div>
+
+
+
 </body>
 </html>
 

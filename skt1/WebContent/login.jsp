@@ -36,7 +36,7 @@ window.onload=function(){
 			<ul class="gnb">
 				<li><a href="CalController.do?command=calendar">일정</a></li>
 				<li><a href="AnsController.do?command=boardlistpage&pnum=1">자유게시판</a></li>
-				<li><a href="LoginController.do?command=insert">회원가입</a></li>
+				<li><a href="#" target="_blank" onclick="window.open('checkuser.jsp', 'mapWin', 'left=100,top=0,width=390,height=334'); return false">회원가입</a></li>
 				<li><a href="LoginController.do?command=login">로그인</a></li>
 				<li><a href="LoginController.do?command=info">마이페이지</a></li>	
 				<li><a href="LoginController.do?command=logout">로그아웃</a></li>
