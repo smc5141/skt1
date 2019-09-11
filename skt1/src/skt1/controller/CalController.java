@@ -86,7 +86,9 @@ public class CalController extends HttpServlet {
 			String title=request.getParameter("title");
 			String content=request.getParameter("content");
 			String teamname=request.getParameter("teamname");
-			boolean isS=dao.insertCal(new CalDto(0,id,title,content,mdate,null,teamname));
+			int ourscore=Integer.parseInt(request.getParameter("ourscore"));
+			int otherscore=Integer.parseInt(request.getParameter("otherscore"));
+			boolean isS=dao.insertCal(new CalDto(0,id,title,content,mdate,null,teamname,ourscore,otherscore));
 			if(isS) {
 				response.sendRedirect("CalController.do?command=calendar");
 			}else{
@@ -153,8 +155,10 @@ public class CalController extends HttpServlet {
 			int seq=Integer.parseInt(request.getParameter("seq"));
 			String title=request.getParameter("title");
 			String content=request.getParameter("content");
-			
-			boolean isS=dao.updateCal(new CalDto(seq,null,title,content,mdate,null,null));
+			String teamname=request.getParameter("teamname");
+			int ourscore=Integer.parseInt(request.getParameter("ourscore"));
+			int otherscore=Integer.parseInt(request.getParameter("otherscore"));
+			boolean isS=dao.updateCal(new CalDto(seq,null,title,content,mdate,null,teamname,ourscore,otherscore));
 			if(isS) {
 				response.sendRedirect("CalController.do?command=caldetail&seq="+seq);
 			}else {

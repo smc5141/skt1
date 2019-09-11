@@ -192,16 +192,13 @@
 			for(int i=1;i<=lastDay;i++){
 				%>
 				<td>
-					<a class="countview" href="CalController.do?command=callist&year=<%=year%>&month=<%=month%>&date=<%=i%>" style="color:<%=Util.fontColor(dayOfWeek,i)%>;"><%=i%></a>
 					<a href="CalController.do?command=insertcalform
 					&year=<%=year%>&month=<%=month%>&date=<%=i%>&lastday=<%=lastDay%>" >
 						<img src="img/pen.png" alt="일정추가"  />
 					</a>
-
-					
-					<%=Util.getCalView(list, i) %>
-					
+					<a class="countview" href="CalController.do?command=callist&year=<%=year%>&month=<%=month%>&date=<%=i%>" style="color:<%=Util.fontColor(dayOfWeek,i)%>;"><%=Util.getCalView(list, i) %></a>		
 				</td>
+				
 				<%
 				//dayofweek-1=공백수
 				if((dayOfWeek-1+i)%7==0){
@@ -216,7 +213,6 @@
 				out.print("<td>&nbsp;</td>");
 			}
 		%>
-
 	</tr>
 </table>
 

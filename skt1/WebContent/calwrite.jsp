@@ -113,19 +113,15 @@
 				<tr>
 			<th>경기결과</th>
 			<td>
-			<select>
-				<option >0</option>
-				<option >1</option>
-				<option >2</option>
+			<select name="ourscore">
+				<option value="0">0</option>
+				<option value="1">1</option>
+				<option value="2">2</option>
 			</select>
-			<select>
-				<option >0</option>
-				<option >1</option>
-				<option>2</option>
-			</select>
-			<select>
-				<option >승</option>
-				<option >패</option>
+			<select name="otherscore">
+				<option value="0">0</option>
+				<option value="1">1</option>
+				<option value="2">2</option>
 			</select>
 			</td>
 		</tr>

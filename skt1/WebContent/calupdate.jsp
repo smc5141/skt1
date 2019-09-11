@@ -7,11 +7,38 @@
 <html>
 <head>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="css/skt1.css">
 <title></title>
 
 </head>
 <body>
-<h1>일정수정하기</h1>
+<div id="wrap"  >
+		<header>
+			<h1><a href="index.jsp"><img src="img/skt1.jpeg" alt="skt1logo"></a></h1>
+			<ul class="gnb">
+				<li><a href="CalController.do?command=calendar">일정</a></li>
+				<li><a href="AnsController.do?command=boardlistpage&pnum=1">자유게시판</a></li>
+				<li><a href="LoginController.do?command=insert">회원가입</a></li>
+				<li><a href="LoginController.do?command=login">로그인</a></li>
+				<li><a href="">마이페이지</a></li>
+			</ul>
+		</header>
+	<section class='sec1'>
+			<h2><img src='img/sk4.jpg' alt='MEMBER 회원안내'></h2>
+			<nav class='lnb' style="text-align: center;">
+				<ul >
+					<li><a href='#' onclick="location.href='LoginController.do?command=login'" style="color:#fff; font-size:40px;">로그인</a></li>
+				</ul>
+			</nav>
+		
+		<div class='lnb_sns' style="text-align: center;" >
+			<div class='sns_title' style="color: #fff;" >SKT1 유트브</div>
+			<a href='https://www.youtube.com/user/SKTTeam1st' target="_blank" ><img src="img/youtube.png" alt="youtube"></a>
+		</div>
+	</section>
+<section class="sec2" >
+<div id="container">
+<h2  style="text-align: center;">일정수정하기</h2>
 <form action="CalController.do" method="post">
 <input type="hidden" name="command" value="calupdate" />
 <input type="hidden" name="seq" value="${dto.seq}" />
@@ -56,8 +83,35 @@
 		</td>
 	</tr>
 	<tr>
+			<th>상대팀</th>
+			<td>
+			<select name="teamname">
+				<option value="kt">케이티</option>
+				<option value="afreeca">아프리카</option>
+				<option value="jinair">진에어</option>
+				<option value="damwon">담원</option>
+				<option value="kingzone">킹존</option>
+			</select>
+			</td>
+		</tr>
+				<tr>
+			<th>경기결과</th>
+			<td>
+			<select name="ourscore">
+				<option value="0">0</option>
+				<option value="1">1</option>
+				<option value="2">2</option>
+			</select>
+			<select name="otherscore">
+				<option value="0">0</option>
+				<option value="1">1</option>
+				<option value="2">2</option>
+			</select>
+			</td>
+		</tr>
+	<tr>
 		<th>제목</th>
-		<td><input type="text" name="title" value="${dto.title}"> </td>
+		<td><input type="text" name="title" value="${dto.title}" readonly="readonly"> </td>
 	</tr>
 	<tr>
 		<th>내용</th>
@@ -73,5 +127,13 @@
 	</tr>
 </table>
 </form>
+</div>
+</section>
+<div style="margin: 0 auto; text-align: right;">
+	<br/>
+	<address >서울특별시 영등포구 양평동3가 15-1 월드메르디앙비즈센터 4층 401 402호 연락처 : 02-6340-2233<br/>COPYRIGHT &copy;
+	iCox. All Rights Reserved </address>
+	</div>
+</div>
 </body>
 </html>
