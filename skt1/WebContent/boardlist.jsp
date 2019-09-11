@@ -214,7 +214,7 @@ text-align:center;
 					<td>${dto.id}</td>
 					<c:choose>
 						<c:when test="${dto.delflag=='Y'}">
-							<td>-----삭제된 글입니다.-----</td>
+							<td>------삭제된 글입니다.------</td>
 						</c:when>
 						<c:otherwise>
 							<td id="util">
