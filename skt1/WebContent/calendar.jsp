@@ -168,7 +168,8 @@
 					&year=<%=year%>&month=<%=month%>&date=<%=i%>&lastday=<%=lastDay%>" >
 						<img src="img/pen.png" alt="일정추가"  />
 					</a>
-					<a class="countview" href="CalController.do?command=callist&year=<%=year%>&month=<%=month%>&date=<%=i%>" style="color:<%=Util.fontColor(dayOfWeek,i)%>;"><%=Util.getCalView(list, i) %></a>		
+					<a class="countview" href="CalController.do?command=callist&year=<%=year%>&month=<%=month%>&date=<%=i%>" style="color:<%=Util.fontColor(dayOfWeek,i)%>;"><%=Util.getCalView(list, i) %>	</a>	
+					
 				</td>
 				
 				<%

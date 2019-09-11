@@ -85,7 +85,7 @@
 	<tr>
 			<th>상대팀</th>
 			<td>
-			<select name="teamname">
+			<select name="teamname" >
 				<option value="kt">케이티</option>
 				<option value="afreeca">아프리카</option>
 				<option value="jinair">진에어</option>

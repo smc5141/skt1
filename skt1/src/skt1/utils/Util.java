@@ -87,13 +87,13 @@ public class Util {
 								//<p>title</p>
 			for (CalDto calDto : list) {
 				if(calDto.getMdate().substring(6, 8).equals(d)) {
-					titleList+="<img src='img/"+calDto.getTeamname()+".jpg' alt='상대팀' width=70px>";
+					titleList+="<img src='img/"+calDto.getTeamname()+".jpg' alt='상대팀' width=120px>";
 					if(calDto.getOurscore()>calDto.getOtherscore()) {
 						titleList+= "<img src='img/"+calDto.getOurscore()+".jpg' alt='점수' width=40px>" +"<img src='img/clone.jpg' alt='콜론' width=30px>"+ "<img src='img/"+calDto.getOtherscore()+".jpg' alt='점수' width=35px>" + "<img src='img/win.jpg' alt='승' width=40px >";
 					}else if(calDto.getOurscore()<calDto.getOtherscore()){
 						titleList+= "<img src='img/"+calDto.getOurscore()+".jpg' alt='점수'width=40px >" +"<img src='img/clone.jpg' alt='콜론' width=30px >"+ "<img src='img/"+calDto.getOtherscore()+".jpg' alt='점수' width=35px >" + "<img src='img/lose.jpg' alt='패'width=35px >";
 					}else {
-						titleList+="<img src='img/null.jpg' alt='경기전' width=70px>";
+						titleList+="<img src='img/null.jpg' alt='경기전' width=150px>";
 					}
 				}	
 			}
