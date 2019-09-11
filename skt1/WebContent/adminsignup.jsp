@@ -73,7 +73,7 @@ function idChk(){
 	<section class="sec2" >
 	<form action="LoginController.do" method="post" style="width:1000px; height:1500px; margin: 0 auto;">
 		<h2 style="text-align: center;">회원가입을 시작합니다.</h2>
-	<input type="hidden" name="command" value="insertuser"/>
+	<input type="hidden" name="command" value="insertadmin"/>
 			
 	<div class="form-group" id="divId">
 	
