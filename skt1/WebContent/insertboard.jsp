@@ -72,7 +72,7 @@
 			<a href='https://www.youtube.com/user/SKTTeam1st' target="_blank" ><img src="img/youtube.png" alt="youtube"></a>
 		</div>
 	</section>
-
+<section class="sec2" >
 <form action="AnsController.do" method="post" >
 <input type="hidden" name="command" value="insertboard"/>
 <input type="hidden" name="id" value="<%=ldto.getId()%>">
@@ -100,7 +100,9 @@
 </table>
 
 </form>
+</section>
 </div>
+
 </body>
 </html>
 

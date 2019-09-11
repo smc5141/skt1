@@ -28,11 +28,14 @@
 	
 </script>
 </head>
-<body>
+
 <%
-// 	AnsDto dto1=(AnsDto)request.getAttribute("dto");
+ 	AnsDto dto1=(AnsDto)request.getAttribute("dto");
 
 	LoginDto ldto=(LoginDto)session.getAttribute("ldto");
+	if(ldto==null){
+		pageContext.forward("login.jsp");
+	}
 %>
 <div id="wrap"  >
 		<header>
@@ -58,6 +61,7 @@
 			<a href='https://www.youtube.com/user/SKTTeam1st' target="_blank" ><img src="img/youtube.png" alt="youtube"></a>
 		</div>
 	</section>
+<section class="sec2" >
 <div id="container">
 
 <table border="1">
@@ -80,8 +84,13 @@
 	<tr>
 		<td colspan="2">
 			<button onclick="replyForm()">답글</button>
+			<% if(ldto!=null){
+			 if(ldto.getId().equals(dto1.getId())){%>	
+				 		 
 			<button onclick="updateForm(${dto.seq})">수정</button>
 			<button onclick="delBoard(${dto.seq})">삭제</button>
+			<% } %>
+			<% } %>
 			<button onclick="location.href='AnsController.do?command=boardlistpage&pnum=1'">글목록</button>
 		</td>
 	</tr>
@@ -114,9 +123,12 @@
 	</tr>
 </table>
 </form>
+
 </div>
 </div>
+</section>
 </div>
+	
 <script type="text/javascript">
 	function replyForm(){
 // 		$("#replyForm").css("display","block");
@@ -136,6 +148,7 @@
 	}
 </script>
 </body>
+
 </html>
 
 
