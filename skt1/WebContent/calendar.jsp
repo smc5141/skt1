@@ -14,37 +14,8 @@
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
 <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
 <link rel="stylesheet" href="css/skt1.css">
+<link rel="stylesheet" href="css/skt2.css">
 <title></title>
-<style type="text/css">
-	table{
-		border-collapse: collapse;
-	}
-	th{background-color: orange; color: white;}
-	td{height:150px; vertical-align: top; position: relative;}
-	a{text-decoration: none;}
-	.clist{
-		font-size: 5px;
-		background-color: orange;
-		margin-top: 1px;
-	}
-	#container{
-		margin: 0px auto;
-		width:560px;
-	}
-	
-	td>div{
-		position: absolute;
-		top : -20px;
-		left : 10px; 
-		background-color: orange;
-		width : 30px;
-		height: 30px;
-		border-radius:30px 30px 30px 0px; 
-		text-align: center;
-		line-height: 30px;
-	}
-	
-</style>
 <script type="text/javascript">
 	$(function(){
 		var aCount;
@@ -157,23 +128,23 @@
 %>
 <section class="sec2" >
 <div id="container">
-<h2 style="text-align: center;">일정보기</h2>
+<h2 style="text-align: center;"></h2>
 <table border="1">
 	<caption>
 		<a href="calendar.jsp?year=<%=year-1%>&month=<%=month%>">◁</a>
 		<a href="calendar.jsp?year=<%=year%>&month=<%=month-1%>">◀</a>
-		<span class="y"><%=year%></span>년
-		<span class="m"><%=month%></span>월
+		<span class="y"><%=year%>년</span>
+		<span class="y"><%=month%>월</span>
 		<a href="calendar.jsp?year=<%=year%>&month=<%=month+1%>">▶</a>
 		<a href="calendar.jsp?year=<%=year+1%>&month=<%=month%>">▷</a>
 	</caption>
-	<col width="80px"/>
-	<col width="80px"/>
-	<col width="80px"/>
-	<col width="80px"/>
-	<col width="80px"/>
-	<col width="80px"/>
-	<col width="80px"/>
+	<col width="150px"/>
+	<col width="150px"/>
+	<col width="150px"/>
+	<col width="150px"/>
+	<col width="150px"/>
+	<col width="150px"/>
+	<col width="150px"/>
 	<tr>
 		<th>일</th>
 		<th>월</th>

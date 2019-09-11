@@ -1,0 +1,40 @@
+@charset "UTF-8";
+
+	table{
+		border-collapse: collapse;
+		position: relative;
+		right: -100px;
+		bottom: -50px;
+	}
+	th{background-color: orange; color: white;}
+	td{height:150px; vertical-align: top; position: relative;}
+	a{text-decoration: none;}
+	.clist{
+		font-size: 5px;
+		background-color: orange;
+		margin-top: 1px;
+	}
+	#container{
+		margin: 0 auto;
+		width:1400px;
+		top:50%;
+		height: 680px;
+	}
+	
+	td>div{
+		position: absolute;
+		top : -20px;
+		left : 10px; 
+		background-color: orange;
+		width : 30px;
+		height: 30px;
+		border-radius:30px 30px 30px 0px; 
+		text-align: center;
+		line-height: 30px;
+	}
+	.y{
+	font-size: 2em;
+    line-height: 1.25em;
+    margin: .25em 0;
+	}
+	
