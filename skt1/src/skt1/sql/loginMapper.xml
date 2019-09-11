@@ -6,6 +6,11 @@
 		#{phone},#{email},'USER')
 	</insert>
 	
+	<insert id="insertadmin" parameterType="loginDto">
+		INSERT INTO M_USER VALUES(#{id},#{password},#{name},#{address},
+		#{phone},#{email},'ADMIN')
+	</insert>
+	
 	<select id="Login" parameterType="Map" resultType="loginDto">
 		SELECT ID,PASSWORD,NAME,ADDRESS,PHONE,EMAIL,ROLE
 		FROM M_USER WHERE ID=#{id} AND PASSWORD=#{password}
