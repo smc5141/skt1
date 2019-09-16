@@ -121,7 +121,7 @@ text-align:center;
 	Map<String,Integer>map=(Map<String,Integer>)request.getAttribute("pmap");
 	
 	LoginDto ldto=(LoginDto)session.getAttribute("ldto");
-	if(ldto==null){
+	if(ldto==null){		
 		pageContext.forward("login.jsp");
 	}
 %>
