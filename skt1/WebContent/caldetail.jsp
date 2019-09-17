@@ -19,7 +19,7 @@
 				<li><a href="AnsController.do?command=boardlistpage&pnum=1">자유게시판</a></li>
 				<li><a href="LoginController.do?command=insert">회원가입</a></li>
 				<li><a href="LoginController.do?command=login">로그인</a></li>
-				<li><a href="">마이페이지</a></li>
+				<li><a href="LoginController.do?command=info">마이페이지</a></li>
 			</ul>
 		</header>
 	<section class='sec1'>
@@ -39,8 +39,8 @@
 <h2 style="text-align: center;">일정상세보기</h2>
 <table border="1">
 	<tr>
-		<th>아이디</th>
-		<td>${dto.id}</td>
+		<th>상대팀</th>
+		<td>${dto.teamname}</td>
 	</tr>
 	<tr>
 		<th>일정</th>
@@ -63,7 +63,7 @@
 		<td colspan="2">
 			<input type="button" value="수정" onclick="updateForm(${dto.seq})" />
 			<input type="button" value="삭제" onclick="delBoard(${dto.seq})" />
-			<input type="button" value="달력" onclick="calList()" />
+			<input type="button" value="일정보기" onclick="calList()" />
 		</td>
 	</tr>
 </table>

@@ -165,11 +165,6 @@ public class CalController extends HttpServlet {
 				request.setAttribute("msg", "일정수정실패");
 				dispatch("error.jsp", request, response);
 			}
-		}else if(command.equals("calcount")) {
-			String yyyyMMdd=request.getParameter("yyyyMMdd");
-			int count=dao.getCalViewCount(yyyyMMdd);
-			PrintWriter pw=response.getWriter();
-			pw.print(count);
 		}
 		
 		

@@ -39,7 +39,7 @@
 				<li><a href="AnsController.do?command=boardlistpage&pnum=1">자유게시판</a></li>
 				<li><a href="LoginController.do?command=insert">회원가입</a></li>
 				<li><a href="LoginController.do?command=login">로그인</a></li>
-				<li><a href="">마이페이지</a></li>
+				<li><a href="LoginController.do?command=info">마이페이지</a></li>
 			</ul>
 		</header>
 	<section class='sec1'>
@@ -127,11 +127,13 @@
 		</tr>
 		<tr>
 			<th>제목</th>
-			<td><input type="text" name="title" value="KDA확인하기" readonly="readonly"/>
+			<td><input type="text" name="title" value="상세내용 확인" />
 		</tr>
 		<tr>
 			<th>내용</th>
-			<td><textarea rows="10" cols="60" name="content"></textarea></td>
+			<td><textarea rows="10" cols="60" name="content">*일정: 롤파크 (서울 종로구 종로33)
+*장소: 오후 5시 ~ (2경기)
+*결과: (승) SKT 2 vs 0 KT (패)</textarea></td>
 		</tr>
 		<tr>
 			<td colspan="2">

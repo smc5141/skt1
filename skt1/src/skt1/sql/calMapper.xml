@@ -36,7 +36,7 @@
 	</delete>
 	
 	<select id="caldetail" parameterType="int" resultMap="calDtoMap">
-		SELECT SEQ,ID,TITLE,CONTENT,MDATE,REGDATE
+		SELECT SEQ,ID,TITLE,CONTENT,MDATE,REGDATE,TEAMNAME
 		FROM M_CALBOARD WHERE SEQ=#{seq}
 	</select>
 	
@@ -50,9 +50,6 @@
 	FROM M_CALBOARD WHERE SUBSTR(MDATE,1,6)=#{yyyyMM}
 	</select>
 	
-	<select id="calcount" resultType="int" parameterType="Map">
-		SELECT COUNT(*) FROM M_CALBOARD
-		WHERE SUBSTR(MDATE,1,8)=#{yyyyMMdd}	
-	</select>
+
 	
 </mapper>

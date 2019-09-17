@@ -41,7 +41,7 @@
 				<li><a href="AnsController.do?command=boardlistpage&pnum=1">자유게시판</a></li>
 				<li><a href="LoginController.do?command=insert">회원가입</a></li>
 				<li><a href="LoginController.do?command=login">로그인</a></li>
-				<li><a href="">마이페이지</a></li>
+				<li><a href="LoginController.do?command=info">마이페이지</a></li>
 			</ul>
 		</header>
 	<section class='sec1'>
@@ -71,8 +71,8 @@
 	<tr>
 		<th><input type="checkbox" name="all" onclick="allChk(this.checked)"/></th>
 		<th>번호</th>
-		<th>일정</th>
-		<th>KDA</th>
+		<th>상대팀</th>
+		<th>상세내용</th>
 		<th>작성일</th>
 	</tr>
 	<c:choose>
@@ -83,13 +83,10 @@
 			<c:forEach var="dto" items="${list}">
 				<tr>
 					<td><input type="checkbox" name="chk" value="${dto.seq}" /> </td>
-					<td>${dto.seq}</td>
-					<td>
-					<jsp:setProperty value="${dto.mdate}" property="toDates" name="util"/>
-					<jsp:getProperty property="toDates" name="util"/>
-					</td>
-					<td><a href="CalController.do?command=caldetail&seq=${dto.seq}">${dto.title}</a></td>
-					<td><f:formatDate value="${dto.regDate}" pattern="yyyy-MM-dd"/></td>
+					<td style="text-align: center;">${dto.seq}</td>
+					<td style="text-align: center;">${dto.teamname}</td>
+					<td style="text-align: center;"><a href="CalController.do?command=caldetail&seq=${dto.seq}">${dto.title}</a></td>
+					<td style="text-align: center;"><f:formatDate value="${dto.regDate}" pattern="yyyy-MM-dd"/></td>
 				</tr>
 			</c:forEach>
 		</c:otherwise>
