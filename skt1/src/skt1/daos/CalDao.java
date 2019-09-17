@@ -46,6 +46,10 @@ public class CalDao extends SqlMapConfig{
 		return count>0?true:false;
 	}
 
+	//일정 알림
+	
+
+	
 	//일정상세보기
 	
 	public CalDto getCalBoard(int seq) {

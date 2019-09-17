@@ -15,9 +15,6 @@
 		<result property="otherscore" column="OHTERSCORE" />
 	</resultMap>
 	
-	
-	
-	
 	<select id="getCalList" parameterType="Map" resultMap="calDtoMap">
 		SELECT SEQ,ID,TITLE,CONTENT,MDATE,REGDATE,TEAMNAME,OURSCORE,OTHERSCORE
 		FROM M_CALBOARD WHERE SUBSTR(MDATE,1,8)=#{yyyyMMdd}

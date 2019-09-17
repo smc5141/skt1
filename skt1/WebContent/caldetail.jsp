@@ -8,6 +8,17 @@
 <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <link rel="stylesheet" href="css/skt1.css">
 <title></title>
+	<style>
+  table {
+    width: 100%;
+    border-top: 1px solid #444444;
+    border-collapse: collapse;
+  }
+  th, td {
+    border-bottom: 1px solid #444444;
+    padding: 10px;
+  }
+</style>
 </head>
 <body>
 <jsp:useBean id="util" class="skt1.utils.Util"/>
@@ -37,7 +48,7 @@
 	</section>
 	<section class="sec2" >
 <h2 style="text-align: center;">일정상세보기</h2>
-<table border="1">
+<table border="1" style="text-align: center;" >
 	<tr>
 		<th>상대팀</th>
 		<td>${dto.teamname}</td>
@@ -56,7 +67,7 @@
 	<tr>
 		<th>내용</th>
 		<td>
-			<textarea rows="10" cols="60" readonly="readonly">${dto.content}</textarea>
+			<pre>${dto.content}</pre>
 		</td>
 	</tr>
 	<tr>

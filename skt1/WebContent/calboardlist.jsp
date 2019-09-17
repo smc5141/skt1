@@ -29,8 +29,19 @@
 			return bool;
 		});
 	})
-	
 </script>
+	<style>
+  table {
+    width: 100%;
+    border-top: 1px solid #444444;
+    border-collapse: collapse;
+  }
+  th, td {
+    border-bottom: 1px solid #444444;
+    padding: 10px;
+  }
+</style>
+
 </head>
 <body>
 <div id="wrap"  >
@@ -85,7 +96,7 @@
 					<td><input type="checkbox" name="chk" value="${dto.seq}" /> </td>
 					<td style="text-align: center;">${dto.seq}</td>
 					<td style="text-align: center;">${dto.teamname}</td>
-					<td style="text-align: center;"><a href="CalController.do?command=caldetail&seq=${dto.seq}">${dto.title}</a></td>
+					<td style="text-align: center;" ><a href="CalController.do?command=caldetail&seq=${dto.seq}" style="color:blue;"><ins>${dto.title}</ins></a></td>
 					<td style="text-align: center;"><f:formatDate value="${dto.regDate}" pattern="yyyy-MM-dd"/></td>
 				</tr>
 			</c:forEach>

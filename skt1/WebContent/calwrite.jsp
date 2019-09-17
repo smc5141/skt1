@@ -30,6 +30,7 @@
 	pageContext.setAttribute("hour", hour);
 	pageContext.setAttribute("min", min);
 	%>
+
 <body>
 <div id="wrap"  >
 		<header>
@@ -127,7 +128,7 @@
 		</tr>
 		<tr>
 			<th>제목</th>
-			<td><input type="text" name="title" value="상세내용 확인" />
+			<td><input type="text" name="title" />
 		</tr>
 		<tr>
 			<th>내용</th>
