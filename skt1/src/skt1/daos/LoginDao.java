@@ -194,4 +194,21 @@ public class LoginDao extends SqlMapConfig {
 		
 		return count>0?true:false;
 	}
+	public String searchid(String name, String phone) {
+		String id= null;
+		SqlSession sqlSession= null;
+		Map<String,String> map=new HashMap<>();
+		map.put("name", name);
+		map.put("phone", phone);
+		
+		try {
+			sqlSession=getSqlSessionFactory().openSession(true);
+			id=sqlSession.selectOne(nameSpace+"searchid", map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			sqlSession.close();
+		}
+		return id;
+	}
 }

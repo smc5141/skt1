@@ -169,7 +169,17 @@ public class LoginController extends HttpServlet {
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
-				jsFoward("이메일 발송", "login.jsp", response);
+				jsFoward("등록된 이메일로 임시비밀번호 발송", "login.jsp", response);
+		}else if(command.equals("searchid")) {
+			String name=request.getParameter("name");
+			String phone=request.getParameter("phone");
+			String id=dao.searchid(name, phone);
+			if(id!=null) {
+				request.setAttribute("id", id);
+				dispatch("idcompl.jsp", request, response);
+			}else {
+				jsFoward2("아이디가 없거나 이름 핸드폰번호를 다시 입력해주세요","searchid.jsp" , response);
+			}
 		}
 	}
 	public void dispatch(String url,HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -180,6 +190,15 @@ public class LoginController extends HttpServlet {
 		String str="<script type='text/javascript'>"
 		+"alert('"+msg+"');"
 		+"location.href='"+url+"';"
+		+"</script>";
+		PrintWriter pw=response.getWriter();
+		pw.print(str);
+		
+	}
+	public void jsFoward2(String msg,String url,  HttpServletResponse response) throws IOException {
+		String str="<script type='text/javascript'>"
+		+"alert('"+msg+"');"
+		+"window.open('"+url+"', 'mapWin', 'left=100,top=0,width=500,height=450');"
 		+"</script>";
 		PrintWriter pw=response.getWriter();
 		pw.print(str);

@@ -33,17 +33,23 @@ window.onload=function(){
 <div id="wrap"  >
 	<section class="sec2" >
 	<form action="LoginController.do" method="post" style="width:350px; height:300px; margin: 0 auto;">
-		<h2 style="text-align: center;">비밀번호 찾기</h2>
-	<input type="hidden" name="command" value="searchpw"/>		
+		<h2 style="text-align: center;">아이디 찾기</h2>
+	<input type="hidden" name="command" value="searchid"/>		
 	<div class="form-group" id="divId">
-                <label for="inputId" class="control-label">아이디</label>
+                <label for="inputId" class="control-label">이름</label>
                 <div class="col-lg-10">
-                    <input type="text" class="form-control" name="id" data-rule-required="true" placeholder="이메일로 임시비밀번호 전송" maxlength="30">
+                    <input type="text" class="form-control" name="name" data-rule-required="true" placeholder="이름 입력" maxlength="30">
+                </div>
+            </div>
+            	<div class="form-group" id="divId">
+                <label for="inputId" class="control-label">핸드폰 번호</label>
+                <div class="col-lg-10">
+                    <input type="text" class="form-control" name="phone" data-rule-required="true" placeholder="핸드폰 번호 - 없이 입력" maxlength="30">
                 </div>
             </div>
                <div class="form-group" >
                 <div class="col-lg-10">
-                    <input type="submit" value="비밀번호 찾기" class="form-control" >
+                    <input type="submit" value="아이디 찾기" class="form-control" >
                 </div>
             </div>
             </form>

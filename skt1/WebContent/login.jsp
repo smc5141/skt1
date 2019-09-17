@@ -11,7 +11,7 @@
 <style type="text/css">
 .pwbutton{
 position: relative;
-left:650px;
+left:608px;
 }
 </style>
 <script type="text/javascript">
@@ -40,7 +40,7 @@ window.onload=function(){
 	<section class="sec2" >
 	<form action="LoginController.do" method="post" style="width:1000px; height:1000px; margin: 0 auto;">
 		<h2 style="text-align: center;">로그인</h2>
-		<button class="pwbutton" onclick="window.open('searchpw.jsp', 'mapWin', 'left=100,top=0,width=390,height=334'); return false">비밀번호 찾기</button>
+		<button class="pwbutton" onclick="window.open('search.jsp', 'mapWin', 'left=100,top=0,width=390,height=334'); return false">아이디/비밀번호 찾기</button>
 	<input type="hidden" name="command" value="userlogin"/>		
 	<div class="form-group" id="divId">
                 <label for="inputId" class="control-label">아이디</label>

@@ -51,6 +51,10 @@
 		<update id="changePw" parameterType="Map">
 		UPDATE M_USER SET PASSWORD=#{newPwd} WHERE ID=#{id}
 	</update>
+	
+	<select id="searchid" parameterType="Map" resultType="String">
+		SELECT ID FROM M_USER WHERE NAME=#{name} AND PHONE=#{phone}
+	</select>
 </mapper>
 
 

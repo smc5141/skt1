@@ -8,6 +8,9 @@
 <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
 <link rel="stylesheet" href="css/skt4.css">
 <title></title>
+<%
+	String id=(String)request.getAttribute("id");
+%>
 <script type="text/javascript">
 window.onload=function(){
 	var form=document.getElementsByTagName("form")[0];//[form]
@@ -33,21 +36,22 @@ window.onload=function(){
 <div id="wrap"  >
 	<section class="sec2" >
 	<form action="LoginController.do" method="post" style="width:350px; height:300px; margin: 0 auto;">
-		<h2 style="text-align: center;">비밀번호 찾기</h2>
-	<input type="hidden" name="command" value="searchpw"/>		
+		<h2 style="text-align: center;">찾은 아이디</h2>
+	<input type="hidden" name="command" value="searchid"/>		
 	<div class="form-group" id="divId">
-                <label for="inputId" class="control-label">아이디</label>
+                <label for="inputId" class="control-label"><%=id%></label>
                 <div class="col-lg-10">
-                    <input type="text" class="form-control" name="id" data-rule-required="true" placeholder="이메일로 임시비밀번호 전송" maxlength="30">
                 </div>
             </div>
                <div class="form-group" >
                 <div class="col-lg-10">
-                    <input type="submit" value="비밀번호 찾기" class="form-control" >
+                    <input type="button" value="닫기" onClick="window.close()" class="form-control" >
                 </div>
             </div>
             </form>
 	</section>
 </div>
 </body>
+<script type="text/javascript">
+</script>
 </html>
