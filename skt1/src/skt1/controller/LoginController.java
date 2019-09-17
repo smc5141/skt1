@@ -14,6 +14,8 @@ import javax.servlet.http.HttpSession;
 
 import skt1.daos.LoginDao;
 import skt1.dtos.LoginDto;
+import skt1.utils.FindUtil;
+import skt1.utils.MailUtil;
 
 
 @WebServlet("/LoginController.do")
@@ -159,6 +161,15 @@ public class LoginController extends HttpServlet {
 					jsFoward("비밀번호 변경 실패", "LoginController.do?command=pwch", response);
 				}
 			}
+		}else if(command.equals("searchpw")) {
+				String id=request.getParameter("id");
+				LoginDto ldto=dao.userinfo(id);
+				try {
+					findPwd(ldto.getEmail(), ldto.getId());
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				jsFoward("이메일 발송", "login.jsp", response);
 		}
 	}
 	public void dispatch(String url,HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -174,4 +185,23 @@ public class LoginController extends HttpServlet {
 		pw.print(str);
 		
 	}
+	public String findPwd(String email,String id) throws Exception {
+		String newPwd = FindUtil.getNewPwd();
+		LoginDao dao=new LoginDao();
+		boolean isS=dao.changePw(newPwd, id);
+		
+		String subject = "[하하하하하] 임시 비밀번호 발급 안내";
+		
+		String msg="";
+		msg += "<div align='center' style='border:1px solid black; font-family:verdana'>";
+		msg += "<h3 style='color:blue;'><strong>"+id;
+		msg += "님</strong>의 임시비밀번호 입니다. 로그인후 비밀번호를 변경해주세요.</h3>";
+		msg += "<p>임시 비밀번호 : <strong>" + newPwd + "<strong></p></div>";
+		
+		MailUtil.sendMail(email, subject, msg);
+		
+		return "success";
+		
+	}
+
 }

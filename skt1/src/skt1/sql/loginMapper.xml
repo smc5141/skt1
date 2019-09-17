@@ -48,6 +48,9 @@
 		SELECT ID,PASSWORD
 		FROM M_USER WHERE ID=#{id}
 	</select>
+		<update id="changePw" parameterType="Map">
+		UPDATE M_USER SET PASSWORD=#{newPwd} WHERE ID=#{id}
+	</update>
 </mapper>
 
 
