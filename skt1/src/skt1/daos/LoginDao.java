@@ -144,4 +144,36 @@ public class LoginDao extends SqlMapConfig {
 		}
 		return dto;
 	}
+	public boolean Pwch(String id,String chpassword) {
+		int count=0;
+		Map<String,String> map=new HashMap<>();
+		map.put("id", id);
+		map.put("password", chpassword);
+		SqlSession sqlSession=null;
+		
+		try {
+			sqlSession=getSqlSessionFactory().openSession(true);
+			count=sqlSession.update(nameSpace+"Pwch", map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			sqlSession.close();
+		}
+		
+		return count>0?true:false;
+	}
+	public LoginDto pwinfo(String id) {
+		LoginDto dto=new LoginDto();
+		SqlSession sqlSession=null;
+		
+		try {
+			sqlSession=getSqlSessionFactory().openSession(true);
+			dto=sqlSession.selectOne(nameSpace+"pwinfo", id);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			sqlSession.close();
+		}
+		return dto;
+	}
 }

@@ -138,6 +138,27 @@ public class LoginController extends HttpServlet {
 			LoginDto ldto=dao.idChk(id);
 			request.setAttribute("ldto", ldto);
 			dispatch("idChkform.jsp", request, response);
+		}else if(command.equals("pwch")) {
+			String id=request.getParameter("id");
+			LoginDto ldto=dao.pwinfo(id);
+			request.setAttribute("ldto", ldto);
+			dispatch("pwch.jsp", request, response);
+			
+		}else if(command.equals("pwcheck")) {
+			String id=request.getParameter("id");
+			String password=request.getParameter("password");
+			String chpassword=request.getParameter("passwordch");
+			LoginDto ldto=dao.Login(id, password);
+			if(ldto==null) {
+				jsFoward("현재 비밀번호가 일치하지 않습니다.", "LoginController.do?command=pwch&id="+id, response);
+			}else {
+				boolean isS=dao.Pwch(id, chpassword);
+				if(isS) {
+					jsFoward("비밀번호 변경 성공", "LoginController.do?command=info", response);
+				}else {
+					jsFoward("비밀번호 변경 실패", "LoginController.do?command=pwch", response);
+				}
+			}
 		}
 	}
 	public void dispatch(String url,HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
