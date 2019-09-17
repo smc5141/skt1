@@ -29,7 +29,7 @@
 			<h2><img src='img/sk4.jpg' alt='MEMBER 회원안내'></h2>
 			<nav class='lnb' style="text-align: center;">
 				<ul >
-					<li><a href='#' onclick="location.href='LoginController.do?command=login'" style="color:#fff; font-size:40px;">로그인</a></li>
+					<li><a href='#' onclick="location.href='LoginController.do?command=pwch&id=<%=ldto.getId()%>'" style="color:#fff; font-size:40px;">비밀번호 변경</a></li>
 				</ul>
 			</nav>
 		
@@ -82,7 +82,6 @@
                <div class="form-group" >
                 <div class="col-lg-10">
                     <input type="submit"  value="정보 수정" class="form-control" >
-                    <input type="button"  value="비밀번호 변경" onclick="location.href='LoginController.do?command=pwch&id=<%=ldto.getId()%>'">
                 </div>
             </div>
             </form>
