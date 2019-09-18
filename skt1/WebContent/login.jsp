@@ -38,20 +38,20 @@ window.onload=function(){
 <body>
 <div id="wrap"  >
 	<section class="sec2" >
-	<form action="LoginController.do" method="post" style="width:1000px; height:1000px; margin: 0 auto;">
+	<form action="LoginController.do" method="post" name="gogo" style="width:1000px; height:1000px; margin: 0 auto;">
 		<h2 style="text-align: center;">로그인</h2>
 		<button class="pwbutton" onclick="window.open('search.jsp', 'mapWin', 'left=100,top=0,width=390,height=334'); return false">아이디/비밀번호 찾기</button>
 	<input type="hidden" name="command" value="userlogin"/>		
 	<div class="form-group" id="divId">
                 <label for="inputId" class="control-label">아이디</label>
                 <div class="col-lg-10">
-                    <input type="text" class="form-control" name="id" data-rule-required="true" placeholder="아이디" maxlength="30">
+                    <input type="text"  class="form-control" name="id" data-rule-required="true" placeholder="아이디" maxlength="30">
                 </div>
             </div>
             <div class="form-group" >
                 <label for="inputPassword" class="control-label">비밀번호</label>
                 <div class="col-lg-10">
-                    <input type="password" class="form-control" name="password" name="excludeHangul" data-rule-required="true" placeholder="패스워드" maxlength="30">
+                    <input type="password"  class="form-control" name="password" name="excludeHangul" data-rule-required="true" placeholder="패스워드" maxlength="30">
                 </div>
             </div>
                <div class="form-group" >

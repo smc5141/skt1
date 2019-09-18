@@ -88,4 +88,5 @@ li a i{
 }
 .sec2{
 	background-image: url('back.jpg');
+	background-size: cover;
 }
