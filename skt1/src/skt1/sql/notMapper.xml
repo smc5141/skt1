@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="skt1.notice">
+
+
+	<select id="boardlistpaging" resultType="notDto" parameterType="Map">
+		SELECT RN,SEQ,ID,TITLE,CONTENT,REGDATE,REFER,STEP,DEPTH,READCOUNT,DELFLAG
+     	 FROM(
+      	SELECT ROW_NUMBER() OVER (ORDER BY REFER DESC,STEP) AS RN,SEQ,ID,TITLE,CONTENT,REGDATE,REFER,STEP,DEPTH,READCOUNT,DELFLAG FROM M_NOTICE
+      	<where>
+      	<if test="id!=null">
+	      	ID LIKE '%'||#{id}||'%'
+      	</if>
+      	<if test="title!=null">
+	      	TITLE LIKE '%'||#{title}||'%'
+      	</if>
+      	<if test="content!=null">
+	      	CONTENT LIKE '%'||#{content}||'%'
+      	</if>
+      	</where>
+     	 ) 
+      	WHERE CEIL(RN/10) = #{pnum}
+	</select>
+
+	<select id="pcount" resultType="int" parameterType="Map">
+		SELECT CEIL(COUNT(*)/10) FROM M_NOTICE
+		<where>
+      	<if test="id!=null">
+	      	ID LIKE '%'||#{id}||'%'
+      	</if>
+      	<if test="title!=null">
+	      	TITLE LIKE '%'||#{title}||'%'
+      	</if>
+      	<if test="content!=null">
+	      	CONTENT LIKE '%'||#{content}||'%'
+      	</if>
+      	</where>
+	</select>
+
+
+	<sql id="a">
+		SELECT SEQ,ID,TITLE,CONTENT,REGDATE,REFER,STEP,DEPTH,READCOUNT,DELFLAG 
+		FROM M_NOTICE 
+	</sql>
+
+	<select id="boardlist" resultType="notDto" parameterType="Map">
+		<include refid="a"/>
+		<where>
+			<if test="seq!=null">
+				SEQ=#{seq}					
+			</if>
+		</where>
+		ORDER BY REFER,STEP 
+	</select>
+	
+	<select id="getboard" parameterType="int">
+		<include refid="a"/>
+		WHERE SEQ=#{seq}
+	</select>
+	
+	<insert id="insertboard" parameterType="notDto">
+		INSERT INTO M_NOTICE (SEQ,ID,TITLE,CONTENT,REGDATE,REFER,
+		STEP,DEPTH,READCOUNT,DELFLAG) 
+		VALUES(M_NOTICE_SEQ.NEXTVAL,#{id},#{title},#{content},SYSDATE, 
+		(SELECT NVL(MAX(REFER)+1,0) FROM M_NOTICE ),0,0,0,'N')
+	</insert>
+	
+	<update id="updateboard" parameterType="notDto">
+		UPDATE M_NOTICE SET TITLE=#{title},CONTENT=#{content},REGDATE=SYSDATE 
+		WHERE SEQ=#{seq} 
+	</update>		
+	
+	<update id="muldel" parameterType="Map">
+		UPDATE M_NOTICE SET DELFLAG='Y' WHERE SEQ IN 
+		<foreach collection="seqs" item="seq" open="(" close=")" separator=",">
+			#{seq}
+		</foreach>
+	</update>
+	
+	<update id="readcount" parameterType="int">
+		<![CDATA[
+		UPDATE M_NOTICE SET READCOUNT=READCOUNT+1
+		WHERE SEQ=#{seq} 
+		]]>
+	</update>
+	
+	<update id="replyupdate" parameterType="notDto">
+		<![CDATA[
+			UPDATE M_NOTICE SET STEP=STEP+1
+			WHERE REFER=(SELECT REFER FROM M_NOTICE WHERE SEQ=#{seq})
+			AND STEP > (SELECT STEP FROM M_NOTICE WHERE SEQ=#{seq})		
+		]]>
+	</update>
+	<insert id="replyinsert" parameterType="notDto">
+		INSERT INTO M_NOTICE 
+		VALUES(M_NOTICE_SEQ.NEXTVAL,#{id},#{title},#{content},SYSDATE, 
+		(SELECT REFER FROM M_NOTICE WHERE SEQ=#{seq}), 
+		(SELECT STEP FROM M_NOTICE WHERE SEQ=#{seq})+1, 
+		(SELECT DEPTH FROM M_NOTICE WHERE SEQ=#{seq})+1,0,'N')
+	</insert>
+	
+	<select id="contentAjax" parameterType="int" resultType="notDto">
+		SELECT CONTENT FROM M_NOTICE WHERE SEQ=#{seq}
+	</select>
+	
+	<select id="noticelist" resultType="notDto">
+		<![CDATA[
+		SELECT SEQ,ID,TITLE,CONTENT,REGDATE,REFER,STEP,DEPTH,READCOUNT,DELFLAG
+     	 FROM(
+      	SELECT ROW_NUMBER() OVER (ORDER BY REFER DESC,STEP) AS RN,SEQ,ID,TITLE,CONTENT,REGDATE,REFER,STEP,DEPTH,READCOUNT,DELFLAG FROM M_NOTICE)
+		WHERE RN <=3
+		]]>
+	</select>
+	
+</mapper>
+
+
+
+
+
+
+
+

@@ -1,6 +1,6 @@
 package skt1.controller;
 
-import java.io.IOException; 
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.websocket.Session;
 
 import skt1.daos.AnsDao;
 import skt1.daos.LoginDao;
@@ -21,19 +20,17 @@ import skt1.dtos.NotDto;
 import skt1.utils.Paging;
 
 
-
-
-@WebServlet("/AnsController.do")
-public class AnsController extends HttpServlet {
+@WebServlet("/NotController.do")
+public class NotController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
+	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doPost(request, response);
 	}
 
-
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//인코딩처리
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html; charset=utf-8");
 		
@@ -41,9 +38,8 @@ public class AnsController extends HttpServlet {
 		
 		String command=request.getParameter("command");
 		
-		AnsDao dao=new AnsDao();
+		NotDao dao=new NotDao();
 		LoginDao ldao=new LoginDao();
-		NotDao notDao=new NotDao();
 		if(command.equals("boardlistpage")) {
 			//요청 페이지 번호 받기
 			String pnum=request.getParameter("pnum");
@@ -74,14 +70,8 @@ public class AnsController extends HttpServlet {
 				request.getSession().setAttribute("pnum", pnum);
 			}
 			
+			List<NotDto> list=dao.getAllListPage(pnum, id, title, content);
 			
-			////////////// 자유게시판 맨위에 공지사항 뛰우기
-			List<NotDto> list1=notDao.notAllListPage(pnum, id, title, content);
-			request.setAttribute("list1", list1);
-			/////////////
-			
-			
-			List<AnsDto> list=dao.getAllListPage(pnum, id, title, content);
 			//페이지의 개수를 구하기
 			int pcount=dao.getPcount(id, title, content);
 //			LoginDto ldto=ldao.userinfo(id);
@@ -90,19 +80,65 @@ public class AnsController extends HttpServlet {
 //			request.setAttribute("ldto", ldto);
 			request.setAttribute("pmap", map);
 			request.setAttribute("list", list);
+			
 			request.setAttribute("statusPage", statusPage);
-			dispatch("boardlist.jsp", request, response);	
+			dispatch("notboardlist.jsp", request, response);
 		
+		}else if(command.equals("boardlistpage")) {
+			//요청 페이지 번호 받기
+			String pnum=request.getParameter("pnum");
+			String opt=request.getParameter("opt");
+			String condition=request.getParameter("condition");
+			String id=null;
+			String title=null;
+			String content=null;
+			String statusPage=null;
+			if(opt!=null) {
+				if(opt.equals("id")) {
+					id=condition;
+				}
+				if(opt.equals("title")) {
+					title=condition;
+				}
+				if(opt.equals("content")) {
+					content=condition;
+				}
+				statusPage="&opt="+opt+"&condition="+condition;
+			}
+			//list 요청페이지에 해당하는 글목록 가져오기
+			//String id=request.getParameter("id");
+			//글목록을 요청할때 따로 pnum 파라미터를 전달하지 않아도 목륵을 볼 수 있게 전에 담긴pnum을 사용
+			if(pnum==null) {
+				pnum=(String)request.getSession().getAttribute("pnum");
+			}else {
+				request.getSession().setAttribute("pnum", pnum);
+			}
+			
+			
+			List<NotDto> list1=dao.notAllListPage(pnum, id, title, content);
+			//페이지의 개수를 구하기
+			int pcount=dao.getPcount(id, title, content);
+//			LoginDto ldto=ldao.userinfo(id);
+			
+			Map<String, Integer> map=Paging.pagingValue(pcount, pnum, 10);
+//			request.setAttribute("ldto", ldto);
+			request.setAttribute("pmap", map);
+			
+			request.setAttribute("list1", list1);
+			request.setAttribute("statusPage", statusPage);
+			dispatch("boardlist.jsp", request, response);
+			
+			
 		}else if(command.equals("boardlist")) {
 			
 			//"readcount"값을 삭제한다. 
 			request.getSession().removeAttribute("readcount");
 			
 			
-			List<AnsDto> list=dao.getAllList();
+			List<NotDto> list=dao.getAllList();
 			request.setAttribute("list", list);
 //			request.getRequestDispatcher("boardlist.jsp").forward(request, response);
-			dispatch("boardlist.jsp", request, response);
+			dispatch("notboardlist.jsp", request, response);
 		}else if(command.equals("boarddetail")) {
 			int seq=Integer.parseInt(request.getParameter("seq"));
 			
@@ -117,45 +153,45 @@ public class AnsController extends HttpServlet {
 			}
 			
 			
-			AnsDto dto=dao.getBoard(seq);
+			NotDto dto=dao.getBoard(seq);
 			request.setAttribute("dto", dto);
-			dispatch("boarddetail.jsp", request, response);
+			dispatch("notboarddetail.jsp", request, response);
 		}else if(command.equals("muldel")) {
 			String [] seqs=request.getParameterValues("chk");
 			boolean isS=dao.mulDel(seqs);
 			if(isS) {
-				response.sendRedirect("AnsController.do?command=boardlistpage&pnum=1");
+				response.sendRedirect("NotController.do?command=boardlistpage&pnum=1");
 			}else {
 				request.setAttribute("msg", "글여러개삭제실패");
 				dispatch("error.jsp", request, response);
 			}
 		}else if(command.equals("insertForm")) {		
-			 dispatch("insertboard.jsp", request, response);
+			 dispatch("notinsertboard.jsp", request, response);
 		}else if(command.equals("insertboard")) {
 			String id=request.getParameter("id");
 			String title=request.getParameter("title");
 			String content=request.getParameter("content");
 			
-			boolean isS=dao.insertBoard(new AnsDto(id,title,content));
+			boolean isS=dao.insertBoard(new NotDto(id,title,content));
 			if(isS) {
-				response.sendRedirect("AnsController.do?command=boardlistpage&pnum=1");
+				response.sendRedirect("NotController.do?command=boardlistpage&pnum=1");
 			}else {
 				request.setAttribute("msg", "글추가실패");
 				dispatch("error.jsp", request, response);
 			}
 		}else if(command.equals("updateForm")) {
 			int seq=Integer.parseInt(request.getParameter("seq"));
-			AnsDto dto=dao.getBoard(seq);
+			NotDto dto=dao.getBoard(seq);
 			request.setAttribute("dto", dto);
-			dispatch("updateboard.jsp", request, response);
+			dispatch("notupdateboard.jsp", request, response);
 		}else if(command.equals("updateboard")) {
 			int seq=Integer.parseInt(request.getParameter("seq"));
 			String title=request.getParameter("title");
 			String content=request.getParameter("content");
 			
-			boolean isS=dao.updateBoard(new AnsDto(seq,title,content));
+			boolean isS=dao.updateBoard(new NotDto(seq,title,content));
 			if(isS) {
-				response.sendRedirect("AnsController.do?command=boarddetail&seq="+seq);
+				response.sendRedirect("NotController.do?command=boarddetail&seq="+seq);
 			}else {
 				request.setAttribute("msg", "글수정하기 실패");
 				dispatch("error.jsp", request, response);
@@ -166,9 +202,9 @@ public class AnsController extends HttpServlet {
 			String title=request.getParameter("title");
 			String content=request.getParameter("content");
 			
-			boolean isS=dao.replyBoard(new AnsDto(seq,id,title,content));
+			boolean isS=dao.replyBoard(new NotDto(seq,id,title,content));
 			if(isS) {
-				response.sendRedirect("AnsController.do?command=boardlistpage&pnum=1");
+				response.sendRedirect("NotController.do?command=boardlistpage&pnum=1");
 			}else {
 				request.setAttribute("msg", "답글달기실패");
 				dispatch("error.jsp", request, response);
@@ -181,13 +217,7 @@ public class AnsController extends HttpServlet {
 	public void dispatch(String url, HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		request.getRequestDispatcher(url).forward(request, response);
+	
 	}
 
 }
-
-
-
-
-
-
-

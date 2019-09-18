@@ -10,7 +10,7 @@
 <%@page import="java.sql.ResultSet"%>
 <%@page import="skt1.dtos.AnsDto"%>
 <%@page import="java.util.List"%>
-<%@page import="skt1.daos.AnsDao"%>
+<%@page import="skt1.daos.NotDao"%>
 <%@page import="java.util.Map"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
@@ -57,8 +57,6 @@
 		
 
 </script>
-
-
 <style type="text/css">
 
 
@@ -111,19 +109,15 @@
 #nd{
 text-align:center;
  position: relative;
-}
-#list1{color: red;}	
+}	
 </style>
 </head>
 <%
 // 	Object obj=request.getAttribute("list");
 
-	NotDto dto2=(NotDto)request.getAttribute("dto");
+	NotDto dto1=(NotDto)request.getAttribute("dto");	
 
-	AnsDto dto1=(AnsDto)request.getAttribute("dto");
-	List<NotDto> list1 =(List<NotDto>)request.getAttribute("list");
-
-	List<AnsDto> list =(List<AnsDto>)request.getAttribute("list"); 
+	List<NotDto> list =(List<NotDto>)request.getAttribute("list"); 
 	
 	Map<String,Integer>map=(Map<String,Integer>)request.getAttribute("pmap");
 	
@@ -138,6 +132,7 @@ text-align:center;
 			<h1><a href="index.jsp"><img src="img/skt1.jpeg" alt="skt1logo"></a></h1>
 			<ul class="gnb">
 				<li><a href="CalController.do?command=calendar">일정</a></li>
+				<li><a href="NotController.do?command=boardlistpage&pnum=1">공지게시판</a></li>
 				<li><a href="AnsController.do?command=boardlistpage&pnum=1">자유게시판</a></li>
 				<li><a href="LoginController.do?command=insert">회원가입</a></li>
 				<li><a href="LoginController.do?command=login">로그인</a></li>
@@ -148,7 +143,7 @@ text-align:center;
 			<h2><img src='img/sk4.jpg' alt='MEMBER 회원안내'></h2>
 			<nav class='lnb' style="text-align: center;">
 				<ul >
-					<li><a href='#' onclick="location.href='LoginController.do?command=login'" style="color:#fff; font-size:40px;">게시판글목록</a></li>
+					<li><a href='#' onclick="location.href='LoginController.do?command=login'" style="color:#fff; font-size:40px;">공지게시판</a></li>
 				</ul>
 			</nav>
 		
@@ -162,7 +157,7 @@ text-align:center;
 <section class="" >
 	<br/><br/><br/>
 	<div id="nd">
-			<form action="AnsController.do" method="post">
+			<form action="NotController.do" method="post">
 			<input type="hidden" name="command" value="boardlistpage" />
 			<select name="opt">
 				<option value="id">작성자</option>
@@ -173,7 +168,7 @@ text-align:center;
 			<input type="submit" value="검색"/>
 			</form>
 	</div>
-<form action="AnsController.do" method="post" id="aaa">
+<form action="NotController.do" method="post" id="aaa">
 <input type="hidden" name="command" value="muldel" />
 
 
@@ -202,43 +197,6 @@ text-align:center;
 	</tr>
 	</thead>
 	<c:choose>
-		<c:when test="${empty list1}">
-			<tr id="list1">
-				<td colspan="5">----작성된 글이 없습니다.----</td>
-			</tr>
-		</c:when>
-		<c:otherwise>
-			<c:forEach items="${list1}" var="dto">
-				<tr id="list1">
-					<% 
-					if(ldto.getRole().equals("ADMIN")){
-					%>
-					<td><input type="checkbox" name="chk" value="${dto.seq}"/></td>
-					<%
-					}
-					%>
-					<td>${dto.seq}</td>
-					<td>${dto.id}</td>
-					<c:choose>
-						<c:when test="${dto.delflag=='Y'}">
-							<td>-----삭제된 글입니다.-----</td>
-						</c:when>
-						<c:otherwise>
-							<td id="util">
-								<jsp:setProperty property="arrowNbsp" name="util" value="${dto.depth}"/>
-								<jsp:getProperty property="arrowNbsp" name="util"/>
-							   <a href="NotController.do?command=boarddetail&seq=${dto.seq}" style="color: red" >${dto.title}</a>
-							</td>
-						</c:otherwise>
-					</c:choose>
-					<td><fmt:formatDate value="${dto.regdate}" pattern="yyyy년MM월dd일"/> </td>					
-					<td>${dto.readcount}</td>
-					
-				</tr>
-			</c:forEach>
-		</c:otherwise>
-	</c:choose>
-	<c:choose>
 		<c:when test="${empty list}">
 			<tr>
 				<td colspan="6">----작성된 글이 없습니다.----</td>
@@ -264,7 +222,7 @@ text-align:center;
 							<td id="util">
 								<jsp:setProperty property="arrowNbsp" name="util" value="${dto.depth}"/>
 								<jsp:getProperty property="arrowNbsp" name="util"/>
-							   <a href="AnsController.do?command=boarddetail&seq=${dto.seq}">${dto.title}</a>
+							   <a href="NotController.do?command=boarddetail&seq=${dto.seq}">${dto.title}</a>
 							</td>
 						</c:otherwise>
 					</c:choose>
@@ -277,24 +235,32 @@ text-align:center;
 	</c:choose>
 	<tr>
 		<td colspan="6" style="text-align: center;">
-			<a href="AnsController.do?command=boardlistpage&pnum=<%=map.get("prePageNum")%>${statusPage==null?'':statusPage}">◀</a>
+			<a href="NotController.do?command=boardlistpage&pnum=<%=map.get("prePageNum")%>${statusPage==null?'':statusPage}">◀</a>
 			<%
 // 				int pcount=(Integer)request.getAttribute("pcount");
 				for(int i=map.get("startPage");i<=map.get("endPage");i++){
 					%>
-					<a href="AnsController.do?command=boardlistpage&pnum=<%=i%>${statusPage==null?'':statusPage}" style="text-decoration: none;"><%=i%></a>				
+					<a href="NotController.do?command=boardlistpage&pnum=<%=i%>${statusPage==null?'':statusPage}" style="text-decoration: none;"><%=i%></a>				
 					<%
 				}	
 				
 			%>
-			<a href="AnsController.do?command=boardlistpage&pnum=<%=map.get("nextPageNum")%>${statusPage==null?'':statusPage}">▶</a>
+			<a href="NotController.do?command=boardlistpage&pnum=<%=map.get("nextPageNum")%>${statusPage==null?'':statusPage}">▶</a>
 		</td>
 	</tr>
 	
 	<tr>
 		<td colspan="6" >
+			<% 
+// 			if(ldto.getRole()!=null){
+				if(ldto.getRole().equals("ADMIN")){
+				%>     
 			<input type="button" value="글추가" 
-			       onclick="location.href='AnsController.do?command=insertForm&id=<%=ldto.getId()%>'"/>
+			       onclick="location.href='NotController.do?command=insertForm&id=<%=ldto.getId()%>'"/>
+			       <%
+					}
+// 				 } 
+			%>
 			<% 
 // 			if(ldto.getRole()!=null){
 				if(ldto.getRole().equals("ADMIN")){
