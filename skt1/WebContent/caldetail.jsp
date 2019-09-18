@@ -91,7 +91,8 @@ function calendar(){
 }
 
 function calList(){
-	location.href="CalController.do?command=callist&year=${fn:substring(dto.mdate,0,4)}&month=${fn:substring(dto.mdate,4,6)}&date=${fn:substring(dto.mdate,6,8)}";
+	var yyyyMMdd="${fn:substring(dto.mdate,0,4)}"+"${fn:substring(dto.mdate,4,6)}"+"${fn:substring(dto.mdate,6,8)}"
+	location.href="CalController.do?command=callist&yyyyMMdd="+yyyyMMdd;
 }
 </script>
 <div style="margin: 0 auto; text-align: right;">
