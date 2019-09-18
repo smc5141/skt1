@@ -51,6 +51,10 @@
 		return s.length<2?"0"+s:s;
 	}
 	
+	function showPopup(){
+		window.open("calalert.jsp","alert","width=300,height=300,left=100,top=50");
+	}
+	
 </script>
 </head>
 <%
@@ -169,7 +173,8 @@
 					&year=<%=year%>&month=<%=month%>&date=<%=i%>&lastday=<%=lastDay%>" >
 						<img src="img/pen.png" alt="일정추가" align="right"/><br/>
 					</a>			
-					<a href="CalController.do?command=callist&year=<%=year%>&month=<%=month%>&date=<%=i%>"><%=Util.getCalView(list, i) %><br></a>
+					<a href="CalController.do?command=callist&year=<%=year%>&month=<%=month%>&date=<%=i%>"
+						onclick="showPopup()"><%=Util.getCalView(list, i) %><br></a>
 				</td>
 				
 				<%

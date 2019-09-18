@@ -74,7 +74,7 @@
 		<td colspan="2">
 			<input type="button" value="수정" onclick="updateForm(${dto.seq})" />
 			<input type="button" value="삭제" onclick="delBoard(${dto.seq})" />
-			<input type="button" value="일정보기" onclick="calList()" />
+			<input type="button" value="목록보기" onclick="calList()" />
 		</td>
 	</tr>
 </table>
