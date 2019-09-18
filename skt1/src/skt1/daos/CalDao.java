@@ -42,7 +42,7 @@ public class CalDao extends SqlMapConfig{
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally {
-			sqlSession.close();
+			sqlSession.close(); 
 		}
 		return dto;
 	}
