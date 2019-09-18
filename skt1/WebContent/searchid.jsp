@@ -42,7 +42,7 @@ window.onload=function(){
                 </div>
             </div>
             	<div class="form-group" id="divId">
-                <label for="inputId" class="control-label">핸드폰번호</label>
+                <label for="inputId" class="control-label">핸드폰</label>
                 <div class="col-lg-10">
                     <input type="text" class="form-control" name="phone" data-rule-required="true" placeholder="핸드폰 번호 - 없이 입력" maxlength="30">
                 </div>
