@@ -1,8 +1,11 @@
 package skt1.utils;
 
+import java.io.PrintWriter;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.List;
+
+import com.sun.prism.Image;
 
 import skt1.dtos.CalDto;
 
@@ -84,13 +87,23 @@ public class Util {
 								//<p>title</p>
 			for (CalDto calDto : list) {
 				if(calDto.getMdate().substring(6, 8).equals(d)) {
-					titleList+="<p title='"+calDto.getTitle()+"'  class='clist'>" // title은 리스트에서 마우스로 보면 풀네임 다 나옴
-								+(calDto.getTitle().length()>6?calDto.getTitle().substring(0,6)+"..":calDto.getTitle())
-								+"</p>";					
-				}
+					titleList+="<img src='img/"+calDto.getTeamname()+".jpg' alt='상대팀' width=50px >";
+					if(calDto.getOurscore()>calDto.getOtherscore()) {
+						titleList+= "<img src='img/"+calDto.getOurscore()+".jpg' alt='점수' width=25px>" +"<img src='img/clone.jpg' alt='콜론' width=15px>"+ "<img src='img/"+calDto.getOtherscore()+".jpg' alt='점수' width=25px>" + "<img src='img/win.jpg' alt='승' width=30px >";
+					}else if(calDto.getOurscore()<calDto.getOtherscore()){
+						titleList+= "<img src='img/"+calDto.getOurscore()+".jpg' alt='점수'width=25px >" +"<img src='img/clone.jpg' alt='콜론' width=15px >"+ "<img src='img/"+calDto.getOtherscore()+".jpg' alt='점수' width=25px >" + "<img src='img/lose.jpg' alt='패'width=30px >";
+					}else {
+						titleList+="<img src='img/null.jpg' alt='경기전' width=80px>";
+					}
+				}	
 			}
 			return titleList;
 		}
 	
-	
-}
+
+	}
+		
+		
+		
+		
+

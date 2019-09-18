@@ -91,6 +91,7 @@
 	
 	//한달에 대한 일정목록 가져오기(separation 패턴)
 	CalDao dao=new CalDao();
+	CalDto dto=new CalDto();
 	String yyyyMM=year+Util.isTwo(month+"");
 	List<CalDto>list=dao.getCalViewList(yyyyMM);
 //	List<CalDto>list=(List<CalDto>)request.getAttribute("list");
@@ -163,14 +164,14 @@
 			for(int i=1;i<=lastDay;i++){
 				%>
 				<td>
-					<a class="countview" href="CalController.do?command=callist&year=<%=year%>&month=<%=month%>&date=<%=i%>" style="color:<%=Util.fontColor(dayOfWeek,i)%>;"><%=i%></a>
+					<a style="color:<%=Util.fontColor(dayOfWeek,i)%>;"><%=i%></a>
 					<a href="CalController.do?command=insertcalform
 					&year=<%=year%>&month=<%=month%>&date=<%=i%>&lastday=<%=lastDay%>" >
-						<img src="img/pen.png" alt="일정추가"  />
-					</a>
-					<%=Util.getCalView(list, i) %>
-					
+						<img src="img/pen.png" alt="일정추가" align="right"/><br/>
+					</a>			
+					<a href="CalController.do?command=callist&year=<%=year%>&month=<%=month%>&date=<%=i%>"><%=Util.getCalView(list, i) %><br></a>
 				</td>
+				
 				<%
 				//dayofweek-1=공백수
 				if((dayOfWeek-1+i)%7==0){
@@ -185,7 +186,6 @@
 				out.print("<td>&nbsp;</td>");
 			}
 		%>
-
 	</tr>
 </table>
 

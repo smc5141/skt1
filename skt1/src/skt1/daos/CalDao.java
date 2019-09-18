@@ -46,6 +46,10 @@ public class CalDao extends SqlMapConfig{
 		return count>0?true:false;
 	}
 
+	//일정 알림
+	
+
+	
 	//일정상세보기
 	
 	public CalDto getCalBoard(int seq) {
@@ -116,22 +120,7 @@ public class CalDao extends SqlMapConfig{
 	}
 	
 	
-	
 
-	//하루에 대한 일정 개수 구하기
-	public int getCalViewCount(String yyyyMMdd){
-		int count=0;
-		SqlSession sqlSession=null;
-		try {
-			sqlSession=getSqlSessionFactory().openSession(true);
-			count=sqlSession.selectOne(nameSpace+"calcount", yyyyMMdd);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}finally {
-			sqlSession.close();
-		}
-		return count;
-	}
 
 	
 }

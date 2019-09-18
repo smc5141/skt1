@@ -29,8 +29,19 @@
 			return bool;
 		});
 	})
-	
 </script>
+	<style>
+  table {
+    width: 100%;
+    border-top: 1px solid #444444;
+    border-collapse: collapse;
+  }
+  th, td {
+    border-bottom: 1px solid #444444;
+    padding: 10px;
+  }
+</style>
+
 </head>
 <body>
 <div id="wrap"  >
@@ -41,7 +52,7 @@
 				<li><a href="AnsController.do?command=boardlistpage&pnum=1">자유게시판</a></li>
 				<li><a href="LoginController.do?command=insert">회원가입</a></li>
 				<li><a href="LoginController.do?command=login">로그인</a></li>
-				<li><a href="">마이페이지</a></li>
+				<li><a href="LoginController.do?command=info">마이페이지</a></li>
 			</ul>
 		</header>
 	<section class='sec1'>
@@ -71,8 +82,8 @@
 	<tr>
 		<th><input type="checkbox" name="all" onclick="allChk(this.checked)"/></th>
 		<th>번호</th>
-		<th>일정</th>
-		<th>제목</th>
+		<th>상대팀</th>
+		<th>상세내용</th>
 		<th>작성일</th>
 	</tr>
 	<c:choose>
@@ -83,13 +94,10 @@
 			<c:forEach var="dto" items="${list}">
 				<tr>
 					<td><input type="checkbox" name="chk" value="${dto.seq}" /> </td>
-					<td>${dto.seq}</td>
-					<td>
-					<jsp:setProperty value="${dto.mdate}" property="toDates" name="util"/>
-					<jsp:getProperty property="toDates" name="util"/>
-					</td>
-					<td><a href="CalController.do?command=caldetail&seq=${dto.seq}">${dto.title}</a></td>
-					<td><f:formatDate value="${dto.regDate}" pattern="yyyy-MM-dd"/></td>
+					<td style="text-align: center;">${dto.seq}</td>
+					<td style="text-align: center;">${dto.teamname}</td>
+					<td style="text-align: center;" ><a href="CalController.do?command=caldetail&seq=${dto.seq}" style="color:blue;"><ins>${dto.title}</ins></a></td>
+					<td style="text-align: center;"><f:formatDate value="${dto.regDate}" pattern="yyyy-MM-dd"/></td>
 				</tr>
 			</c:forEach>
 		</c:otherwise>
@@ -97,7 +105,7 @@
 	<tr>
 		<td colspan="5">
 			<input type="submit" value="삭제"/>
-			<input type="button" value="달력보기" onclick="location.href='CalController.do?command=calendar'"/>
+			<input type="button" value="일정보기" onclick="location.href='CalController.do?command=calendar'"/>
 		</td>
 	</tr>
 </table>

@@ -8,6 +8,17 @@
 <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <link rel="stylesheet" href="css/skt1.css">
 <title></title>
+	<style>
+  table {
+    width: 100%;
+    border-top: 1px solid #444444;
+    border-collapse: collapse;
+  }
+  th, td {
+    border-bottom: 1px solid #444444;
+    padding: 10px;
+  }
+</style>
 </head>
 <body>
 <jsp:useBean id="util" class="skt1.utils.Util"/>
@@ -19,7 +30,7 @@
 				<li><a href="AnsController.do?command=boardlistpage&pnum=1">자유게시판</a></li>
 				<li><a href="LoginController.do?command=insert">회원가입</a></li>
 				<li><a href="LoginController.do?command=login">로그인</a></li>
-				<li><a href="">마이페이지</a></li>
+				<li><a href="LoginController.do?command=info">마이페이지</a></li>
 			</ul>
 		</header>
 	<section class='sec1'>
@@ -37,10 +48,10 @@
 	</section>
 	<section class="sec2" >
 <h2 style="text-align: center;">일정상세보기</h2>
-<table border="1">
+<table border="1" style="text-align: center;" >
 	<tr>
-		<th>아이디</th>
-		<td>${dto.id}</td>
+		<th>상대팀</th>
+		<td>${dto.teamname}</td>
 	</tr>
 	<tr>
 		<th>일정</th>
@@ -56,14 +67,14 @@
 	<tr>
 		<th>내용</th>
 		<td>
-			<textarea rows="10" cols="60" readonly="readonly">${dto.content}</textarea>
+			<pre>${dto.content}</pre>
 		</td>
 	</tr>
 	<tr>
 		<td colspan="2">
 			<input type="button" value="수정" onclick="updateForm(${dto.seq})" />
 			<input type="button" value="삭제" onclick="delBoard(${dto.seq})" />
-			<input type="button" value="달력" onclick="calList()" />
+			<input type="button" value="일정보기" onclick="calList()" />
 		</td>
 	</tr>
 </table>
