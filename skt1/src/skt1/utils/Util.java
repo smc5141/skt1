@@ -99,6 +99,17 @@ public class Util {
 			}
 			return titleList;
 		}
+		public static int getseqView(List<CalDto> list, int i) {
+			String d=isTwo(String.valueOf(i));
+			int seq=0;
+			for (CalDto calDto : list) {
+				if(calDto.getMdate().substring(6, 8).equals(d)) {
+					seq=calDto.getSeq();
+				
+				}
+			}
+			return seq;
+		}
 	
 
 	}
