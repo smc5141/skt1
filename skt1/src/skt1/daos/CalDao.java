@@ -29,6 +29,23 @@ public class CalDao extends SqlMapConfig{
 		}
 		return list;
 	}
+	public CalDto getalertList(String yyyyMMdd,int seq){
+		CalDto dto=new CalDto();
+		SqlSession sqlSession=null;
+		Map<String,String> map = new HashMap<>();
+		map.put("yyyyMMdd",yyyyMMdd);
+		map.put("seq",String.valueOf(seq));
+		
+		try {
+			sqlSession=getSqlSessionFactory().openSession(true);
+			dto=sqlSession.selectOne(nameSpace+"getalertList", map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			sqlSession.close();
+		}
+		return dto;
+	}
 
 	//일정추가
 	

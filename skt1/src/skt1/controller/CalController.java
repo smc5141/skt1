@@ -62,12 +62,13 @@ public class CalController extends HttpServlet {
 			request.setAttribute("list", list);
 			dispatch("calendar.jsp", request, response);
 
-			}else if(command.equals("callist")) {
-			String year=request.getParameter("year");
-			String month=request.getParameter("month");
-			String date=request.getParameter("date");
+			}else if(command.equals("callist")) {    //수정
+//			String year=request.getParameter("year");
+//			String month=request.getParameter("month");
+//			String date=request.getParameter("date");
 			
-			String yyyyMMdd=year+Util.isTwo(month)+Util.isTwo(date);//8자리
+//			String yyyyMMdd=year+Util.isTwo(month)+Util.isTwo(date);//8자리
+			String yyyyMMdd=request.getParameter("yyyyMMdd");
 			List<CalDto>list=dao.getCalList(yyyyMMdd);
 			request.setAttribute("list", list);
 			dispatch("calboardlist.jsp", request, response);
@@ -165,6 +166,18 @@ public class CalController extends HttpServlet {
 				request.setAttribute("msg", "일정수정실패");
 				dispatch("error.jsp", request, response);
 			}
+	}
+		else if(command.equals("calalert")) {
+			String year=request.getParameter("year");
+			String month=request.getParameter("month");
+			String date=request.getParameter("date");
+			int seq=Integer.parseInt(request.getParameter("seq"));
+			
+			String yyyyMMdd=year+Util.isTwo(month)+Util.isTwo(date);//8자리
+			CalDto dto=dao.getalertList(yyyyMMdd, seq);
+			request.setAttribute("yyyyMMdd", yyyyMMdd);
+			request.setAttribute("dto", dto);
+			dispatch("calalert.jsp", request, response);
 		}
 		
 		
@@ -196,5 +209,6 @@ public class CalController extends HttpServlet {
 		
 		
 	}
+
 	
 }

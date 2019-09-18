@@ -128,7 +128,7 @@
 		</tr>
 		<tr>
 			<th>제목</th>
-			<td><input type="text" name="title" />
+			<td><input type="text" name="title" required="required" />
 		</tr>
 		<tr>
 			<th>내용</th>

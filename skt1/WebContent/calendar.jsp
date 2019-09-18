@@ -51,10 +51,7 @@
 		return s.length<2?"0"+s:s;
 	}
 	
-	function showPopup(){
-		window.open("calalert.jsp","alert","width=300,height=300,left=100,top=50");
-	}
-	
+
 </script>
 </head>
 <%
@@ -173,15 +170,18 @@
 					&year=<%=year%>&month=<%=month%>&date=<%=i%>&lastday=<%=lastDay%>" >
 						<img src="img/pen.png" alt="일정추가" align="right"/><br/>
 					</a>			
-					<a href="CalController.do?command=callist&year=<%=year%>&month=<%=month%>&date=<%=i%>"
-						onclick="showPopup()"><%=Util.getCalView(list, i) %><br></a>
+					<a href="#" onclick="window.open('CalController.do?command=calalert&year=<%=year%>&month=<%=month%>&date=<%=i%>&seq=<%=Util.getseqView(list, i)%>', 'mapWin', 'left=100,top=0,width=500,height=450'); return false" >
+					<br/>
+					<%=Util.getCalView(list, i) %>
+					</a>
 				</td>
-				 
 				<%
+				
 				//dayofweek-1=공백수
 				if((dayOfWeek-1+i)%7==0){
 					out.print("</tr><tr>");
 				}
+				
 			}
 			//달력의 나머지 공백수 출력하기
 			//7-((dayofweek-1+lastDay)%7)
