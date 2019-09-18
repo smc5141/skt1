@@ -15,11 +15,10 @@
 <script type="text/javascript">
 	function list(){
 		var yyyyMMdd=document.getElementById("yyyyMMdd").value
-		alert(yyyyMMdd);
 		opener.location.href="CalController.do?command=callist&yyyyMMdd="+yyyyMMdd;
 		self.close();	
-		}
-
+		} 
+  
 </script>
 </head>
 <body>
