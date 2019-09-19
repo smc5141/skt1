@@ -17,10 +17,66 @@
 	*/
 	#replyForm{display: none;}
 	#container{
-		height: 400px;
+		height: 800px;
 		width: 800px;
 		border: 1px solid red;
 		overflow: auto;
+	}
+
+		#util img{width: 12px; height: 12px;}
+	 a:hover{
+   color:blue;
+	}
+
+	* {
+   	margin: 0 auto;
+  	 padding: 0;
+  	 font-family: 'Malgun gothic','Sans-Serif','Arial';
+	}
+	a {
+   text-decoration: none;
+   color:#333;
+	}
+	ul li {
+   list-style:none;
+	}
+
+	.fl {
+   float:left;
+}
+.tc {
+   text-align:center;
+}	
+
+	#board_area {
+   width: 900px;
+   position: relative;
+}
+.list-table {
+   margin-top: 40px;
+}
+.list-table thead th{
+   height:40px;
+   border-top:2px solid #09C;
+   border-bottom:1px solid #CCC;
+   font-weight: bold;
+   font-size: 17px;
+}
+.list-table tbody td{
+   text-align:center;
+   padding:10px 0;
+   border-bottom:1px solid #CCC; height:20px;
+   font-size: 14px 
+}
+
+#da{text-align:center;
+position: relative;
+}
+.gnb li{
+		float: left;
+		width: 14.285%;
+		text-align: center;
+		line-height: 100px;
 	}
 
 </style>
@@ -41,18 +97,20 @@
 		<header>
 			<h1><a href="index.jsp"><img src="img/skt1.jpeg" alt="skt1logo"></a></h1>
 			<ul class="gnb">
-				<li><a href="">일정</a></li>
+				<li><a href="CalController.do?command=calendar">일정</a></li>
+				<li><a href="NotController.do?command=boardlistpage&pnum=1">공지게시판</a></li>
 				<li><a href="AnsController.do?command=boardlistpage&pnum=1">자유게시판</a></li>
-				<li><a href="LoginController.do?command=insert">회원가입</a></li>
+				<li><a href="#" target="_blank" onclick="window.open('checkuser.jsp', 'mapWin', 'left=100,top=0,width=390,height=334'); return false">회원가입</a></li>				
 				<li><a href="LoginController.do?command=login">로그인</a></li>
-				<li><a href="">마이페이지</a></li>
+				<li><a href="LoginController.do?command=info">마이페이지</a></li>
+				<li><a href="LoginController.do?command=logout">로그아웃</a></li>
 			</ul>
 		</header>
 			<section class='sec1'>
-			<h2><img src='img/sk4.jpg' alt='MEMBER 회원안내'></h2>
+			<h2><img src='img/sk4.jpg' alt='MEMBER 회원안내' style="max-width:100%;height:auto;"></h2>
 			<nav class='lnb' style="text-align: center;">
 				<ul >
-					<li><a href='#' onclick="location.href='LoginController.do?command=login'" style="color:#fff; font-size:30px;">게시글 추가하기</a></li>
+					<li><a href='#' onclick="location.href='LoginController.do?command=login'" style="color:#fff; font-size:30px;">게시글 상세보기</a></li>
 				</ul>
 			</nav>
 		
@@ -64,7 +122,7 @@
 <section class="sec2" >
 <div id="container">
 
-<table border="1">
+<table  class="list-table">
 	<tr>
 		<th>번호</th>
 		<td>${requestScope.dto.seq}</td>
@@ -96,12 +154,13 @@
 	</tr>
 </table>
 <div id="replyForm">
-<h1>답글달기</h1>
+<br/>
+<p id="da" style="font-size: 30px" >답글달기</p>
 <form action="AnsController.do" method="post" >
 <input type="hidden" name="command" value="replyboard"/>
 <input type="hidden" name="seq" value="${dto.seq}"/>
 <input type="hidden" name="id" value="<%=ldto.getId()%>">
-<table border="1">
+<table class="list-table">
 	<tr>
 		<th>아이디</th>
 		<td><%=ldto.getId()%></td>

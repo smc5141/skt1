@@ -17,12 +17,60 @@
 	*/
 	#replyForm{display: none;}
 	#container{
-		height: 400px;
+		height: 800px;
 		width: 800px;
 		border: 1px solid red;
 		overflow: auto;
 	}
+			#util img{width: 12px; height: 12px;}
+	 a:hover{
+   color:blue;
+	}
 
+	* {
+   	margin: 0 auto;
+  	 padding: 0;
+  	 font-family: 'Malgun gothic','Sans-Serif','Arial';
+	}
+	a {
+   text-decoration: none;
+   color:#333;
+	}
+	ul li {
+   list-style:none;
+	}
+
+	.fl {
+   float:left;
+}
+.tc {
+   text-align:center;
+}	
+
+	#board_area {
+   width: 900px;
+   position: relative;
+}
+.list-table {
+   margin-top: 40px;
+}
+.list-table thead th{
+   height:40px;
+   border-top:2px solid #09C;
+   border-bottom:1px solid #CCC;
+   font-weight: bold;
+   font-size: 17px;
+}
+.list-table tbody td{
+   text-align:center;
+   padding:10px 0;
+   border-bottom:1px solid #CCC; height:20px;
+   font-size: 14px 
+}
+
+#da{text-align:center;
+position: relative;
+}
 </style>
 <script type="text/javascript">
 	
@@ -54,7 +102,7 @@
 			<h2><img src='img/sk4.jpg' alt='MEMBER 회원안내'></h2>
 			<nav class='lnb' style="text-align: center;">
 				<ul >
-					<li><a href='#' onclick="location.href='LoginController.do?command=login'" style="color:#fff; font-size:30px;">게시글 추가하기</a></li>
+					<li><a href='#' onclick="location.href='LoginController.do?command=login'" style="color:#fff; font-size:30px;">공지글 상세보기</a></li>
 				</ul>
 			</nav>
 		
@@ -63,10 +111,11 @@
 			<a href='https://www.youtube.com/user/SKTTeam1st' target="_blank" ><img src="img/youtube.png" alt="youtube"></a>
 		</div>
 	</section>
+	
 <section class="sec2" >
 <div id="container">
 
-<table border="1">
+<table class="list-table">
 	<tr>
 		<th>번호</th>
 		<td>${requestScope.dto.seq}</td>
@@ -81,11 +130,17 @@
 	</tr>
 	<tr>
 		<th>내용</th>
-		<td><textarea rows="10" cols="60" readonly="readonly">${dto.content}</textarea> </td>
+		<td><textarea rows="10" cols="60" readonly="readonly" style="border:0">${dto.content}</textarea> </td>
 	</tr>
 	<tr>
 		<td colspan="2">
+			<% 
+			if(ldto.getRole().equals("ADMIN")){
+			%>
 			<button onclick="replyForm()">답글</button>
+			<%
+			}
+			%>
 			<% if(ldto!=null){
 			 if(ldto.getId().equals(dto1.getId())){%>	
 				 		 
@@ -103,7 +158,7 @@
 <input type="hidden" name="command" value="replyboard"/>
 <input type="hidden" name="seq" value="${dto.seq}"/>
 <input type="hidden" name="id" value="<%=ldto.getId()%>">
-<table border="1">
+<table class="list-table">
 	<tr>
 		<th>아이디</th>
 		<td><%=ldto.getId()%></td>
