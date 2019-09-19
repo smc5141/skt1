@@ -168,20 +168,15 @@ public class CalController extends HttpServlet {
 			}
 	}
 		else if(command.equals("calalert")) {
-			String year=request.getParameter("year");
-			String month=request.getParameter("month");
-			String date=request.getParameter("date");
+			String yyyyMMdd = request.getParameter("yyyyMMdd");
 			int seq=Integer.parseInt(request.getParameter("seq"));
-			
-			String yyyyMMdd=year+Util.isTwo(month)+Util.isTwo(date);//8자리
 			CalDto dto=dao.getalertList(yyyyMMdd, seq);
 			request.setAttribute("yyyyMMdd", yyyyMMdd);
 			request.setAttribute("dto", dto);
 			dispatch("calalert.jsp", request, response);
 		}
 		
-		
-		
+
 		
 	}//dopost
 

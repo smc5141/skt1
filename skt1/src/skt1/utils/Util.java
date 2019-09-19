@@ -86,35 +86,20 @@ public class Util {
 			String titleList=""; //달력에서 일정을 출력해줄 문자열
 								//<p>title</p>
 			for (CalDto calDto : list) {
-				calDto.getSeq();
-				
 				if(calDto.getMdate().substring(6, 8).equals(d)) {
-					titleList+="<img src='img/"+calDto.getTeamname()+".jpg' alt='상대팀' width=50px >";
+					titleList+="<a href='#' onclick='window.open(\"CalController.do?command=calalert&yyyyMMdd="+calDto.getMdate().substring(0, 8)+"&seq="+calDto.getSeq()+"\", \"mapWin\", \"left=500px,top=-100,width=550,height=450\"); return false' >"+"<img src='img/"+calDto.getTeamname()+".jpg' alt='상대팀' width=35px >";
 					if(calDto.getOurscore()>calDto.getOtherscore()) {
 						titleList+= "<img src='img/"+calDto.getOurscore()+".jpg' alt='점수' width=25px>" +"<img src='img/clone.jpg' alt='콜론' width=15px>"+ "<img src='img/"+calDto.getOtherscore()+".jpg' alt='점수' width=25px>" + "<img src='img/win.jpg' alt='승' width=30px >";
 					}else if(calDto.getOurscore()<calDto.getOtherscore()){
 						titleList+= "<img src='img/"+calDto.getOurscore()+".jpg' alt='점수'width=25px >" +"<img src='img/clone.jpg' alt='콜론' width=15px >"+ "<img src='img/"+calDto.getOtherscore()+".jpg' alt='점수' width=25px >" + "<img src='img/lose.jpg' alt='패'width=30px >";
 					}else {
 						titleList+="<img src='img/null.jpg' alt='경기전' width=80px>";
-					}
+					}titleList+="</a>";
+					
 				}	
 			}
 			return titleList;
 		}
-		
-		public static int getseqView(List<CalDto> list, int i) {
-			String d=isTwo(String.valueOf(i));
-			int seq=0;
-			for (CalDto calDto : list) {
-				if(calDto.getMdate().substring(6, 8).equals(d)) {
-					seq=calDto.getSeq();
-				
-				}
-			}
-			return seq;
-		}
-	
-
 	}
 		
 		
