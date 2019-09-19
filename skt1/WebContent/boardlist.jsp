@@ -217,7 +217,7 @@ text-align:center;
 					<%
 					}
 					%>
-					<td>${dto.seq}</td>
+					<td>공지</td>
 					<td>${dto.id}</td>
 					<c:choose>
 						<c:when test="${dto.delflag=='Y'}">
