@@ -14,6 +14,8 @@ import javax.servlet.http.HttpSession;
 
 import skt1.daos.LoginDao;
 import skt1.dtos.LoginDto;
+import skt1.utils.FindUtil;
+import skt1.utils.MailUtil;
 
 
 @WebServlet("/LoginController.do")
@@ -138,6 +140,46 @@ public class LoginController extends HttpServlet {
 			LoginDto ldto=dao.idChk(id);
 			request.setAttribute("ldto", ldto);
 			dispatch("idChkform.jsp", request, response);
+		}else if(command.equals("pwch")) {
+			String id=request.getParameter("id");
+			LoginDto ldto=dao.pwinfo(id);
+			request.setAttribute("ldto", ldto);
+			dispatch("pwch.jsp", request, response);
+			
+		}else if(command.equals("pwcheck")) {
+			String id=request.getParameter("id");
+			String password=request.getParameter("password");
+			String chpassword=request.getParameter("passwordch");
+			LoginDto ldto=dao.Login(id, password);
+			if(ldto==null) {
+				jsFoward("현재 비밀번호가 일치하지 않습니다.", "LoginController.do?command=pwch&id="+id, response);
+			}else {
+				boolean isS=dao.Pwch(id, chpassword);
+				if(isS) {
+					jsFoward("비밀번호 변경 성공", "LoginController.do?command=info", response);
+				}else {
+					jsFoward("비밀번호 변경 실패", "LoginController.do?command=pwch", response);
+				}
+			}
+		}else if(command.equals("searchpw")) {
+				String id=request.getParameter("id");
+				LoginDto ldto=dao.userinfo(id);
+				try {
+					findPwd(ldto.getEmail(), ldto.getId());
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				jsFoward("등록된 이메일로 임시비밀번호 발송", "login.jsp", response);
+		}else if(command.equals("searchid")) {
+			String name=request.getParameter("name");
+			String phone=request.getParameter("phone");
+			String id=dao.searchid(name, phone);
+			if(id!=null) {
+				request.setAttribute("id", id);
+				dispatch("idcompl.jsp", request, response);
+			}else {
+				jsFoward2("아이디가 없거나 이름 핸드폰번호를 다시 입력해주세요","searchid.jsp" , response);
+			}
 		}
 	}
 	public void dispatch(String url,HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -153,4 +195,32 @@ public class LoginController extends HttpServlet {
 		pw.print(str);
 		
 	}
+	public void jsFoward2(String msg,String url,  HttpServletResponse response) throws IOException {
+		String str="<script type='text/javascript'>"
+		+"alert('"+msg+"');"
+		+"window.open('"+url+"', 'mapWin', 'left=100,top=0,width=500,height=450');"
+		+"</script>";
+		PrintWriter pw=response.getWriter();
+		pw.print(str);
+		
+	}
+	public String findPwd(String email,String id) throws Exception {
+		String newPwd = FindUtil.getNewPwd();
+		LoginDao dao=new LoginDao();
+		boolean isS=dao.changePw(newPwd, id);
+		
+		String subject = "[하하하하하] 임시 비밀번호 발급 안내";
+		
+		String msg="";
+		msg += "<div align='center' style='border:1px solid black; font-family:verdana'>";
+		msg += "<h3 style='color:blue;'><strong>"+id;
+		msg += "님</strong>의 임시비밀번호 입니다. 로그인후 비밀번호를 변경해주세요.</h3>";
+		msg += "<p>임시 비밀번호 : <strong>" + newPwd + "<strong></p></div>";
+		
+		MailUtil.sendMail(email, subject, msg);
+		
+		return "success";
+		
+	}
+
 }

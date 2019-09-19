@@ -30,6 +30,7 @@
 	pageContext.setAttribute("hour", hour);
 	pageContext.setAttribute("min", min);
 	%>
+
 <body>
 <div id="wrap"  >
 		<header>
@@ -39,7 +40,7 @@
 				<li><a href="AnsController.do?command=boardlistpage&pnum=1">자유게시판</a></li>
 				<li><a href="LoginController.do?command=insert">회원가입</a></li>
 				<li><a href="LoginController.do?command=login">로그인</a></li>
-				<li><a href="">마이페이지</a></li>
+				<li><a href="LoginController.do?command=info">마이페이지</a></li>
 			</ul>
 		</header>
 	<section class='sec1'>
@@ -61,7 +62,7 @@
 	<input type="hidden" name="command" value="insertcal" />
 	<input type="hidden" name="seq" value="${dto.seq}" />
 	<input type="hidden" name="id" value="<%=ldto.getId()%>">
-	<table border="1">
+	<table border="1" style="height:250px; ">
 		<tr>
 			<th>아이디</th>
 			<td><input type="text" name="id" value="<%=ldto.getId()%>" readonly="readonly"></td>
@@ -99,17 +100,46 @@
 			</td>
 		</tr>
 		<tr>
+			<th>상대팀</th>
+			<td>
+			<select name="teamname">
+				<option value="kt">케이티</option>
+				<option value="afreeca">아프리카</option>
+				<option value="jinair">진에어</option>
+				<option value="damwon">담원</option>
+				<option value="kingzone">킹존</option>
+			</select>
+			</td>
+		</tr>
+				<tr>
+			<th>경기결과</th>
+			<td>
+			<select name="ourscore">
+				<option value="0">0</option>
+				<option value="1">1</option>
+				<option value="2">2</option>
+			</select>
+			<select name="otherscore">
+				<option value="0">0</option>
+				<option value="1">1</option>
+				<option value="2">2</option>
+			</select>
+			</td>
+		</tr>
+		<tr>
 			<th>제목</th>
-			<td><input type="text" name="title" /></td>
+			<td><input type="text" name="title" required="required" />
 		</tr>
 		<tr>
 			<th>내용</th>
-			<td><textarea rows="10" cols="60" name="content"></textarea></td>
+			<td><textarea rows="10" cols="60" name="content">*일정: 롤파크 (서울 종로구 종로33)
+*장소: 오후 5시 ~ (2경기)
+*결과: (승) SKT 2 vs 0 KT (패)</textarea></td>
 		</tr>
 		<tr>
 			<td colspan="2">
 				<input type="submit" value="일정추가" />
-				<input type="button" value="달력"
+				<input type="button" value="일정보기"
 					onclick="location.href='CalController.do?command=calendar'"/>
 		</tr>
 	</table>

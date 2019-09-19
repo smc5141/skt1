@@ -10,19 +10,19 @@
 		<result property="content" column="CONTENT" />
 		<result property="mdate" column="MDATE" />
 		<result property="regDate" column="REGDATE" />
+		<result property="teamname" column="TEAMNAME" />
+		<result property="ourscore" column="OURSCORE" />
+		<result property="otherscore" column="OHTERSCORE" />
 	</resultMap>
 	
-	
-	
-	
 	<select id="getCalList" parameterType="Map" resultMap="calDtoMap">
-		SELECT SEQ,ID,TITLE,CONTENT,MDATE,REGDATE
-		FROM M_CALBOARD WHERE SUBSTR(MDATE,1,8)=#{yyyyMMdd}
+		SELECT SEQ,ID,TITLE,CONTENT,MDATE,REGDATE,TEAMNAME,OURSCORE,OTHERSCORE
+		FROM M_CALBOARD WHERE SUBSTR(MDATE,1,8)=#{yyyyMMdd} ORDER BY SEQ ASC
 	</select>
 	
 	<insert id="insertCal" parameterType="calDto">
 		INSERT INTO M_CALBOARD VALUES(M_CALBOARD_SEQ.NEXTVAL,#{id},#{title},#{content},
-		#{mdate},SYSDATE)
+		#{mdate},SYSDATE,#{teamname},#{ourscore},#{otherscore})
 	</insert>
 	
 	<delete id="muldel" parameterType="Map">
@@ -33,23 +33,23 @@
 	</delete>
 	
 	<select id="caldetail" parameterType="int" resultMap="calDtoMap">
-		SELECT SEQ,ID,TITLE,CONTENT,MDATE,REGDATE
+		SELECT SEQ,ID,TITLE,CONTENT,MDATE,REGDATE,TEAMNAME
 		FROM M_CALBOARD WHERE SEQ=#{seq}
 	</select>
 	
 	<update id="calupdate" parameterType="calDto">
 		UPDATE M_CALBOARD SET TITLE=#{title}, CONTENT=#{content},MDATE=#{mdate},
-		REGDATE=SYSDATE WHERE SEQ=#{seq}
+		REGDATE=SYSDATE, TEAMNAME=#{teamname}, OURSCORE=#{ourscore}, OTHERSCORE=#{otherscore} WHERE SEQ=#{seq}
 	</update>
 	
 	<select id="calviewlist" parameterType="String" resultMap="calDtoMap">
-	SELECT SEQ, ID, TITLE, CONTENT, MDATE, REGDATE
-	FROM M_CALBOARD WHERE SUBSTR(MDATE,1,6)=#{yyyyMM}
+	SELECT SEQ, ID, TITLE, CONTENT, MDATE, REGDATE , TEAMNAME, OURSCORE,OTHERSCORE
+	FROM M_CALBOARD WHERE SUBSTR(MDATE,1,6)=#{yyyyMM} ORDER BY SEQ ASC
 	</select>
-	
-	<select id="calcount" resultType="int" parameterType="Map">
-		SELECT COUNT(*) FROM M_CALBOARD
-		WHERE SUBSTR(MDATE,1,8)=#{yyyyMMdd}	
+		<select id="getalertList" parameterType="Map" resultMap="calDtoMap">
+		SELECT SEQ,ID,TITLE,CONTENT,MDATE,REGDATE,TEAMNAME,OURSCORE,OTHERSCORE
+		FROM M_CALBOARD WHERE SUBSTR(MDATE,1,8)=#{yyyyMMdd} AND SEQ=#{seq}
 	</select>
+
 	
 </mapper>

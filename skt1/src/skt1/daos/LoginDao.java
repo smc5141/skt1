@@ -144,4 +144,71 @@ public class LoginDao extends SqlMapConfig {
 		}
 		return dto;
 	}
+	public boolean Pwch(String id,String chpassword) {
+		int count=0;
+		Map<String,String> map=new HashMap<>();
+		map.put("id", id);
+		map.put("password", chpassword);
+		SqlSession sqlSession=null;
+		
+		try {
+			sqlSession=getSqlSessionFactory().openSession(true);
+			count=sqlSession.update(nameSpace+"Pwch", map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			sqlSession.close();
+		}
+		
+		return count>0?true:false;
+	}
+	public LoginDto pwinfo(String id) {
+		LoginDto dto=new LoginDto();
+		SqlSession sqlSession=null;
+		
+		try {
+			sqlSession=getSqlSessionFactory().openSession(true);
+			dto=sqlSession.selectOne(nameSpace+"pwinfo", id);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			sqlSession.close();
+		}
+		return dto;
+	}
+	public boolean changePw(String newPwd, String id ) {
+		int count=0;
+		Map<String,String> map=new HashMap<>();
+		map.put("id", id);
+		map.put("newPwd", newPwd);
+		SqlSession sqlSession=null;
+		
+		try {
+			sqlSession=getSqlSessionFactory().openSession(true);
+			count=sqlSession.update(nameSpace+"changePw", map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			sqlSession.close();
+		}
+		
+		return count>0?true:false;
+	}
+	public String searchid(String name, String phone) {
+		String id= null;
+		SqlSession sqlSession= null;
+		Map<String,String> map=new HashMap<>();
+		map.put("name", name);
+		map.put("phone", phone);
+		
+		try {
+			sqlSession=getSqlSessionFactory().openSession(true);
+			id=sqlSession.selectOne(nameSpace+"searchid", map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			sqlSession.close();
+		}
+		return id;
+	}
 }

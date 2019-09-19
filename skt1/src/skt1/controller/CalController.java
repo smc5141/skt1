@@ -62,12 +62,13 @@ public class CalController extends HttpServlet {
 			request.setAttribute("list", list);
 			dispatch("calendar.jsp", request, response);
 
-			}else if(command.equals("callist")) {
-			String year=request.getParameter("year");
-			String month=request.getParameter("month");
-			String date=request.getParameter("date");
+			}else if(command.equals("callist")) {    //수정
+//			String year=request.getParameter("year");
+//			String month=request.getParameter("month");
+//			String date=request.getParameter("date");
 			
-			String yyyyMMdd=year+Util.isTwo(month)+Util.isTwo(date);//8자리
+//			String yyyyMMdd=year+Util.isTwo(month)+Util.isTwo(date);//8자리
+			String yyyyMMdd=request.getParameter("yyyyMMdd");
 			List<CalDto>list=dao.getCalList(yyyyMMdd);
 			request.setAttribute("list", list);
 			dispatch("calboardlist.jsp", request, response);
@@ -85,7 +86,10 @@ public class CalController extends HttpServlet {
 			String id=request.getParameter("id");
 			String title=request.getParameter("title");
 			String content=request.getParameter("content");
-			boolean isS=dao.insertCal(new CalDto(0,id,title,content,mdate,null));
+			String teamname=request.getParameter("teamname");
+			int ourscore=Integer.parseInt(request.getParameter("ourscore"));
+			int otherscore=Integer.parseInt(request.getParameter("otherscore"));
+			boolean isS=dao.insertCal(new CalDto(0,id,title,content,mdate,null,teamname,ourscore,otherscore));
 			if(isS) {
 				response.sendRedirect("CalController.do?command=calendar");
 			}else{
@@ -152,19 +156,28 @@ public class CalController extends HttpServlet {
 			int seq=Integer.parseInt(request.getParameter("seq"));
 			String title=request.getParameter("title");
 			String content=request.getParameter("content");
-			
-			boolean isS=dao.updateCal(new CalDto(seq,null,title,content,mdate,null));
+			String teamname=request.getParameter("teamname");
+			int ourscore=Integer.parseInt(request.getParameter("ourscore"));
+			int otherscore=Integer.parseInt(request.getParameter("otherscore"));
+			boolean isS=dao.updateCal(new CalDto(seq,null,title,content,mdate,null,teamname,ourscore,otherscore));
 			if(isS) {
 				response.sendRedirect("CalController.do?command=caldetail&seq="+seq);
 			}else {
 				request.setAttribute("msg", "일정수정실패");
 				dispatch("error.jsp", request, response);
 			}
-		}else if(command.equals("calcount")) {
-			String yyyyMMdd=request.getParameter("yyyyMMdd");
-			int count=dao.getCalViewCount(yyyyMMdd);
-			PrintWriter pw=response.getWriter();
-			pw.print(count);
+	}
+		else if(command.equals("calalert")) {
+			String year=request.getParameter("year");
+			String month=request.getParameter("month");
+			String date=request.getParameter("date");
+			int seq=Integer.parseInt(request.getParameter("seq"));
+			
+			String yyyyMMdd=year+Util.isTwo(month)+Util.isTwo(date);//8자리
+			CalDto dto=dao.getalertList(yyyyMMdd, seq);
+			request.setAttribute("yyyyMMdd", yyyyMMdd);
+			request.setAttribute("dto", dto);
+			dispatch("calalert.jsp", request, response);
 		}
 		
 		
@@ -196,5 +209,6 @@ public class CalController extends HttpServlet {
 		
 		
 	}
+
 	
 }

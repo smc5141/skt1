@@ -10,13 +10,17 @@ public class CalDto {
 	private String content;
 	private String mdate;
 	private Date regDate;
+	private String teamname;
+	private int ourscore;
+	private int otherscore;
 	
 	public CalDto() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public CalDto(int seq, String id, String title, String content, String mdate, Date regDate) {
+	public CalDto(int seq, String id, String title, String content, String mdate, Date regDate, String teamname,
+			int ourscore, int otherscore) {
 		super();
 		this.seq = seq;
 		this.id = id;
@@ -24,6 +28,9 @@ public class CalDto {
 		this.content = content;
 		this.mdate = mdate;
 		this.regDate = regDate;
+		this.teamname = teamname;
+		this.ourscore = ourscore;
+		this.otherscore = otherscore;
 	}
 
 	public int getSeq() {
@@ -74,11 +81,37 @@ public class CalDto {
 		this.regDate = regDate;
 	}
 
+	public String getTeamname() {
+		return teamname;
+	}
+
+	public void setTeamname(String teamname) {
+		this.teamname = teamname;
+	}
+
+	public int getOurscore() {
+		return ourscore;
+	}
+
+	public void setOurscore(int ourscore) {
+		this.ourscore = ourscore;
+	}
+
+	public int getOtherscore() {
+		return otherscore;
+	}
+
+	public void setOtherscore(int otherscore) {
+		this.otherscore = otherscore;
+	}
+
 	@Override
 	public String toString() {
 		return "CalDto [seq=" + seq + ", id=" + id + ", title=" + title + ", content=" + content + ", mdate=" + mdate
-				+ ", regDate=" + regDate + "]";
+				+ ", regDate=" + regDate + ", teamname=" + teamname + ", ourscore=" + ourscore + ", otherscore="
+				+ otherscore + "]";
 	}
+	
 	
 	
 		

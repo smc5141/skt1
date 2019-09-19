@@ -39,9 +39,22 @@
 	<select id="loginChk" parameterType="Map" resultType="loginDto">
 		SELECT ID,PASSWORD FROM M_USER WHERE ID=#{id} AND PASSWORD=#{password}
 	</select>
-
 	
+	<update id="Pwch" parameterType="Map">
+		UPDATE M_USER SET PASSWORD=#{password} WHERE ID=#{id}
+	</update>
 	
+	<select id="pwinfo" parameterType="String" resultType="loginDto">
+		SELECT ID,PASSWORD
+		FROM M_USER WHERE ID=#{id}
+	</select>
+		<update id="changePw" parameterType="Map">
+		UPDATE M_USER SET PASSWORD=#{newPwd} WHERE ID=#{id}
+	</update>
+	
+	<select id="searchid" parameterType="Map" resultType="String">
+		SELECT ID FROM M_USER WHERE NAME=#{name} AND PHONE=#{phone}
+	</select>
 </mapper>
 
 

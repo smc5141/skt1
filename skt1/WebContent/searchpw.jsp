@@ -6,14 +6,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
-<link rel="stylesheet" href="css/skt3.css">
+<link rel="stylesheet" href="css/skt4.css">
 <title></title>
-<style type="text/css">
-.pwbutton{
-position: relative;
-left:608px;
-}
-</style>
 <script type="text/javascript">
 window.onload=function(){
 	var form=document.getElementsByTagName("form")[0];//[form]
@@ -38,25 +32,18 @@ window.onload=function(){
 <body>
 <div id="wrap"  >
 	<section class="sec2" >
-	<form action="LoginController.do" method="post" name="gogo" style="width:1000px; height:1000px; margin: 0 auto;">
-		<h2 style="text-align: center;">로그인</h2>
-		<button class="pwbutton" onclick="window.open('search.jsp', 'mapWin', 'left=100,top=0,width=390,height=334'); return false">아이디/비밀번호 찾기</button>
-	<input type="hidden" name="command" value="userlogin"/>		
+	<form action="LoginController.do" method="post" style="width:350px; height:300px; margin: 0 auto;">
+		<h2 style="text-align: center;">비밀번호 찾기</h2>
+	<input type="hidden" name="command" value="searchpw"/>		
 	<div class="form-group" id="divId">
                 <label for="inputId" class="control-label">아이디</label>
                 <div class="col-lg-10">
-                    <input type="text"  class="form-control" name="id" data-rule-required="true" placeholder="아이디" maxlength="30">
-                </div>
-            </div>
-            <div class="form-group" >
-                <label for="inputPassword" class="control-label">비밀번호</label>
-                <div class="col-lg-10">
-                    <input type="password"  class="form-control" name="password" name="excludeHangul" data-rule-required="true" placeholder="패스워드" maxlength="30">
+                    <input type="text" class="form-control" name="id" data-rule-required="true" placeholder="이메일로 임시비밀번호 전송" maxlength="30">
                 </div>
             </div>
                <div class="form-group" >
                 <div class="col-lg-10">
-                    <input type="submit" value="로그인" class="form-control" >
+                    <input type="submit" value="비밀번호 찾기" class="form-control" >
                 </div>
             </div>
             </form>
