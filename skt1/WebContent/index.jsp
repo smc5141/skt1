@@ -106,7 +106,7 @@
     }
   }  
   .row{
-  width:1300px;
+  width:800px;
   margin:0 auto;
   }
 </style>
@@ -178,9 +178,9 @@
   <br>
   <div class="row" >
     <div class="col-sm-4">
-      <p class="text-center"><strong>Name</strong></p><br>
+      <p class="text-center"><strong>신민철</strong></p><br>
       <a href="#demo" data-toggle="collapse">
-        <img src="bandmember.jpg" class="img-circle person" alt="Random Name" width="255" height="255">
+<!--         <img src="" class="img-circle person" alt="Random Name" width="255" height="255"> -->
       </a>
       <div id="demo" class="collapse">
         <p>t</p>
@@ -189,12 +189,23 @@
       </div>
     </div>
     <div class="col-sm-4">
-      <p class="text-center"><strong>Name</strong></p><br>
+      <p class="text-center"><strong>김종완</strong></p><br>
       <a href="#demo2" data-toggle="collapse">
-        <img src="bandmember.jpg" class="img-circle person" alt="Random Name" width="255" height="255">
+<!--         <img src="" class="img-circle person" alt="Random Name" width="255" height="255"> -->
       </a>
       <div id="demo2" class="collapse">
         <p></p>
+        <p></p>
+        <p></p>
+      </div>
+    </div>
+        <div class="col-sm-4">
+      <p class="text-center"><strong>은현욱</strong></p><br>
+      <a href="#demo" data-toggle="collapse">
+<!--         <img src="" class="img-circle person" alt="Random Name" width="255" height="255"> -->
+      </a>
+      <div id="demo" class="collapse">
+        <p>t</p>
         <p></p>
         <p></p>
       </div>
