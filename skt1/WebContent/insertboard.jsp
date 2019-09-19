@@ -43,6 +43,56 @@
 
 	})
 </script>
+<style type="text/css">
+
+
+
+	#util img{width: 12px; height: 12px;}
+	 a:hover{
+   color:blue;
+	}
+
+	* {
+   	margin: 0 auto;
+  	 padding: 0;
+  	 font-family: 'Malgun gothic','Sans-Serif','Arial';
+	}
+	a {
+   text-decoration: none;
+   color:#333;
+	}
+	ul li {
+   list-style:none;
+	}
+
+	.fl {
+   float:left;
+}
+.tc {
+   text-align:center;
+}	
+
+	#board_area {
+   width: 900px;
+   position: relative;
+}
+.list-table {
+   margin-top: 40px;
+}
+.list-table thead th{
+   height:40px;
+   border-top:2px solid #09C;
+   border-bottom:1px solid #CCC;
+   font-weight: bold;
+   font-size: 17px;
+}
+.list-table tbody td{
+   text-align:center;
+   padding:10px 0;
+   border-bottom:1px solid #CCC; height:20px;
+   font-size: 14px 
+}
+</style>
 <%
 	LoginDto ldto=(LoginDto)session.getAttribute("ldto");
 %>
@@ -77,7 +127,7 @@
 <input type="hidden" name="command" value="insertboard"/>
 <input type="hidden" name="id" value="<%=ldto.getId()%>">
 <h1></h1>
-<table border="1">
+<table class="list-table">
 	<tr>
 		<th>아이디</th>
 		<td><%=ldto.getId()%></td>

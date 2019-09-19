@@ -133,19 +133,21 @@ text-align:center;
 	}
 %>
 <body>
-<div id="wrap"  >
+<div id="wrap" >
 		<header>
-			<h1><a href="index.jsp"><img src="img/skt1.jpeg" alt="skt1logo"></a></h1>
-			<ul class="gnb">
+			<h1><a href="index.jsp"><img src="img/skt1.jpeg" alt="skt1logo" style="max-width:100%;height:auto;"></a></h1>
+			<ul class="gnb" >
 				<li><a href="CalController.do?command=calendar">일정</a></li>
+				<li><a href="NotController.do?command=boardlistpage&pnum=1">공지게시판</a></li>
 				<li><a href="AnsController.do?command=boardlistpage&pnum=1">자유게시판</a></li>
-				<li><a href="LoginController.do?command=insert">회원가입</a></li>
+				<li><a href="#" target="_blank" onclick="window.open('checkuser.jsp', 'mapWin', 'left=100,top=0,width=390,height=334'); return false">회원가입</a></li>				
 				<li><a href="LoginController.do?command=login">로그인</a></li>
-				<li><a href="">마이페이지</a></li>
+				<li><a href="LoginController.do?command=info">마이페이지</a></li>
+				<li><a href="LoginController.do?command=logout">로그아웃</a></li>
 			</ul>
 		</header>
 			<section class='sec1'>
-			<h2><img src='img/sk4.jpg' alt='MEMBER 회원안내'></h2>
+			<h2><img src='img/sk4.jpg' alt='MEMBER 회원안내' style="max-width:100%;height:auto;" ></h2>
 			<nav class='lnb' style="text-align: center;">
 				<ul >
 					<li><a href='#' onclick="location.href='LoginController.do?command=login'" style="color:#fff; font-size:40px;">게시판글목록</a></li>

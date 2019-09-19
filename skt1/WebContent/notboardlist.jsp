@@ -140,7 +140,7 @@ text-align:center;
 			</ul>
 		</header>
 			<section class='sec1'>
-			<h2><img src='img/sk4.jpg' alt='MEMBER 회원안내'></h2>
+			<h2><img src='img/sk4.jpg' alt='MEMBER 회원안내' style="max-width:100%;height:auto;"></h2>
 			<nav class='lnb' style="text-align: center;">
 				<ul >
 					<li><a href='#' onclick="location.href='LoginController.do?command=login'" style="color:#fff; font-size:40px;">공지게시판</a></li>

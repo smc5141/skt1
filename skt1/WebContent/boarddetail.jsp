@@ -17,12 +17,61 @@
 	*/
 	#replyForm{display: none;}
 	#container{
-		height: 400px;
+		height: 800px;
 		width: 800px;
 		border: 1px solid red;
 		overflow: auto;
 	}
 
+		#util img{width: 12px; height: 12px;}
+	 a:hover{
+   color:blue;
+	}
+
+	* {
+   	margin: 0 auto;
+  	 padding: 0;
+  	 font-family: 'Malgun gothic','Sans-Serif','Arial';
+	}
+	a {
+   text-decoration: none;
+   color:#333;
+	}
+	ul li {
+   list-style:none;
+	}
+
+	.fl {
+   float:left;
+}
+.tc {
+   text-align:center;
+}	
+
+	#board_area {
+   width: 900px;
+   position: relative;
+}
+.list-table {
+   margin-top: 40px;
+}
+.list-table thead th{
+   height:40px;
+   border-top:2px solid #09C;
+   border-bottom:1px solid #CCC;
+   font-weight: bold;
+   font-size: 17px;
+}
+.list-table tbody td{
+   text-align:center;
+   padding:10px 0;
+   border-bottom:1px solid #CCC; height:20px;
+   font-size: 14px 
+}
+
+#da{text-align:center;
+position: relative;
+}
 </style>
 <script type="text/javascript">
 	
@@ -64,7 +113,7 @@
 <section class="sec2" >
 <div id="container">
 
-<table border="1">
+<table  class="list-table">
 	<tr>
 		<th>번호</th>
 		<td>${requestScope.dto.seq}</td>
@@ -96,12 +145,13 @@
 	</tr>
 </table>
 <div id="replyForm">
-<h1>답글달기</h1>
+<br/>
+<h1 id="da">답글달기</h1>
 <form action="AnsController.do" method="post" >
 <input type="hidden" name="command" value="replyboard"/>
 <input type="hidden" name="seq" value="${dto.seq}"/>
 <input type="hidden" name="id" value="<%=ldto.getId()%>">
-<table border="1">
+<table class="list-table">
 	<tr>
 		<th>아이디</th>
 		<td><%=ldto.getId()%></td>

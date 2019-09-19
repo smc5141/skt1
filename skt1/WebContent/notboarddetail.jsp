@@ -85,7 +85,13 @@
 	</tr>
 	<tr>
 		<td colspan="2">
+			<% 
+			if(ldto.getRole().equals("ADMIN")){
+			%>
 			<button onclick="replyForm()">답글</button>
+			<%
+			}
+			%>
 			<% if(ldto!=null){
 			 if(ldto.getId().equals(dto1.getId())){%>	
 				 		 
