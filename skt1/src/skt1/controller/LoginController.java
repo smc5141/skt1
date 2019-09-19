@@ -66,7 +66,7 @@ public class LoginController extends HttpServlet {
 			
 			boolean isS=dao.insertadmin(new LoginDto(id,password,name,address,phone,email,null));
 			if(isS) {
-				jsFoward("회원가입 성공", "index.jsp", response);
+				jsFoward("회원가입 성공 마스터 승인후 사용가능", "index.jsp", response);
 			}else {
 				request.setAttribute("msg", "회원가입실패");
 				dispatch("error.jsp", request, response);
@@ -84,6 +84,8 @@ public class LoginController extends HttpServlet {
 			LoginDto ldto=dao.Login(id, password);
 			if(ldto==null) {
 				jsFoward("아이디와 비밀번호가 틀리거나 없는 아이디입니다.", "login.jsp", response);
+			}else if(ldto.getRole().equals("WAIT")){
+				jsFoward("마스터 승인후 이용 가능합니다.", "index.jsp", response);
 			}else {
 				session.setAttribute("ldto", ldto);
 				session.setMaxInactiveInterval(10*60);
@@ -99,9 +101,12 @@ public class LoginController extends HttpServlet {
 				if(ldto.getRole().equals("USER")) {
 				request.setAttribute("ldto",ldto);
 				dispatch("userinfo.jsp", request, response);
-				}else {
+				}else if(ldto.getRole().equals("ADMIN")) {
 					request.setAttribute("ldto",ldto);
 					dispatch("admininfo.jsp", request, response);
+				}else {
+					request.setAttribute("ldto",ldto);
+					dispatch("masterinfo.jsp", request, response);
 				}
 			}
 			
@@ -179,6 +184,18 @@ public class LoginController extends HttpServlet {
 				dispatch("idcompl.jsp", request, response);
 			}else {
 				jsFoward2("아이디가 없거나 이름 핸드폰번호를 다시 입력해주세요","searchid.jsp" , response);
+			}
+		}else if(command.equals("adminsign")) {
+			List<LoginDto> list=dao.searchadmin();
+			request.setAttribute("list",list);
+			dispatch("adminsign.jsp", request, response);
+		}else if(command.equals("adminsignup")) {
+			String id=request.getParameter("id");
+			boolean isS=dao.adminsignup(id);
+			if(isS) {
+				jsFoward("승인 성공", "LoginController.do?command=adminsign", response);
+			}else {
+				jsFoward("승인 실패", "LoginController.do?command=adminsign", response);
 			}
 		}
 	}

@@ -211,4 +211,32 @@ public class LoginDao extends SqlMapConfig {
 		}
 		return id;
 	}
+	public List<LoginDto> searchadmin(){
+		List<LoginDto> list=null;
+		SqlSession sqlSession = null;
+		
+		try {
+			sqlSession=getSqlSessionFactory().openSession(true);
+			list=sqlSession.selectList(nameSpace+"searchadmin");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			sqlSession.close();
+		}
+		return list;
+	}
+	public boolean adminsignup(String id) {
+		int count=0;
+		SqlSession sqlSession=null;
+		
+		try {
+			sqlSession=getSqlSessionFactory().openSession(true);
+			count=sqlSession.update(nameSpace+"adminsignup", id);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			sqlSession.close();
+		}
+		return count>0?true:false;
+	}
 }

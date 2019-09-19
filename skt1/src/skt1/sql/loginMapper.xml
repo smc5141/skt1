@@ -8,7 +8,7 @@
 	
 	<insert id="insertadmin" parameterType="loginDto">
 		INSERT INTO M_USER VALUES(#{id},#{password},#{name},#{address},
-		#{phone},#{email},'ADMIN')
+		#{phone},#{email},'WAIT')
 	</insert>
 	
 	<select id="Login" parameterType="Map" resultType="loginDto">
@@ -55,6 +55,15 @@
 	<select id="searchid" parameterType="Map" resultType="String">
 		SELECT ID FROM M_USER WHERE NAME=#{name} AND PHONE=#{phone}
 	</select>
+	
+	<select id="searchadmin" resultType="loginDto">
+		SELECT ID,PASSWORD,NAME,ADDRESS,PHONE,EMAIL,ROLE
+		FROM M_USER WHERE ROLE='WAIT'
+	</select>
+	
+	<update id="adminsignup" parameterType="String">
+		UPDATE M_USER SET ROLE='ADMIN' WHERE ID=#{id}
+	</update>
 </mapper>
 
 

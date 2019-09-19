@@ -58,19 +58,19 @@
              <div class="form-group" >
                 <label for="inputPassword" class="control-label">주소</label>
                 <div class="col-lg-10">
-                    <input type="text" class="form-control" name="address" data-rule-required="true" placeholder="10자이내의 알파벳, 언더스코어(_), 숫자만 입력 가능합니다." maxlength="30">
+                    <input type="text" class="form-control" required="required" name="address" data-rule-required="true" placeholder="10자이내의 알파벳, 언더스코어(_), 숫자만 입력 가능합니다." maxlength="30">
            		 </div>
             </div>
             <div class="form-group" >
                 <label for="inputPassword" class="control-label">전화번호</label>
                 <div class="col-lg-10">
-                    <input type="text" class="form-control" name="phone" data-rule-required="true" placeholder="10자이내의 알파벳, 언더스코어(_), 숫자만 입력 가능합니다." maxlength="30">
+                    <input type="text" class="form-control"  required="required" name="phone" data-rule-required="true" placeholder="10자이내의 알파벳, 언더스코어(_), 숫자만 입력 가능합니다." maxlength="30">
            		 </div>
             </div>
              <div class="form-group" >
                 <label for="inputPassword" class="control-label">이메일</label>
                 <div class="col-lg-10">
-                   <input type="email" class="form-control" name="email" data-rule-required="true" placeholder="10자이내의 알파벳, 언더스코어(_), 숫자만 입력 가능합니다." maxlength="30">
+                   <input type="email" class="form-control" required="required" name="email" data-rule-required="true" placeholder="10자이내의 알파벳, 언더스코어(_), 숫자만 입력 가능합니다." maxlength="30">
            		 </div>
             </div>
              <div class="form-group" >

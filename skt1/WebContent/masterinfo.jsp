@@ -29,7 +29,7 @@
 			<h2><img src='img/sk4.jpg' alt='MEMBER 회원안내'></h2>
 			<nav class='lnb' style="text-align: center;">
 				<ul >
-					<li><a href='#' onclick="location.href='LoginController.do?command=login'" style="color:#fff; font-size:40px;"></a></li>
+					<li><a href='#' onclick="location.href='LoginController.do?command=adminsign'" style="color:#fff; font-size:40px;">관리자 승인</a></li>
 				</ul>
 			</nav>
 		
