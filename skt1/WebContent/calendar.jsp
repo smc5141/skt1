@@ -168,12 +168,9 @@
 					<a style="color:<%=Util.fontColor(dayOfWeek,i)%>;"><%=i%></a>
 					<a href="CalController.do?command=insertcalform
 					&year=<%=year%>&month=<%=month%>&date=<%=i%>&lastday=<%=lastDay%>" >
-						<img src="img/pen.png" alt="일정추가" align="right"/><br/>
-					</a>			
-					<a href="#" onclick="window.open('CalController.do?command=calalert&year=<%=year%>&month=<%=month%>&date=<%=i%>&seq=<%=Util.getseqView(list, i)%>', 'mapWin', 'left=100,top=0,width=500,height=450'); return false" >
-					<br/>
-					<%=Util.getCalView(list, i) %>
-					</a>
+						<img src="img/pen.png" alt="일정추가" align="right"/><br/></a>	<hr/>		
+	titleList+="<onclick="window.open('CalController.do?command=calalert&seq=<%=%>', 'mapWin', 'width=550,height=450'); return false" >"		calDto.getSeq();
+					<a href="#"><%=Util.getCalView(list, i) %></a><hr/>
 				</td>
 				<%
 				
@@ -193,7 +190,6 @@
 		%>
 	</tr>
 </table>
-
 </div>
 </section>
 <div style="margin: 0 auto; text-align: right;">

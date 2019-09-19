@@ -5,7 +5,7 @@ import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
-import com.sun.prism.Image;
+
 
 import skt1.dtos.CalDto;
 
@@ -86,6 +86,8 @@ public class Util {
 			String titleList=""; //달력에서 일정을 출력해줄 문자열
 								//<p>title</p>
 			for (CalDto calDto : list) {
+				calDto.getSeq();
+				
 				if(calDto.getMdate().substring(6, 8).equals(d)) {
 					titleList+="<img src='img/"+calDto.getTeamname()+".jpg' alt='상대팀' width=50px >";
 					if(calDto.getOurscore()>calDto.getOtherscore()) {
@@ -99,6 +101,7 @@ public class Util {
 			}
 			return titleList;
 		}
+		
 		public static int getseqView(List<CalDto> list, int i) {
 			String d=isTwo(String.valueOf(i));
 			int seq=0;

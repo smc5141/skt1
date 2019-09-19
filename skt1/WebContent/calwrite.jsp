@@ -128,7 +128,7 @@
 		</tr>
 		<tr>
 			<th>제목</th>
-			<td><input type="text" name="title" required="required" />
+			<td><input type="text" name="title" placeholder="대회명 작성" required="required" />
 		</tr>
 		<tr>
 			<th>내용</th>
