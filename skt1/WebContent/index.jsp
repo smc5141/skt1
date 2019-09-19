@@ -173,7 +173,7 @@
 
 <div class="container text-center">
   <h3>만든사람</h3>
-  <p><em>기능이 별로없다</em></p>
+  <p><em>기능이 별로없다.</em></p>
   <p>we are the champion</p>
   <br>
   <div class="row" >
