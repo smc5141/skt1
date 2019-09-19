@@ -109,7 +109,13 @@
 #nd{
 text-align:center;
  position: relative;
-}	
+}
+.gnb li{
+		float: left;
+		width: 14.285%;
+		text-align: center;
+		line-height: 100px;
+	}	
 </style>
 </head>
 <%
@@ -134,9 +140,10 @@ text-align:center;
 				<li><a href="CalController.do?command=calendar">일정</a></li>
 				<li><a href="NotController.do?command=boardlistpage&pnum=1">공지게시판</a></li>
 				<li><a href="AnsController.do?command=boardlistpage&pnum=1">자유게시판</a></li>
-				<li><a href="LoginController.do?command=insert">회원가입</a></li>
+				<li><a href="#" target="_blank" onclick="window.open('checkuser.jsp', 'mapWin', 'left=100,top=0,width=390,height=334'); return false">회원가입</a></li>				
 				<li><a href="LoginController.do?command=login">로그인</a></li>
-				<li><a href="">마이페이지</a></li>
+				<li><a href="LoginController.do?command=info">마이페이지</a></li>
+				<li><a href="LoginController.do?command=logout">로그아웃</a></li>
 			</ul>
 		</header>
 			<section class='sec1'>
@@ -154,7 +161,7 @@ text-align:center;
 	</section>
 	
 <jsp:useBean id="util" class="skt1.utils.Util"  />
-<section class="" >
+<section class="sec2" >
 	<br/><br/><br/>
 	<div id="nd">
 			<form action="NotController.do" method="post">
@@ -234,7 +241,7 @@ text-align:center;
 		</c:otherwise>
 	</c:choose>
 	<tr>
-		<td colspan="6" style="text-align: center;">
+		<td colspan="5" style="text-align: center;">
 			<a href="NotController.do?command=boardlistpage&pnum=<%=map.get("prePageNum")%>${statusPage==null?'':statusPage}">◀</a>
 			<%
 // 				int pcount=(Integer)request.getAttribute("pcount");
@@ -250,7 +257,7 @@ text-align:center;
 	</tr>
 	
 	<tr>
-		<td colspan="6" >
+		<td colspan="5" >
 			<% 
 // 			if(ldto.getRole()!=null){
 				if(ldto.getRole().equals("ADMIN")){

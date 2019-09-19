@@ -92,6 +92,12 @@
    border-bottom:1px solid #CCC; height:20px;
    font-size: 14px 
 }
+.gnb li{
+		float: left;
+		width: 14.285%;
+		text-align: center;
+		line-height: 100px;
+	}
 </style>
 <%
 	LoginDto ldto=(LoginDto)session.getAttribute("ldto");
@@ -101,16 +107,18 @@
 <div id="wrap"  >
 		<header>
 			<h1><a href="index.jsp"><img src="img/skt1.jpeg" alt="skt1logo"></a></h1>
-			<ul class="gnb">
-				<li><a href="">일정</a></li>
+			<ul class="gnb" >
+				<li><a href="CalController.do?command=calendar">일정</a></li>
+				<li><a href="NotController.do?command=boardlistpage&pnum=1">공지게시판</a></li>
 				<li><a href="AnsController.do?command=boardlistpage&pnum=1">자유게시판</a></li>
-				<li><a href="LoginController.do?command=insert">회원가입</a></li>
+				<li><a href="#" target="_blank" onclick="window.open('checkuser.jsp', 'mapWin', 'left=100,top=0,width=390,height=334'); return false">회원가입</a></li>				
 				<li><a href="LoginController.do?command=login">로그인</a></li>
-				<li><a href="">마이페이지</a></li>
+				<li><a href="LoginController.do?command=info">마이페이지</a></li>
+				<li><a href="LoginController.do?command=logout">로그아웃</a></li>
 			</ul>
 		</header>
 			<section class='sec1'>
-			<h2><img src='img/sk4.jpg' alt='MEMBER 회원안내'></h2>
+			<h2><img src='img/sk4.jpg' alt='MEMBER 회원안내' style="max-width:100%;height:auto;"></h2>
 			<nav class='lnb' style="text-align: center;">
 				<ul >
 					<li><a href='#' onclick="location.href='LoginController.do?command=login'" style="color:#fff; font-size:30px;">게시글 추가하기</a></li>

@@ -63,7 +63,7 @@
 	}
 	.gnb li{
 		float: left;
-		width: 16.667%;
+		width: 14.285%;
 		text-align: center;
 		line-height: 100px;
 	}

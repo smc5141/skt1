@@ -25,7 +25,7 @@
 
 <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
 <link rel="stylesheet" href="css/skt1.css">
-<link rel="stylesheet" href="css/bootstrap.css">
+
 <title></title>
 <script type="text/javascript">
 
@@ -113,6 +113,13 @@ text-align:center;
  position: relative;
 }
 #list1{color: red;}	
+
+.gnb li{
+		float: left;
+		width: 14.285%;
+		text-align: center;
+		line-height: 100px;
+	}
 </style>
 </head>
 <%
@@ -146,11 +153,11 @@ text-align:center;
 				<li><a href="LoginController.do?command=logout">로그아웃</a></li>
 			</ul>
 		</header>
-			<section class='sec1'>
+		<section class='sec1'>
 			<h2><img src='img/sk4.jpg' alt='MEMBER 회원안내' style="max-width:100%;height:auto;" ></h2>
 			<nav class='lnb' style="text-align: center;">
 				<ul >
-					<li><a href='#' onclick="location.href='LoginController.do?command=login'" style="color:#fff; font-size:40px;">게시판글목록</a></li>
+					<li><a href='#' onclick="location.href='LoginController.do?command=login'" style="color:#fff; font-size:40px;">자유게시판</a></li>
 				</ul>
 			</nav>
 		
@@ -158,10 +165,11 @@ text-align:center;
 			<div class='sns_title' style="color: #fff;" >SKT1 유트브</div>
 			<a href='https://www.youtube.com/user/SKTTeam1st' target="_blank" ><img src="img/youtube.png" alt="youtube"></a>
 		</div>
-	</section>
+		</section>
+		
 	
 <jsp:useBean id="util" class="skt1.utils.Util"  />
-<section class="" >
+<section class="sec2" >
 	<br/><br/><br/>
 	<div id="nd">
 			<form action="AnsController.do" method="post">
@@ -206,7 +214,7 @@ text-align:center;
 	<c:choose>
 		<c:when test="${empty list1}">
 			<tr id="list1">
-				<td colspan="5">----작성된 글이 없습니다.----</td>
+				<td colspan="6">----작성된 공지사항이 없습니다.----</td>
 			</tr>
 		</c:when>
 		<c:otherwise>
@@ -314,6 +322,7 @@ text-align:center;
 </table>
 
 </form>
+
 </section>
 </div>
 
