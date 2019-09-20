@@ -86,6 +86,8 @@ text-align:center;
 </head>
 <%
 	List<LoginDto>list=(List<LoginDto>)request.getAttribute("list");
+
+int i=1;
 %>
 <body>
 <div id="wrap"  >
@@ -138,7 +140,7 @@ text-align:center;
 	</thead>
 <%
 		for(LoginDto dto:list){
-			int i=1;
+			
 			%>
 			<tr>
 				<td><%=i%></td>
