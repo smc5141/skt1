@@ -38,7 +38,7 @@ public class LoginController extends HttpServlet {
 		HttpSession session=request.getSession();
 		
 		if(command.equals("insert")){
-			response.sendRedirect("singup.jsp");
+			response.sendRedirect("signup.jsp");
 		}else if(command.equals("admin")){
 			response.sendRedirect("adminsignup.jsp");
 		}else if(command.equals("insertuser")) {
