@@ -189,7 +189,7 @@ text-align:center;
 	<thead>
 	<tr>
 		<% 
-		if(ldto.getRole().equals("ADMIN")){
+		if(ldto.getRole().equals("ADMIN")||ldto.getRole().equals("MASTER")){
 		%>
 		<th><input type="checkbox" name="all" onclick="allSel(this)"/></th>
 		<%
@@ -213,7 +213,7 @@ text-align:center;
 			<c:forEach items="${list}" var="dto">
 				<tr>
 					<% 
-					if(ldto.getRole().equals("ADMIN")){
+					if(ldto.getRole().equals("ADMIN")||ldto.getRole().equals("MASTER")){
 					%>
 					<td><input type="checkbox" name="chk" value="${dto.seq}"/></td>
 					<%
@@ -260,7 +260,7 @@ text-align:center;
 		<td colspan="5" >
 			<% 
 // 			if(ldto.getRole()!=null){
-				if(ldto.getRole().equals("ADMIN")){
+				if(ldto.getRole().equals("ADMIN")||ldto.getRole().equals("MASTER")){
 				%>     
 			<input type="button" value="글추가" 
 			       onclick="location.href='NotController.do?command=insertForm&id=<%=ldto.getId()%>'"/>
@@ -270,7 +270,7 @@ text-align:center;
 			%>
 			<% 
 // 			if(ldto.getRole()!=null){
-				if(ldto.getRole().equals("ADMIN")){
+				if(ldto.getRole().equals("ADMIN")||ldto.getRole().equals("MASTER")){
 				%>     
 					<input type="submit" value="글삭제"/> 
 				<%
