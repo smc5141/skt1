@@ -118,7 +118,7 @@ function idChk(){
             <div class="form-group" >
                 <label for="inputPhoneNumber" class="control-label">이메일</label>
                 <div class="col-lg-10">
-                    <input type="email" class="form-control" name="email" data-rule-required="true" placeholder="이메일" maxlength="11">
+                    <input type="email" class="form-control" name="email" data-rule-required="true" placeholder="이메일" maxlength="20">
                 </div>
             </div>
              <div class="form-group" >
