@@ -173,6 +173,7 @@ text-align:center;
 			</select>
 			<input type="text" size="20" name="condition"/>&nbsp;
 			<input type="submit" value="검색"/>
+			<a href="NotController.do?command=boardlistpage&pnum=1"><input type="button" value="전체보기"/></a>
 			</form>
 	</div>
 <form action="NotController.do" method="post" id="aaa">
