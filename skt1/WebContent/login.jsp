@@ -31,11 +31,63 @@ window.onload=function(){
 			}
 		}
 	}
+//Your web app's Firebase configuration
+var firebaseConfig = {
+  apiKey: "AIzaSyBwDkg4gN6qhTOE4HskbqCslwesYPaNWd4",
+  authDomain: "hankyung-ed28b.firebaseapp.com",
+  databaseURL: "https://hankyung-ed28b.firebaseio.com",
+  projectId: "hankyung-ed28b",
+  storageBucket: "hankyung-ed28b.appspot.com",
+  messagingSenderId: "678307705084",
+  appId: "1:678307705084:web:b75c099314417013fae779",
+  measurementId: "G-4NMV18ZFFL"
+};
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+firebase.analytics();
 
+window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('sign-in-button', {
+	  'size': 'invisible',
+	  'callback': function(response) {
+	    // reCAPTCHA solved, allow signInWithPhoneNumber.
+	    onSignInSubmit();
+	  }
+	});
 
+window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container');
+var phoneNumber = getPhoneNumberFromUserInput();
+var appVerifier = window.recaptchaVerifier;
+firebase.auth().signInWithPhoneNumber(phoneNumber, appVerifier)
+    .then(function (confirmationResult) {
+      // SMS sent. Prompt user to type the code from the message, then sign the
+      // user in with confirmationResult.confirm(code).
+      window.confirmationResult = confirmationResult;
+    }).catch(function (error) {
+      // Error; SMS not sent
+      // ...
+    });
+grecaptcha.reset(window.recaptchaWidgetId);
+
+//Or, if you haven't stored the widget ID:
+window.recaptchaVerifier.render().then(function(widgetId) {
+grecaptcha.reset(widgetId);
+}
 </script>
 </head>
 <body>
+ <!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services -->
+
+  <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
+  <script src="/__/firebase/6.2.0/firebase-app.js"></script>
+
+  <!-- Add Firebase products that you want to use -->
+  <script src="/__/firebase/6.2.0/firebase-auth.js"></script>
+  <script src="/__/firebase/6.2.0/firebase-firestore.js"></script>
+  <!-- Previously loaded Firebase SDKs -->
+
+  <!-- Initialize Firebase -->
+  <script src="/__/firebase/init.js"></script>
+
 <div id="wrap"  >
 	<section class="sec2" >
 	<form action="LoginController.do" method="post" name="gogo" style="width:1000px; height:1000px; margin: 0 auto;">
@@ -54,10 +106,17 @@ window.onload=function(){
                     <input type="password"  class="form-control" name="password" name="excludeHangul" data-rule-required="true" placeholder="패스워드" maxlength="30">
                 </div>
             </div>
+                        <div class="form-group" >
+                <label for="inputPassword" class="control-label">핸드폰 번호</label>
+                <div class="col-lg-10">
+                    <input type="password"  class="form-control"  id="recaptcha-container" name="phone" name="excludeHangul" data-rule-required="true" placeholder="패스워드" maxlength="30">
+                </div>
+            </div>
                <div class="form-group" >
                 <div class="col-lg-10">
-                    <input type="submit" value="로그인" class="form-control" >
+                    <input type="submit" value="로그인" class="form-control"  id="sign-in-button">
                 </div>
+               
             </div>
             </form>
 	</section>
